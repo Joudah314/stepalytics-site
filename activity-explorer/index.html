@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StepAlytics Activity Explorer</title>
+  <meta name="description" content="Interactive Tableau dashboards exploring one year of hourly activity data for one user living in Sydney, NSW.">
+  <link rel="canonical" href="https://stepalytics.com/activity-explorer/">
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="StepAlytics Activity Explorer">
+  <meta property="og:description" content="Interactive Tableau dashboards exploring one year of hourly activity data for one user living in Sydney, NSW.">
+  <meta property="og:url" content="https://stepalytics.com/activity-explorer/">
+  <meta property="og:image" content="https://stepalytics.com/assets/preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+  <style>
+    :root { --navy: #012150; --muted: #5b6770; --bg: #f5f7f9; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--navy);
+           font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; }
+    header { display: flex; align-items: center; gap: 12px; max-width: 1072px; margin: 0 auto; padding: 6px 16px; }
+    header img { height: 40px; width: auto; display: block; }
+    header h1 { margin: 0; font-size: 18px; font-weight: 600; }
+    header p { margin: 1px 0 0; font-size: 13px; color: var(--muted); }
+    #stage { margin: 0 auto; overflow: hidden; }
+    #scaler { transform-origin: 0 0; }
+    footer { max-width: 1072px; margin: 10px auto 24px; padding: 0 16px; font-size: 12px; color: var(--muted); }
+    footer a { color: inherit; }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="/assets/logo.png" alt="StepAlytics" width="62" height="40">
+    <div>
+      <h1>Activity Explorer</h1>
+      <p>One year of hourly activity data for one user living in Sydney, NSW</p>
+    </div>
+  </header>
+
+  <main>
+    <div id="stage">
+      <div id="scaler">
+        <tableau-viz id="viz"
+                     src="https://public.tableau.com/views/StepAlyticsActivityExplorer/Patterns"
+                     toolbar="hidden" device="desktop"></tableau-viz>
+      </div>
+    </div>
+    <noscript>
+      <p style="text-align:center">
+        <a href="https://public.tableau.com/views/StepAlyticsActivityExplorer/Patterns">Open the dashboards on Tableau Public</a>
+      </p>
+    </noscript>
+  </main>
+
+  <footer>
+    Weather: Open-Meteo.com (CC BY 4.0). Dashboards hosted on Tableau Public.
+  </footer>
+
+  <script>
+    // Shrink the dashboard to fit the browser window. It never grows past its designed size (1040 x 680 plus
+    // the sheet tabs), and never shrinks below 85% for height (smaller text gets hard to read; below that the
+    // page scrolls instead). It always shrinks to fit the width, so phones see the whole dashboard.
+    const viz = document.getElementById("viz");
+    const stage = document.getElementById("stage");
+    const scaler = document.getElementById("scaler");
+    const MIN_SCALE = 0.85;
+
+    function frameSize() {
+      const frame = viz.querySelector("iframe") || (viz.shadowRoot && viz.shadowRoot.querySelector("iframe"));
+      const w = frame && frame.offsetWidth, h = frame && frame.offsetHeight;
+      return w && h ? [w, h] : [1040, 705];
+    }
+
+    function fit() {
+      const [w, h] = frameSize();
+      const top = stage.getBoundingClientRect().top + window.scrollY;
+      const byWidth = (document.documentElement.clientWidth - 16) / w;
+      const byHeight = (window.innerHeight - top - 8) / h;
+      const s = Math.min(1, byWidth, Math.max(byHeight, MIN_SCALE));
+      scaler.style.width = w + "px";
+      scaler.style.height = h + "px";
+      scaler.style.transform = "scale(" + s + ")";
+      stage.style.width = Math.floor(w * s) + "px";
+      stage.style.height = Math.floor(h * s) + "px";
+      // keep the header and footer aligned with the dashboard's edges
+      for (const el of document.querySelectorAll("header, footer")) el.style.maxWidth = Math.floor(w * s) + 32 + "px";
+    }
+
+    viz.addEventListener("firstinteractive", fit);
+    window.addEventListener("resize", fit);
+    new ResizeObserver(fit).observe(viz);
+    fit();
+  </script>
+</body>
+</html>
