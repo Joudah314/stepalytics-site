@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="{{site.language}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{name}} – {{headline}}</title>
+<meta name="description" content="{{description}}">
+<meta name="author" content="{{name}}">
+<link rel="canonical" href="{{page_url}}">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="{{site.site_name}}">
+<meta property="og:title" content="{{name}} – {{headline}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:url" content="{{page_url}}">
+{{#og_image}}<meta property="og:image" content="{{page_url}}{{file}}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{alt}}">
+<meta name="twitter:card" content="summary_large_image">{{/og_image}}
+<meta name="color-scheme" content="light">
+<link rel="icon" type="image/png" href="../../assets/favicon.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/profile.css">
+<script type="application/ld+json">
+{{{jsonld}}}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="shell bar">
+    <a class="brand" href="../../"><img src="../assets/stepalytics-logo.png" width="62" height="40" alt="StepAlytics home"></a>
+    <nav aria-label="StepAlytics"><a href="../../activity-explorer/">Activity Explorer</a></nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero shell" aria-labelledby="name">
+    <div class="hero-id">
+      <picture>
+        <source type="image/webp" srcset="{{photo.webp_srcset}}" sizes="(min-width: 760px) 200px, 96px">
+        <img class="photo" src="{{photo.fallback}}" width="480" height="480" alt="{{photo.alt}}" fetchpriority="high">
+      </picture>
+      <div>
+        <h1 id="name">{{name}}</h1>
+        <p class="headline">{{headline}}</p>
+        <p class="where">{{location}}</p>
+      </div>
+    </div>
+    <p class="value">{{{value_html}}}</p>
+    <ul class="proof" aria-label="Highlights">
+      {{#proof}}<li><span class="kpi">{{value}}</span> <span class="kpi-label">{{{label_html}}}</span></li>
+      {{/proof}}
+    </ul>
+    <div class="cta">
+      <a class="button primary" href="mailto:{{contact.email}}">Email me</a>
+      <a class="button" href="{{contact.linkedin}}">LinkedIn</a>
+      {{#cv}}<a class="button" href="{{file}}">CV <span class="filetype">(PDF, {{pages}} pages, {{size}})</span></a>{{/cv}}
+    </div>
+    <p class="email-line"><a href="mailto:{{contact.email}}">{{contact.email}}</a></p>
+  </section>
+
+  <nav class="toc shell" aria-label="On this page">
+    <ul>
+      {{#sections}}<li><a href="#{{id}}">{{label}}</a></li>
+      {{/sections}}
+    </ul>
+  </nav>
+
+  <section class="shell block" id="about" aria-labelledby="about-h">
+    <h2 id="about-h">About</h2>
+    <p class="measure">{{{summary_html}}}</p>
+    <div class="themes">
+      {{#themes}}<div class="card theme">
+        <h3>{{title}}</h3>
+        <p>{{{text_html}}}</p>
+        <p class="evidence">{{{evidence_html}}}</p>
+      </div>
+      {{/themes}}
+    </div>
+  </section>
+
+  {{#video}}<section class="shell block" id="video" aria-labelledby="video-h">
+    <h2 id="video-h">{{title}}</h2>
+    <video controls preload="none" poster="{{poster}}" width="1280" height="720">
+      <source src="{{file}}" type="video/mp4">
+      <track kind="captions" src="{{captions}}" srclang="en" label="English" default>
+    </video>
+    {{#transcript}}<p><a href="{{transcript}}">Read the transcript</a></p>{{/transcript}}
+  </section>{{/video}}
+
+  <section class="shell block" id="work" aria-labelledby="work-h">
+    <h2 id="work-h">Selected work</h2>
+    <div class="projects">
+      {{#projects}}<article class="card project"{{#id}} id="{{id}}"{{/id}}>
+        <h3>{{title}}</h3>
+        <p class="meta">{{when}} · {{kind}}</p>
+        <dl class="par">
+          <dt>Problem</dt><dd>{{{problem_html}}}</dd>
+          <dt>{{#did_label}}{{did_label}}{{/did_label}}{{^did_label}}What I did{{/did_label}}</dt><dd>{{{approach_html}}}</dd>
+          <dt>Result</dt><dd>{{{result_html}}}</dd>
+        </dl>
+        {{#how_any}}<h4 class="how">{{#how_label}}{{how_label}}{{/how_label}}{{^how_label}}How it works{{/how_label}}</h4>
+        <ul class="how-list">{{#how}}<li>{{{text_html}}}</li>{{/how}}</ul>{{/how_any}}
+        {{#note}}<p class="note">{{{note_html}}}</p>{{/note}}
+        <p class="tools">{{tools}}</p>
+        {{#links_any}}<ul class="links">
+          {{#links}}<li><a href="{{url}}">{{label}}</a></li>
+          {{/links}}
+        </ul>{{/links_any}}
+      </article>
+      {{/projects}}
+    </div>
+    {{#more_projects_any}}<details class="more">
+      <summary>{{more_projects_count}} more projects: {{more_projects_titles}}</summary>
+      <div class="projects">
+      {{#more_projects}}<article class="card project"{{#id}} id="{{id}}"{{/id}}>
+        <h3>{{title}}</h3>
+        <p class="meta">{{when}} · {{kind}}</p>
+        <dl class="par">
+          <dt>Problem</dt><dd>{{{problem_html}}}</dd>
+          <dt>{{#did_label}}{{did_label}}{{/did_label}}{{^did_label}}What I did{{/did_label}}</dt><dd>{{{approach_html}}}</dd>
+          <dt>Result</dt><dd>{{{result_html}}}</dd>
+        </dl>
+        {{#how_any}}<h4 class="how">{{#how_label}}{{how_label}}{{/how_label}}{{^how_label}}How it works{{/how_label}}</h4>
+        <ul class="how-list">{{#how}}<li>{{{text_html}}}</li>{{/how}}</ul>{{/how_any}}
+        {{#note}}<p class="note">{{{note_html}}}</p>{{/note}}
+        <p class="tools">{{tools}}</p>
+        {{#links_any}}<ul class="links">
+          {{#links}}<li><a href="{{url}}">{{label}}</a></li>
+          {{/links}}
+        </ul>{{/links_any}}
+      </article>
+      {{/more_projects}}
+      </div>
+    </details>{{/more_projects_any}}
+  </section>
+
+  <section class="shell block" id="experience" aria-labelledby="experience-h">
+    <h2 id="experience-h">Experience</h2>
+    <ol class="jobs">
+      {{#experience}}<li class="job">
+        <h3>{{title}} <span class="org">· {{org}}</span></h3>
+        <p class="meta">{{when}}</p>
+        <p class="measure">{{{summary_html}}}</p>
+        {{#more_any}}<details>
+          <summary>More about this role</summary>
+          <ul>{{#more}}<li>{{{text_html}}}</li>{{/more}}</ul>
+        </details>{{/more_any}}
+      </li>
+      {{/experience}}
+    </ol>
+  </section>
+
+  <section class="shell block" id="publications" aria-labelledby="publications-h">
+    <h2 id="publications-h">Publications</h2>
+    <p class="measure">{{{pubs_intro_html}}}</p>
+    <ul class="featured">
+      {{#featured_pubs}}<li class="card">
+        <p class="cite">{{{citation_html}}}</p>
+        <p class="why"><strong>Why it matters:</strong> {{{why_html}}}</p>
+        <p class="doi"><a href="{{url}}">Read the paper in {{venue}}</a></p>
+      </li>
+      {{/featured_pubs}}
+    </ul>
+    <details class="all">
+      <summary>{{other_pubs_count}} more publications, conference talks and awards</summary>
+      <h3>More publications</h3>
+      <ol class="pubs">
+        {{#other_pubs}}<li>{{{citation_html}}} <a href="https://doi.org/{{doi}}">doi:{{doi}}</a></li>
+        {{/other_pubs}}
+      </ol>
+      <h3>Conference talks</h3>
+      <ul class="dated">
+        {{#talks}}<li><span class="when">{{when}}</span> {{{text_html}}}</li>
+        {{/talks}}
+      </ul>
+      <h3>Awards and grants</h3>
+      <ul class="dated">
+        {{#awards}}<li><span class="when">{{when}}</span> {{{text_html}}}</li>
+        {{/awards}}
+      </ul>
+    </details>
+  </section>
+
+  <section class="shell block" id="education" aria-labelledby="education-h">
+    <h2 id="education-h">Education</h2>
+    <ul class="edu">
+      {{#education}}<li>
+        <h3>{{degree}} <span class="org">· {{place}}</span></h3>
+        <p class="meta">{{when}}</p>
+        {{#detail}}<p class="measure">{{{detail_html}}}</p>{{/detail}}
+      </li>
+      {{/education}}
+    </ul>
+  </section>
+
+  <section class="shell block" id="skills" aria-labelledby="skills-h">
+    <h2 id="skills-h">Skills</h2>
+    <dl class="skills">
+      {{#skills}}<div><dt>{{group}}</dt><dd>{{{items_html}}}</dd></div>
+      {{/skills}}
+    </dl>
+    <p class="personal measure">{{{personal_html}}}</p>
+  </section>
+
+  <section class="shell block contact" id="contact" aria-labelledby="contact-h">
+    <h2 id="contact-h">Contact</h2>
+    <p>{{contact.open_to}} The quickest way to reach me is email.</p>
+    <p class="email-big"><a href="mailto:{{contact.email}}">{{contact.email}}</a></p>
+    <ul class="links">
+      <li><a href="{{contact.linkedin}}">LinkedIn</a></li>
+      <li><a href="{{contact.github}}">GitHub</a></li>
+      {{#cv}}<li><a href="{{file}}">CV (PDF, {{pages}} pages, {{size}}, {{date}})</a></li>{{/cv}}
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <p>{{name}} · {{location}} · Updated <time datetime="{{updated_iso}}">{{updated_human}}</time> · <a href="../../">{{site.site_name}}</a></p>
+  </div>
+</footer>
+{{#analytics}}<script data-goatcounter="https://{{goatcounter_code}}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>{{/analytics}}
+</body>
+</html>

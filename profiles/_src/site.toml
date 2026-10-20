@@ -1,0 +1,14 @@
+# Site-wide settings for the profile pages (read by profiles/_src/build.py).
+
+site_name = "StepAlytics"
+base_url = "https://stepalytics.com"
+language = "en-AU"
+
+[analytics]
+# Privacy-friendly visitor counting with GoatCounter: no cookies, no personal data,
+# no consent banner needed. Off until the site is published. To turn it on:
+#   1. create a GoatCounter site (https://www.goatcounter.com/signup), e.g. code "stepalytics";
+#   2. put that code below and set enabled = true;
+#   3. run  python profiles/_src/build.py  and publish.
+enabled = false
+goatcounter_code = ""

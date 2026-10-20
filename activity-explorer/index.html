@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StepAlytics Activity Explorer</title>
+  <meta name="description" content="Interactive Tableau dashboards exploring one year of hourly activity data for one user living in Sydney, NSW.">
+  <link rel="canonical" href="https://stepalytics.com/activity-explorer/">
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="StepAlytics Activity Explorer">
+  <meta property="og:description" content="Interactive Tableau dashboards exploring one year of hourly activity data for one user living in Sydney, NSW.">
+  <meta property="og:url" content="https://stepalytics.com/activity-explorer/">
+  <meta property="og:image" content="https://stepalytics.com/assets/preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+    body { margin: 0; background: #f5f7f9; }
+    #stage { margin: 0 auto; overflow: hidden; }
+    #viz { display: block; border: 0; width: 1040px; height: 730px; transform-origin: 0 0; }
+  </style>
+</head>
+<body>
+  <div id="stage">
+    <!-- Tableau Public always draws its sheet tabs and toolbar, so the frame is 1040 x 730:
+         tabs + 680 px dashboard + toolbar. A smaller frame makes Tableau scroll inside it. -->
+    <iframe id="viz" title="StepAlytics Activity Explorer" scrolling="no" allowfullscreen
+            src="https://public.tableau.com/views/StepAlyticsActivityExplorer/Patterns?:embed=y&amp;:showVizHome=no&amp;:tabs=yes&amp;:device=desktop"></iframe>
+  </div>
+
+  <script>
+    // Shrink the dashboard to fit the browser window. It never grows past its designed size, and never shrinks
+    // below 85% for height (smaller text gets hard to read; below that the page scrolls instead). It always
+    // shrinks to fit the width, so phones see the whole dashboard.
+    const W = 1040, H = 730, MIN_SCALE = 0.85;
+    const viz = document.getElementById("viz");
+    const stage = document.getElementById("stage");
+
+    function fit() {
+      const byWidth = document.documentElement.clientWidth / W;
+      const byHeight = window.innerHeight / H;
+      const s = Math.min(1, byWidth, Math.max(byHeight, MIN_SCALE));
+      viz.style.transform = "scale(" + s + ")";
+      stage.style.width = Math.floor(W * s) + "px";
+      stage.style.height = Math.floor(H * s) + "px";
+    }
+
+    // re-fit whenever the visible area changes size (window resize, zoom, rotating a phone)
+    const viewport = document.createElement("div");
+    viewport.style.cssText = "position:fixed;inset:0;visibility:hidden;pointer-events:none";
+    document.body.appendChild(viewport);
+    new ResizeObserver(fit).observe(viewport);
+    window.addEventListener("resize", fit);
+    fit();
+  </script>
+</body>
+</html>

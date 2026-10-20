@@ -1,0 +1,337 @@
+# Content for stepalytics.com/profiles/ibrahim-joudah/  (build: python profiles/_src/build.py)
+# Text fields accept **bold**, *italic* and [links](https://...). Every claim is listed with
+# its source in content_map.md (kept outside the site folder). Top-level keys come first;
+# TOML puts any key written after a [table] header inside that table.
+
+slug = "ibrahim-joudah"
+short_path = "ibrahim-joudah"          # stepalytics.com/ibrahim-joudah redirects here
+updated = "2026-10-20"
+name = "Ibrahim Joudah"
+headline = "Data Scientist, Statistician & Applied AI Specialist"
+location = "Sydney"
+description = "Data scientist and statistician in Sydney: agentic AI and LLM systems, machine learning, statistical modelling, data pipelines and dashboards. Projects, publications and CV."
+value = "I build data and AI tools that people can rely on, end to end: from statistical models and machine learning to an agentic AI system that runs around the clock in the cloud."
+summary = "I am a data scientist and statistician in Sydney. My latest project is an agentic AI system that finds and rates new job openings around the clock, with its LLM judgements measured against people’s. As a consultant I build privacy-preserving (federated) analysis software in R. I work in Python, SQL and R, and explain results to managers, executives and students. In October 2026 I passed my PhD examination in Statistics at Macquarie University; my research is published in *Statistics and Computing* and released as an R package on CRAN."
+personal = "StepAlytics started with a year of my own step-tracker data joined with Sydney’s weather. I speak Arabic (native) and English."
+pubs_intro = "Six peer-reviewed papers (five journal articles and one IEEE conference paper), three as lead author, with more than 100 citations on [Google Scholar](https://scholar.google.com/citations?user=A4ikGPAAAAAJ). ORCID [0000-0002-0397-6266](https://orcid.org/0000-0002-0397-6266)."
+
+[contact]
+email = "ibrahim.inj@gmail.com"
+linkedin = "https://www.linkedin.com/in/ibrahim-joudah/"
+github = "https://github.com/Joudah314"
+open_to = "Open to data science, statistics and applied AI roles in Sydney or remote."
+
+[photo]
+fallback = "photo-480.jpg"
+webp_srcset = "photo-240.webp 240w, photo-480.webp 480w, photo-720.webp 720w"
+alt = "Ibrahim Joudah, smiling, in a white shirt"
+
+[og_image]
+file = "og-image.jpg"
+alt = "Ibrahim Joudah – Data Scientist, Statistician & Applied AI Specialist"
+
+[cv]
+file = "Ibrahim-Joudah-CV.pdf"
+pages = 3
+date = "October 2026"
+
+[structured_data]
+same_as = [
+  "https://www.linkedin.com/in/ibrahim-joudah/",
+  "https://github.com/Joudah314",
+  "https://scholar.google.com/citations?user=A4ikGPAAAAAJ",
+  "https://orcid.org/0000-0002-0397-6266",
+]
+knows_about = ["Data science", "Statistics", "Machine learning", "Agentic AI", "Large language models", "Generative AI", "LLM evaluation", "Statistical modelling", "Bayesian modelling", "Data pipelines", "Feature selection", "Federated analysis", "Python", "SQL", "R", "Tableau"]
+knows_language = ["ar", "en"]
+alumni_of = ["Macquarie University", "King Fahd University of Petroleum & Minerals"]
+works_for = ["Pacific Analytics Consulting", "Macquarie University"]
+home_location = "Sydney, Australia"
+
+# ---------------------------------------------------------------- first screen
+[[proof]]
+value = "PhD in Statistics"
+label = "passed examination, Oct 2026"
+
+[[proof]]
+value = "Agentic AI system"
+label = "[LLM-powered](#agentic-ai), running 24/7 in the cloud"
+
+[[proof]]
+value = "2 live dashboards"
+label = "[StepAlytics](https://stepalytics.com/activity-explorer/), in Tableau"
+
+[[proof]]
+value = "6 papers + R package"
+label = "100+ citations · [AirScreen](https://CRAN.R-project.org/package=AirScreen) on CRAN"
+
+# ---------------------------------------------------------------- "On this page"
+[[sections]]
+id = "work"
+label = "Selected work"
+[[sections]]
+id = "experience"
+label = "Experience"
+[[sections]]
+id = "publications"
+label = "Publications"
+[[sections]]
+id = "education"
+label = "Education"
+[[sections]]
+id = "skills"
+label = "Skills"
+[[sections]]
+id = "contact"
+label = "Contact"
+
+# ---------------------------------------------------------------- what I do
+[[themes]]
+title = "AI and LLM systems"
+text = "Building AI that does useful work, and testing whether it can be trusted: an agentic AI system whose LLM ratings are checked against human judgement, and generative AI (GenAI) models that create privacy-preserving synthetic data."
+evidence = "[Agentic AI system](#agentic-ai) · papers in [Computers and Education: AI](https://doi.org/10.1016/j.caeai.2024.100293) and [IEEE ICDH 2026](https://doi.org/10.1109/ICDH72779.2026.00048)"
+
+[[themes]]
+title = "Machine learning and statistical modelling"
+text = "Choosing, validating and explaining predictive models: machine learning (XGBoost), regression and forecasting, checked with cross-validation. My research created a fast method for finding the few factors that matter among thousands."
+evidence = "[Air-HOLP paper](https://doi.org/10.1007/s11222-025-10599-6) · [AirScreen on CRAN](https://CRAN.R-project.org/package=AirScreen) · [Informatics paper](https://doi.org/10.3390/informatics11030046) comparing prediction models"
+
+[[themes]]
+title = "Data pipelines, analytics and dashboards"
+text = "Turning raw data into dependable answers: data pipelines in Python and SQL with data-quality checks, automated tests and monitoring, and interactive dashboards and reports that explain uncertainty and limitations."
+evidence = "[StepAlytics dashboards](https://stepalytics.com/activity-explorer/)"
+
+[[themes]]
+title = "Explaining results to stakeholders"
+text = "Turning technical findings into practical recommendations for managers and executives, and teaching statistics and machine learning at Macquarie University since 2023."
+evidence = "“He just knows how to teach, and knows what to say and how to say it without making it too confusing.” (student evaluation, 2024)"
+
+# ---------------------------------------------------------------- selected work
+[[projects]]
+id = "agentic-ai"
+title = "Agentic AI job-market monitoring system"
+when = "2026"
+kind = "Independent project · designed, built and run by me"
+problem = "Good jobs appear on hundreds of different sites, and the best ones fill fast."
+did_label = "What I built"
+approach = "An agentic AI system that watches thousands of companies and other job sources around the clock, uses LLMs to judge which jobs fit, and sends notifications to phone."
+result = "New openings are found within minutes, the AI’s judgement is measured against people’s, and a machine-learning filter cuts the number of paid AI calls."
+how_label = "Key facts"
+how = [
+  "**Agentic AI with LLMs (GenAI):** an end-to-end system in Python and SQL on a cloud server, running 24/7. It collects job ads from multiple sources, uses LLMs to screen and evaluate each one, and sends notifications to phone.",
+  "**LLM evaluation:** I compared the AI’s ratings with human judgements, so its decisions can be trusted and improved over time.",
+  "**Machine learning and statistics:** a machine-learning model (XGBoost) reduces paid AI calls; it was tested safely in shadow mode before switching on. Bayesian statistical modelling keeps monitoring fast while keeping server load low.",
+  "**Production-grade:** about 1,300 automated tests, CI/CD with Git, monitoring and alerts, cost tracking, and encrypted backups.",
+]
+tools = "Python · SQL · LLMs / GenAI · XGBoost · Bayesian modelling · cloud · CI/CD"
+
+[[projects]]
+title = "Predicting survey qualification rates with LLMs"
+when = "2026"
+kind = "Applied AI · predictive modelling"
+problem = "How many people will qualify for a new consumer survey, when the topic has no past data to learn from?"
+approach = "Asked a large language model (LLM) for a first estimate from the question wording and location alone, and treated it as data to correct rather than as truth. An R and Python pipeline then combined those estimates with text embeddings and machine learning (XGBoost)."
+result = "In cross-validation on held-out categories, prediction error (RMSE) was 21% lower than the calibrated LLM estimate alone. I translated the results into business terms: how many people a survey would need to recruit to fill its quota, and a rule that flags qualifying questions few people are likely to pass."
+tools = "R · Python · LLMs · text embeddings · XGBoost · cross-validation"
+
+[[projects]]
+title = "StepAlytics Activity Explorer"
+when = "2026"
+kind = "Personal project · public dashboards"
+problem = "Which patterns in a year of step-tracker data are real, and how much do the weather and a program change daily activity?"
+approach = "Built Python and SQL (DuckDB) workflows with data-quality checks; measured the weather’s effect with regression and the program’s effect with a before-and-after time-series design (interrupted time series, checked with placebo tests); forecast the next day’s activity, tested by time-series cross-validation; and published two interactive Tableau dashboards."
+result = "The quality checks changed a conclusion: an apparent jump in walking speed came from a change in how the device estimated stride length, not from a gain in fitness. In the published (simulated-data) version, the forecast was 13% more accurate than the best simple rule (mean absolute error)."
+note = "Analysed first on my own tracker data, then published with a simulated version of the activity data to protect privacy."
+tools = "Python · SQL (DuckDB) · regression · forecasting · Tableau"
+[[projects.links]]
+label = "Open the dashboards"
+url = "https://stepalytics.com/activity-explorer/"
+[[projects.links]]
+label = "Tableau Public"
+url = "https://public.tableau.com/app/profile/ibrahim.joudah/viz/StepAlyticsActivityExplorer/Patterns"
+[[projects.links]]
+label = "Analysis notes and report (GitHub)"
+url = "https://github.com/Joudah314/StepAlytics-Activity-Explorer"
+
+[[projects]]
+title = "Air-HOLP and the AirScreen R package"
+when = "2024–2025"
+kind = "Research · first author · method and software"
+problem = "In data with thousands of possible factors, such as gene-expression data, find the few that really affect the outcome, even when the factors are strongly related."
+approach = "Created Air-HOLP, a statistical method that extends an existing screening method (HOLP) with ridge regularisation that tunes itself, so no slow resampling is needed. Tested it across many simulated settings and on prostate cancer gene-expression data."
+result = "Published as first author in *Statistics and Computing* (2025) and released on CRAN as AirScreen, an R package with unit tests."
+tools = "R · feature selection · simulation studies · testthat"
+[[projects.links]]
+label = "Paper (Statistics and Computing)"
+url = "https://doi.org/10.1007/s11222-025-10599-6"
+[[projects.links]]
+label = "AirScreen on CRAN"
+url = "https://CRAN.R-project.org/package=AirScreen"
+
+[[more_projects]]
+title = "Privacy-preserving federated analysis"
+when = "2026 – now"
+kind = "Consulting · Pacific Analytics Consulting"
+problem = "Analyse sensitive data held on separate servers without anyone seeing or moving the individual records."
+approach = "Built R functions and packages for DataSHIELD, a platform for federated analysis, that bring methods such as multiple imputation for missing data (MICE), survival analysis and regression modelling strategies (rms) to its client-server setup; tested and documented."
+result = "The functions let an analyst run approved analyses on data stored on a separate server and get useful summaries back; only aggregate results that cannot identify anyone are exchanged. The packages are being tested before integration and release."
+tools = "R · DataSHIELD · testthat"
+
+[[more_projects]]
+title = "Synthetic data with generative AI"
+when = "2024"
+kind = "Research · co-author"
+problem = "Can synthetic student records protect privacy and still support accurate prediction of learning outcomes?"
+approach = "Generated synthetic data with generative AI models (CTGAN and CopulaGAN), checked it against the real data (distributions, correlations and principal-component structure), and compared prediction on original, synthetic and combined data. My part: methodology, software and visualisation."
+result = "Published in *Computers and Education: Artificial Intelligence* (2024). I also co-authored research that integrates generative AI with feature selection for high-dimensional cancer classification (IEEE ICDH 2026)."
+tools = "CTGAN · CopulaGAN · PCA"
+[[more_projects.links]]
+label = "Paper (Computers and Education: AI)"
+url = "https://doi.org/10.1016/j.caeai.2024.100293"
+[[more_projects.links]]
+label = "Cancer classification paper (IEEE ICDH 2026)"
+url = "https://doi.org/10.1109/ICDH72779.2026.00048"
+
+# ---------------------------------------------------------------- experience
+[[experience]]
+title = "Consultant"
+org = "Pacific Analytics Consulting"
+when = "Mar 2026 – now"
+summary = "Build R software that lets analysts study sensitive data held on separate servers without seeing the individual records: DataSHIELD-based functions and packages for privacy-preserving (federated) analysis, including research and development of federated survival analysis methods."
+more = [
+  "Adapt statistical procedures to a constrained client-server architecture, resolve package-integration and communication issues, and document technical decisions.",
+  "Write automated tests for the packages, which are being tested before integration and release.",
+]
+
+[[experience]]
+title = "Teaching Associate"
+org = "Macquarie University"
+when = "Feb 2023 – now"
+summary = "Teach statistics and machine learning to undergraduate and postgraduate students through practical classes, workshops, consultations and assessment, using R and Excel."
+more = [
+  "Subjects include introductory and business statistics, data science, applied statistics, probability, statistical modelling and machine learning, often for students with mixed quantitative backgrounds.",
+  "Student evaluations consistently recognise the clarity of my explanations and my depth of knowledge.",
+  "Made an [interactive Desmos visual](https://www.desmos.com/calculator/aqneubmue8) on Type I and Type II errors, outside my formal duties.",
+]
+
+[[experience]]
+title = "Quantitative Data Lead"
+org = "Altamir AI & Data Governance"
+when = "Aug 2025 – Jun 2026"
+summary = "Led the data work for external AI and data-governance projects: study design, data-quality checks, reconciliation, analysis and reporting. My data reconciliation for the Australian Dental Association led to the release of continuing professional development (CPD) certificates to dentists."
+more = [
+  "Translated technical findings into practical recommendations for stakeholders: CEOs, managers and staff.",
+  "Supervised six UTS students through a three-month AI-governance project for the media sector, from survey design and recruitment to analysis and the final presentation.",
+]
+
+[[experience]]
+title = "Research Assistant"
+org = "Environment Protection Authority Victoria"
+when = "Dec 2022 – Jan 2023"
+summary = "Helped estimate the number of tyres in stockpiles from 3D spatial data (point clouds and meshes), contributing to the project’s design, implementation, data analysis and reporting."
+more = []
+
+[[experience]]
+title = "Data Analyst Intern"
+org = "Quant Data & Analytics, Riyadh"
+when = "Jan 2019 – Aug 2019"
+summary = "Contributed to Fruits360, an analytics platform for restaurants: prepared and joined data with millions of records in Alteryx, and worked on forecasting workflows and Tableau dashboards."
+more = [
+  "Developed automated anomaly detection and robust handling of outliers and data-entry errors; this work later became the foundation of my first-author paper in *IEEE Access* (2020).",
+]
+
+# ---------------------------------------------------------------- publications
+[[featured_pubs]]
+citation = "**Joudah, I.**, Müller, S., & Zhu, H. (2025). Air-HOLP: adaptive regularized feature screening for high-dimensional correlated data. *Statistics and Computing*, 35(3), 63."
+why = "a fast, stable way to find the few variables that matter when thousands of predictors are strongly related."
+venue = "Statistics and Computing"
+url = "https://doi.org/10.1007/s11222-025-10599-6"
+
+[[featured_pubs]]
+citation = "Farhood, H., **Joudah, I.**, Beheshti, A., & Müller, S. (2024). Advancing student outcome predictions through generative adversarial networks. *Computers and Education: Artificial Intelligence*, 7, 100293."
+why = "tests whether synthetic records made by generative AI can protect privacy and still help predict student outcomes."
+venue = "Computers and Education: AI"
+url = "https://doi.org/10.1016/j.caeai.2024.100293"
+
+[[featured_pubs]]
+citation = "Farhood, H., **Joudah, I.**, Beheshti, A., & Müller, S. (2026). Optimizing cancer classification in high-dimensional data by integrating generative AI with feature selection. *2026 IEEE International Conference on Digital Health (ICDH)*, 359–367."
+why = "combines synthetic training data with feature selection to improve cancer classification in high-dimensional data."
+venue = "IEEE ICDH 2026"
+url = "https://doi.org/10.1109/ICDH72779.2026.00048"
+
+[[other_pubs]]
+citation = "Farhood, H., **Joudah, I.**, Beheshti, A., & Müller, S. (2024). Evaluating and enhancing artificial intelligence models for predicting student learning outcomes. *Informatics*, 11(3), 46."
+doi = "10.3390/informatics11030046"
+[[other_pubs]]
+citation = "**Joudah, I. N.**, & Abbas, N. (2020). Asymptotically unbiased estimation of mean and standard deviation in the presence of outlying errors. *IEEE Access*, 8, 110623–110632."
+doi = "10.1109/ACCESS.2020.3002958"
+[[other_pubs]]
+citation = "Alfuraidan, M. R., & **Joudah, I. N.** (2019). On a new formula for Fibonacci’s family m-step numbers and some applications. *Mathematics*, 7(9), 805. Main author; authors listed alphabetically."
+doi = "10.3390/math7090805"
+
+# ---------------------------------------------------------------- education
+[[education]]
+degree = "PhD in Statistics"
+place = "Macquarie University"
+when = "2022–2026"
+detail = "Passed examination with the outcome “Award with corrections” (October 2026). Thesis: *Feature Screening for Regression Models in Ultra-High Dimensional Settings*."
+[[education]]
+degree = "Master of Research in Statistics"
+place = "Macquarie University"
+when = "2021–2022"
+detail = "Thesis: *The ROPE Framework for Model Selection in Linear Regression*."
+[[education]]
+degree = "Bachelor of Science in Actuarial Science"
+place = "King Fahd University of Petroleum & Minerals"
+when = "2016–2020"
+detail = ""
+
+# ---------------------------------------------------------------- skills (no level bars)
+[[skills]]
+group = "AI and LLMs"
+items = "Agentic AI, large language models (LLMs) and GenAI, LLM evaluation against human judgement, prompt design, text embeddings, generative models for synthetic data (CTGAN, CopulaGAN), AI-assisted development with careful human review"
+[[skills]]
+group = "Machine learning and statistics"
+items = "Machine learning (XGBoost), deep learning, predictive modelling and classification, statistical modelling and regression, Bayesian statistical modelling, forecasting, experimentation, feature selection for high-dimensional data, robust methods, anomaly detection, simulation, cross-validation and model evaluation"
+[[skills]]
+group = "Data engineering and production"
+items = "Data pipelines and automation, production deployment (cloud), CI/CD with Git, monitoring and alerts, cost tracking, automated testing, R package development (testthat), reproducible analysis, data preparation, validation and reconciliation, DataSHIELD federated analysis"
+[[skills]]
+group = "Programming and tools"
+items = "Python, SQL (DuckDB), R (my strongest language), Tableau, Power BI dashboards, Excel, Alteryx, MATLAB, Git and GitHub, LaTeX and R Markdown"
+[[skills]]
+group = "Communication"
+items = "Stakeholder presentations, practical recommendations for managers and executives, technical reporting, university teaching, research publication"
+
+# ---------------------------------------------------------------- talks and awards
+[[talks]]
+when = "Jul 2026"
+text = "IEEE International Conference on Digital Health (ICDH 2026), Sydney: *Optimizing Cancer Classification in High-Dimensional Data by Integrating Generative AI with Feature Selection*"
+[[talks]]
+when = "Dec 2025"
+text = "Australian Statistical Conference (ASC 2025), Perth: *ROSE: Rank-based Order Statistics Ensemble for High-Dimensional Feature Screening*"
+[[talks]]
+when = "Sep 2025"
+text = "Royal Statistical Society International Conference, Edinburgh: *ROSE: Rank-based Order Statistics Ensemble for High-Dimensional Feature Screening*"
+[[talks]]
+when = "Nov 2024"
+text = "Early Career & Student Statisticians Conference (ECSSC 2024), Hobart: *Air-HOLP: Adaptive Regularized Feature Screening*"
+[[talks]]
+when = "Aug 2024"
+text = "Invited talk, 26th International Conference on Computational Statistics (COMPSTAT 2024), Giessen: *Efficient Stability Screening for Ultra-High Dimensional Data*"
+[[talks]]
+when = "Dec 2023"
+text = "Australian Statistical Conference (ASC 2023), Wollongong: *Air-HOLP: Adaptive Ridge Screening for Ultra-High Dimensional Data*"
+
+[[awards]]
+when = "2025"
+text = "Excellence in Postgraduate Research Award, Statistical Society of Australia, NSW Branch"
+[[awards]]
+when = "2018–2019"
+text = "Undergraduate Student Research Grant (USRG1702), King Fahd University of Petroleum & Minerals; I wrote the successful application"
+[[awards]]
+when = "2018"
+text = "Second Prize, 9th KFUPM Student Forum"
+[[awards]]
+when = "2017"
+text = "Second Prize, Actuarial Science in One Slide competition, KFUPM"
