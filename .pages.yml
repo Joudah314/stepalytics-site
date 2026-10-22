@@ -1,0 +1,383 @@
+# Pages CMS (https://app.pagescms.org): the editor for Ibrahim's profile page.
+# It edits one file, profiles/_src/people/ibrahim-joudah.toml. On every save, the GitHub Actions
+# workflow .github/workflows/publish-profile.yml rebuilds the page, runs the privacy check and
+# publishes only if the check passes.
+# Keys not listed here (slug, photo, CV, contact links, structured data) are kept as they are
+# (settings.content.merge). Every field of a list item must be listed, or a save drops it.
+
+settings:
+  content:
+    merge: true
+  commit:
+    templates:
+      update: "Profile text edited in Pages CMS ({path})"
+
+content:
+  - name: profile
+    label: Profile page (Ibrahim Joudah)
+    type: file
+    path: profiles/_src/people/ibrahim-joudah.toml
+    format: toml
+    fields:
+      # ------------------------------------------------------------ top of the page
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: headline
+        label: Headline (job title under the name)
+        type: string
+        required: true
+      - name: location
+        label: Location (city)
+        type: string
+      - name: value
+        label: Intro sentence (under the headline)
+        type: text
+        description: "Text fields accept **bold**, *italic* and links written as [link text](https://address)."
+      - name: proof
+        label: Highlight boxes (top of the page)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: title
+            label: Title (short)
+            type: string
+            required: true
+          - name: line
+            label: Line under the title
+            type: string
+            description: "A link is written as [link text](https://address); a link to a project on this page as [text](#project-id)."
+
+      # ------------------------------------------------------------ About
+      - name: summary
+        label: About (paragraph)
+        type: text
+      - name: themes
+        label: About – skill-area boxes
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: text
+            label: Text
+            type: text
+          - name: evidence
+            label: Evidence line (small text with links)
+            type: text
+
+      # ------------------------------------------------------------ Selected work
+      - name: projects
+        label: Selected work – projects
+        description: "Order: 1 comes first. Show: on the page, or under “More projects”. Drag to rearrange this list in the editor only; the page uses Order."
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{order}. {title} ({show})"
+        fields:
+          - name: order
+            label: Order
+            type: number
+            required: true
+          - name: show
+            label: Show
+            type: select
+            required: true
+            options:
+              values:
+                - name: page
+                  label: On the page
+                - name: more
+                  label: Under “More projects”
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: id
+            label: Link name (optional)
+            type: string
+            description: "Lets a link elsewhere on the page jump to this project, e.g. agentic-ai for [text](#agentic-ai). Lower-case letters, digits and hyphens."
+            pattern:
+              regex: "^[a-z0-9-]*$"
+              message: "Use lower-case letters, digits and hyphens only."
+          - name: when
+            label: Year(s)
+            type: string
+          - name: kind
+            label: Kind (small line under the title)
+            type: string
+          - name: problem
+            label: Problem
+            type: text
+          - name: did_label
+            label: Heading for the next field (optional; default “What I did”)
+            type: string
+          - name: approach
+            label: What I did
+            type: text
+          - name: result
+            label: Result
+            type: text
+          - name: how_label
+            label: Heading for the bullet points (optional, e.g. “Key facts”)
+            type: string
+          - name: how
+            label: Bullet points (optional)
+            type: text
+            list: true
+          - name: note
+            label: Note (optional, small text with a gold bar)
+            type: text
+          - name: tools
+            label: Tools line (e.g. Python · SQL · Tableau)
+            type: string
+          - name: links
+            label: Links
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Link text
+                type: string
+                required: true
+              - name: url
+                label: Link address
+                type: string
+                required: true
+
+      # ------------------------------------------------------------ Experience
+      - name: experience
+        label: Experience (drag to reorder)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title} · {org}"
+        fields:
+          - name: title
+            label: Job title
+            type: string
+            required: true
+          - name: org
+            label: Organisation
+            type: string
+          - name: when
+            label: Dates (e.g. Mar 2026 – now)
+            type: string
+          - name: summary
+            label: Summary
+            type: text
+          - name: more
+            label: More about this role (bullet points, folded)
+            type: text
+            list: true
+
+      # ------------------------------------------------------------ Publications
+      - name: pubs_intro
+        label: Publications – intro paragraph
+        type: text
+      - name: publications
+        label: Publications
+        description: "Order: 1 comes first. Show: on the page, or under “More publications”."
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{order}. {venue} ({show})"
+        fields:
+          - name: order
+            label: Order
+            type: number
+            required: true
+          - name: show
+            label: Show
+            type: select
+            required: true
+            options:
+              values:
+                - name: page
+                  label: On the page
+                - name: more
+                  label: Under “More publications”
+          - name: citation
+            label: Citation
+            type: text
+            required: true
+            description: "Write your own name in bold as **Joudah, I.** and the journal in italics as *Journal name*."
+          - name: why
+            label: Why it matters
+            type: text
+          - name: venue
+            label: Journal or conference (link text “Read the paper in …”)
+            type: string
+          - name: doi
+            label: DOI (e.g. 10.1007/s11222-025-10599-6)
+            type: string
+            required: true
+
+      # ------------------------------------------------------------ Talks
+      - name: talks
+        label: Conference talks
+        description: "Order: 1 comes first. Show: on the page, or under “More talks”."
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{order}. {when} – {event} ({show})"
+        fields:
+          - name: order
+            label: Order
+            type: number
+            required: true
+          - name: show
+            label: Show
+            type: select
+            required: true
+            options:
+              values:
+                - name: page
+                  label: On the page
+                - name: more
+                  label: Under “More talks”
+          - name: title
+            label: Talk title
+            type: string
+            required: true
+          - name: when
+            label: Date (e.g. Jul 2026)
+            type: string
+          - name: kind
+            label: Kind (optional, e.g. Invited talk)
+            type: string
+          - name: event
+            label: Conference and city
+            type: string
+
+      # ------------------------------------------------------------ Awards, education, skills
+      - name: awards
+        label: Awards and grants (drag to reorder)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{when} · {text}"
+        fields:
+          - name: when
+            label: Year(s)
+            type: string
+          - name: text
+            label: Award or grant
+            type: text
+            required: true
+      - name: education
+        label: Education (drag to reorder)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{degree}"
+        fields:
+          - name: degree
+            label: Degree
+            type: string
+            required: true
+          - name: place
+            label: University
+            type: string
+          - name: when
+            label: Years
+            type: string
+          - name: detail
+            label: Detail (optional)
+            type: text
+      - name: skills
+        label: Skills (drag to reorder)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{group}"
+        fields:
+          - name: group
+            label: Skill area
+            type: string
+            required: true
+          - name: items
+            label: Skills
+            type: text
+      - name: personal
+        label: Personal line (under Skills)
+        type: text
+
+      # ------------------------------------------------------------ Contact text, headings, search
+      - name: contact
+        label: Contact section
+        type: object
+        fields:
+          - name: open_to
+            label: Contact text (the email address and buttons are not edited here)
+            type: text
+      - name: labels
+        label: Section headings and fixed wording
+        type: object
+        fields:
+          - { name: about, label: "Heading: About", type: string }
+          - { name: work, label: "Heading: Selected work", type: string }
+          - { name: more_projects, label: "Toggle: More projects", type: string }
+          - { name: problem, label: "Project label: Problem", type: string }
+          - { name: did, label: "Project label: What I did", type: string }
+          - { name: result, label: "Project label: Result", type: string }
+          - { name: experience, label: "Heading: Experience", type: string }
+          - { name: more_role, label: "Toggle: More about this role", type: string }
+          - { name: publications, label: "Heading: Publications", type: string }
+          - { name: why_it_matters, label: "Label: Why it matters", type: string }
+          - { name: read_paper, label: "Link start: Read the paper in", type: string }
+          - { name: more_publications, label: "Toggle: More publications", type: string }
+          - { name: talks, label: "Heading: Conference talks", type: string }
+          - { name: more_talks, label: "Toggle: More talks", type: string }
+          - { name: awards, label: "Heading: Awards and grants", type: string }
+          - { name: education, label: "Heading: Education", type: string }
+          - { name: skills, label: "Heading: Skills", type: string }
+          - { name: contact, label: "Heading: Contact", type: string }
+          - { name: email_me, label: "Button: Email me", type: string }
+          - { name: highlights, label: "Screen-reader name of the highlight boxes", type: string }
+          - { name: on_this_page, label: "Screen-reader name of the page menu", type: string }
+          - { name: updated, label: "Footer: Updated", type: string }
+          - { name: transcript, label: "Video: Read the transcript", type: string }
+      - name: sections
+        label: Page menu (“On this page”)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{label}"
+        fields:
+          - name: label
+            label: Menu text
+            type: string
+            required: true
+          - name: id
+            label: Section it jumps to
+            type: select
+            required: true
+            options:
+              values: [work, experience, publications, talks, awards, education, skills, contact, about]
+      - name: description
+        label: Search-engine and link-preview description
+        type: text
+      - name: updated
+        label: Last updated (YYYY-MM-DD, shown in the footer)
+        type: string
+        pattern:
+          regex: "^\\d{4}-\\d{2}-\\d{2}$"
+          message: "Use the form 2026-10-22."

@@ -32,12 +32,7 @@ SRC = Path(__file__).resolve().parent          # profiles/_src
 PROFILES = SRC.parent                          # profiles
 ROOT = PROFILES.parent                         # site root
 
-# A content file must never carry these (the page is public). Extend as needed.
-PRIVATE_PATTERNS = [
-    (r"\+61[\s\d]{6,}|\b04\d{2}[\s]?\d{3}[\s]?\d{3}\b", "an Australian phone number"),
-    (r"\b(visa|subclass\s*\d{3}|work(ing)? rights|permanent resident)\b", "visa or work-rights details"),
-    (r"\b(GPA|WAM)\b|\b\d{2}/100\b", "a grade"),
-]
+import privacy_check  # noqa: E402  (same folder)
 
 
 # ---------------------------------------------------------------- text helpers
@@ -225,20 +220,31 @@ def split_by_placement(slug: str, key: str, items: list) -> tuple[list, list]:
     return [i for i in items if i["show"] == "page"], [i for i in items if i["show"] == "more"]
 
 
-def check_private(slug: str, raw_text: str) -> None:
-    for pattern, what in PRIVATE_PATTERNS:
-        m = re.search(pattern, raw_text, flags=re.I)
-        if m:
-            raise SystemExit(f"{slug}: content file seems to contain {what}: '{m.group(0)}'")
+def check_private(slug: str, label: str, text: str, allowed: set[str]) -> None:
+    problems = privacy_check.scan(text, allowed, label)
+    if problems:
+        raise SystemExit(f"{slug}: privacy check failed, nothing was written:\n  - " + "\n  - ".join(problems))
+
+
+def whole_numbers(value):
+    """Pages CMS writes every number as a float (order = 1.0); turn whole floats back into ints."""
+    if isinstance(value, dict):
+        return {k: whole_numbers(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [whole_numbers(v) for v in value]
+    if isinstance(value, float) and value.is_integer():
+        return int(value)
+    return value
 
 
 def build_person(site: dict, path: Path, template: str, redirect_template: str) -> list[Path]:
     raw = path.read_text(encoding="utf-8")
-    p = tomllib.loads(raw)
+    p = whole_numbers(tomllib.loads(raw))
     slug = p["slug"]
     if path.stem != slug:
         raise SystemExit(f"{path.name}: slug '{slug}' must match the file name")
-    check_private(slug, raw)
+    allowed = privacy_check.allowed_emails(p)
+    check_private(slug, path.name, raw, allowed)
     page_dir = PROFILES / slug
     page_url = f"{site['base_url']}/profiles/{slug}/"
 
@@ -272,8 +278,10 @@ def build_person(site: dict, path: Path, template: str, redirect_template: str) 
         goatcounter_code=site.get("analytics", {}).get("goatcounter_code", ""),
     )
     written = []
+    page = render(template, data)
+    check_private(slug, f"profiles/{slug}/index.html (page text)", privacy_check.page_text(page), allowed)
     out = page_dir / "index.html"
-    out.write_text(render(template, data), encoding="utf-8", newline="\n")
+    out.write_text(page, encoding="utf-8", newline="\n")
     written.append(out)
 
     short = p.get("short_path")

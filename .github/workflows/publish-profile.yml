@@ -1,0 +1,78 @@
+# Rebuilds and publishes the profile page whenever its content changes (for example a save in
+# Pages CMS). Order: build.py -> privacy check -> publish. If the build or the privacy check
+# fails, nothing is published and the run's summary says why.
+# Publishing = committing the rebuilt page to main (the branch GitHub Pages serves) and asking
+# GitHub Pages to rebuild. Pushes made here with GITHUB_TOKEN do not start this workflow again.
+name: Build and publish profile
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "profiles/_src/**"
+      - "profiles/assets/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: publish-profile
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Build the page (build.py)
+        run: python profiles/_src/build.py
+
+      - name: Privacy check
+        run: python profiles/_src/privacy_check.py
+
+      - name: Publish
+        id: publish
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A profiles ibrahim-joudah
+          if git diff --cached --quiet; then
+            echo "The built page is already up to date; nothing to publish."
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git commit -m "Publish profile page (built from ${GITHUB_SHA::7})"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Ask GitHub Pages to rebuild the site
+        if: steps.publish.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds"
+
+      - name: Summary
+        if: always()
+        run: |
+          if [ "${{ job.status }}" = "success" ]; then
+            if [ "${{ steps.publish.outputs.pushed }}" = "true" ]; then
+              echo "Published: the profile page was rebuilt and passed the privacy check." >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "Checked: the page passed the privacy check and was already up to date." >> "$GITHUB_STEP_SUMMARY"
+            fi
+          else
+            echo "**Not published.** Open the failed step above (Build or Privacy check) to see why; the live page is unchanged." >> "$GITHUB_STEP_SUMMARY"
+          fi
