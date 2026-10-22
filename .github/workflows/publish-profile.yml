@@ -1,8 +1,8 @@
 # Rebuilds and publishes the profile page whenever its content changes (for example a save in
 # Pages CMS). Order: build.py -> privacy check -> publish. If the build or the privacy check
 # fails, nothing is published and the run's summary says why.
-# Publishing = committing the rebuilt page to main (the branch GitHub Pages serves) and asking
-# GitHub Pages to rebuild. Pushes made here with GITHUB_TOKEN do not start this workflow again.
+# Publishing = committing the rebuilt page to main, the branch GitHub Pages serves; that push starts
+# the Pages build. Pushes made here with GITHUB_TOKEN do not start this workflow again.
 name: Build and publish profile
 
 on:
@@ -15,7 +15,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
 
 concurrency:
   group: publish-profile
@@ -57,12 +56,6 @@ jobs:
           git pull --rebase origin main
           git push origin HEAD:main
           echo "pushed=true" >> "$GITHUB_OUTPUT"
-
-      - name: Ask GitHub Pages to rebuild the site
-        if: steps.publish.outputs.pushed == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds"
 
       - name: Summary
         if: always()
