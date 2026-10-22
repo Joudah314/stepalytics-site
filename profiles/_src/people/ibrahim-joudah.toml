@@ -5,7 +5,7 @@
 
 slug = "ibrahim-joudah"
 short_path = "ibrahim-joudah"          # stepalytics.com/ibrahim-joudah redirects here
-updated = "2026-10-20"
+updated = "2026-10-22"
 name = "Ibrahim Joudah"
 headline = "Data Scientist, Statistician & Applied AI Specialist"
 location = "Sydney"
@@ -19,7 +19,33 @@ pubs_intro = "Six peer-reviewed papers (five journal articles and one IEEE confe
 email = "ibrahim.inj@gmail.com"
 linkedin = "https://www.linkedin.com/in/ibrahim-joudah/"
 github = "https://github.com/Joudah314"
-open_to = "Open to data science, statistics and applied AI roles in Sydney or remote."
+open_to = "Open to data science, statistics and applied AI roles in Sydney or remote. The quickest way to reach me is email."
+
+[labels]
+# Headings and fixed wording on the page.
+highlights = "Highlights"
+email_me = "Email me"
+on_this_page = "On this page"
+about = "About"
+work = "Selected work"
+more_projects = "More projects"
+problem = "Problem"
+did = "What I did"
+result = "Result"
+experience = "Experience"
+more_role = "More about this role"
+publications = "Publications"
+why_it_matters = "Why it matters:"
+read_paper = "Read the paper in"
+more_publications = "More publications"
+talks = "Conference talks"
+more_talks = "More talks"
+awards = "Awards and grants"
+education = "Education"
+skills = "Skills"
+contact = "Contact"
+updated = "Updated"
+transcript = "Read the transcript"
 
 [photo]
 fallback = "photo-480.jpg"
@@ -49,21 +75,22 @@ works_for = ["Pacific Analytics Consulting", "Macquarie University"]
 home_location = "Sydney, Australia"
 
 # ---------------------------------------------------------------- first screen
+# Highlight boxes: a short title and one line under it.
 [[proof]]
-value = "PhD in Statistics"
-label = "passed examination, Oct 2026"
+title = "PhD in Statistics"
+line = "Macquarie University"
 
 [[proof]]
-value = "Agentic AI system"
-label = "[LLM-powered](#agentic-ai), running 24/7 in the cloud"
+title = "Agentic AI systems"
+line = "e.g. [LLM job-market monitor](#agentic-ai)"
 
 [[proof]]
-value = "2 live dashboards"
-label = "[StepAlytics](https://stepalytics.com/activity-explorer/), in Tableau"
+title = "Live dashboards"
+line = "e.g. [StepAlytics](https://stepalytics.com/activity-explorer/)"
 
 [[proof]]
-value = "6 papers + R package"
-label = "100+ citations · [AirScreen](https://CRAN.R-project.org/package=AirScreen) on CRAN"
+title = "R packages"
+line = "e.g. [AirScreen](https://CRAN.R-project.org/package=AirScreen)"
 
 # ---------------------------------------------------------------- "On this page"
 [[sections]]
@@ -75,6 +102,12 @@ label = "Experience"
 [[sections]]
 id = "publications"
 label = "Publications"
+[[sections]]
+id = "talks"
+label = "Talks"
+[[sections]]
+id = "awards"
+label = "Awards"
 [[sections]]
 id = "education"
 label = "Education"
@@ -107,7 +140,10 @@ text = "Turning technical findings into practical recommendations for managers a
 evidence = "“He just knows how to teach, and knows what to say and how to say it without making it too confusing.” (student evaluation, 2024)"
 
 # ---------------------------------------------------------------- selected work
+# Each project: order = position (ascending); show = "page" (on the page) or "more" (under "More projects").
 [[projects]]
+order = 1
+show = "page"
 id = "agentic-ai"
 title = "Agentic AI job-market monitoring system"
 when = "2026"
@@ -126,6 +162,8 @@ how = [
 tools = "Python · SQL · LLMs / GenAI · XGBoost · Bayesian modelling · cloud · CI/CD"
 
 [[projects]]
+order = 2
+show = "page"
 title = "Predicting survey qualification rates with LLMs"
 when = "2026"
 kind = "Applied AI · predictive modelling"
@@ -135,6 +173,8 @@ result = "In cross-validation on held-out categories, prediction error (RMSE) wa
 tools = "R · Python · LLMs · text embeddings · XGBoost · cross-validation"
 
 [[projects]]
+order = 3
+show = "page"
 title = "StepAlytics Activity Explorer"
 when = "2026"
 kind = "Personal project · public dashboards"
@@ -154,6 +194,8 @@ label = "Analysis notes and report (GitHub)"
 url = "https://github.com/Joudah314/StepAlytics-Activity-Explorer"
 
 [[projects]]
+order = 4
+show = "page"
 title = "Air-HOLP and the AirScreen R package"
 when = "2024–2025"
 kind = "Research · first author · method and software"
@@ -168,7 +210,9 @@ url = "https://doi.org/10.1007/s11222-025-10599-6"
 label = "AirScreen on CRAN"
 url = "https://CRAN.R-project.org/package=AirScreen"
 
-[[more_projects]]
+[[projects]]
+order = 5
+show = "more"
 title = "Privacy-preserving federated analysis"
 when = "2026 – now"
 kind = "Consulting · Pacific Analytics Consulting"
@@ -177,7 +221,9 @@ approach = "Built R functions and packages for DataSHIELD, a platform for federa
 result = "The functions let an analyst run approved analyses on data stored on a separate server and get useful summaries back; only aggregate results that cannot identify anyone are exchanged. The packages are being tested before integration and release."
 tools = "R · DataSHIELD · testthat"
 
-[[more_projects]]
+[[projects]]
+order = 6
+show = "more"
 title = "Synthetic data with generative AI"
 when = "2024"
 kind = "Research · co-author"
@@ -185,10 +231,10 @@ problem = "Can synthetic student records protect privacy and still support accur
 approach = "Generated synthetic data with generative AI models (CTGAN and CopulaGAN), checked it against the real data (distributions, correlations and principal-component structure), and compared prediction on original, synthetic and combined data. My part: methodology, software and visualisation."
 result = "Published in *Computers and Education: Artificial Intelligence* (2024). I also co-authored research that integrates generative AI with feature selection for high-dimensional cancer classification (IEEE ICDH 2026)."
 tools = "CTGAN · CopulaGAN · PCA"
-[[more_projects.links]]
+[[projects.links]]
 label = "Paper (Computers and Education: AI)"
 url = "https://doi.org/10.1016/j.caeai.2024.100293"
-[[more_projects.links]]
+[[projects.links]]
 label = "Cancer classification paper (IEEE ICDH 2026)"
 url = "https://doi.org/10.1109/ICDH72779.2026.00048"
 
@@ -241,32 +287,53 @@ more = [
 ]
 
 # ---------------------------------------------------------------- publications
-[[featured_pubs]]
+# Each publication: order = position (ascending); show = "page" or "more" (under "More publications").
+[[publications]]
+order = 1
+show = "page"
 citation = "**Joudah, I.**, Müller, S., & Zhu, H. (2025). Air-HOLP: adaptive regularized feature screening for high-dimensional correlated data. *Statistics and Computing*, 35(3), 63."
 why = "a fast, stable way to find the few variables that matter when thousands of predictors are strongly related."
 venue = "Statistics and Computing"
-url = "https://doi.org/10.1007/s11222-025-10599-6"
+doi = "10.1007/s11222-025-10599-6"
 
-[[featured_pubs]]
+[[publications]]
+order = 2
+show = "page"
 citation = "Farhood, H., **Joudah, I.**, Beheshti, A., & Müller, S. (2024). Advancing student outcome predictions through generative adversarial networks. *Computers and Education: Artificial Intelligence*, 7, 100293."
 why = "tests whether synthetic records made by generative AI can protect privacy and still help predict student outcomes."
 venue = "Computers and Education: AI"
-url = "https://doi.org/10.1016/j.caeai.2024.100293"
+doi = "10.1016/j.caeai.2024.100293"
 
-[[featured_pubs]]
+[[publications]]
+order = 3
+show = "page"
 citation = "Farhood, H., **Joudah, I.**, Beheshti, A., & Müller, S. (2026). Optimizing cancer classification in high-dimensional data by integrating generative AI with feature selection. *2026 IEEE International Conference on Digital Health (ICDH)*, 359–367."
 why = "combines synthetic training data with feature selection to improve cancer classification in high-dimensional data."
 venue = "IEEE ICDH 2026"
-url = "https://doi.org/10.1109/ICDH72779.2026.00048"
+doi = "10.1109/ICDH72779.2026.00048"
 
-[[other_pubs]]
+[[publications]]
+order = 4
+show = "more"
 citation = "Farhood, H., **Joudah, I.**, Beheshti, A., & Müller, S. (2024). Evaluating and enhancing artificial intelligence models for predicting student learning outcomes. *Informatics*, 11(3), 46."
+why = "compares ten machine-learning and deep-learning models for predicting student learning outcomes, checked with cross-validation and holdout testing."
+venue = "Informatics"
 doi = "10.3390/informatics11030046"
-[[other_pubs]]
+
+[[publications]]
+order = 5
+show = "more"
 citation = "**Joudah, I. N.**, & Abbas, N. (2020). Asymptotically unbiased estimation of mean and standard deviation in the presence of outlying errors. *IEEE Access*, 8, 110623–110632."
+why = "estimates the mean and standard deviation reliably when data contain outlying errors; it grew from my anomaly-detection work in industry."
+venue = "IEEE Access"
 doi = "10.1109/ACCESS.2020.3002958"
-[[other_pubs]]
+
+[[publications]]
+order = 6
+show = "more"
 citation = "Alfuraidan, M. R., & **Joudah, I. N.** (2019). On a new formula for Fibonacci’s family m-step numbers and some applications. *Mathematics*, 7(9), 805. Main author; authors listed alphabetically."
+why = "a new recurrence-based formula for Fibonacci-type numbers, with applications in computing square roots."
+venue = "Mathematics"
 doi = "10.3390/math7090805"
 
 # ---------------------------------------------------------------- education
@@ -304,24 +371,49 @@ group = "Communication"
 items = "Stakeholder presentations, practical recommendations for managers and executives, technical reporting, university teaching, research publication"
 
 # ---------------------------------------------------------------- talks and awards
+# Each talk: order = position (ascending); show = "page" or "more" (under "More talks").
 [[talks]]
+order = 1
+show = "page"
 when = "Jul 2026"
-text = "IEEE International Conference on Digital Health (ICDH 2026), Sydney: *Optimizing Cancer Classification in High-Dimensional Data by Integrating Generative AI with Feature Selection*"
+title = "Optimizing Cancer Classification in High-Dimensional Data by Integrating Generative AI with Feature Selection"
+event = "IEEE International Conference on Digital Health (ICDH 2026), Sydney"
+
 [[talks]]
+order = 2
+show = "page"
 when = "Dec 2025"
-text = "Australian Statistical Conference (ASC 2025), Perth: *ROSE: Rank-based Order Statistics Ensemble for High-Dimensional Feature Screening*"
+title = "ROSE: Rank-based Order Statistics Ensemble for High-Dimensional Feature Screening"
+event = "Australian Statistical Conference (ASC 2025), Perth"
+
 [[talks]]
+order = 3
+show = "page"
 when = "Sep 2025"
-text = "Royal Statistical Society International Conference, Edinburgh: *ROSE: Rank-based Order Statistics Ensemble for High-Dimensional Feature Screening*"
+title = "ROSE: Rank-based Order Statistics Ensemble for High-Dimensional Feature Screening"
+event = "Royal Statistical Society International Conference, Edinburgh"
+
 [[talks]]
-when = "Nov 2024"
-text = "Early Career & Student Statisticians Conference (ECSSC 2024), Hobart: *Air-HOLP: Adaptive Regularized Feature Screening*"
-[[talks]]
+order = 4
+show = "page"
 when = "Aug 2024"
-text = "Invited talk, 26th International Conference on Computational Statistics (COMPSTAT 2024), Giessen: *Efficient Stability Screening for Ultra-High Dimensional Data*"
+kind = "Invited talk"
+title = "Efficient Stability Screening for Ultra-High Dimensional Data"
+event = "26th International Conference on Computational Statistics (COMPSTAT 2024), Giessen"
+
 [[talks]]
+order = 5
+show = "more"
+when = "Nov 2024"
+title = "Air-HOLP: Adaptive Regularized Feature Screening"
+event = "Early Career & Student Statisticians Conference (ECSSC 2024), Hobart"
+
+[[talks]]
+order = 6
+show = "more"
 when = "Dec 2023"
-text = "Australian Statistical Conference (ASC 2023), Wollongong: *Air-HOLP: Adaptive Ridge Screening for Ultra-High Dimensional Data*"
+title = "Air-HOLP: Adaptive Ridge Screening for Ultra-High Dimensional Data"
+event = "Australian Statistical Conference (ASC 2023), Wollongong"
 
 [[awards]]
 when = "2025"

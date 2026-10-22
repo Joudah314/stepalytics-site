@@ -1,0 +1,17 @@
+<article class="card project"{{#id}} id="{{id}}"{{/id}}>
+        <h3>{{title}}</h3>
+        <p class="meta">{{when}} · {{kind}}</p>
+        <dl class="par">
+          <dt>{{labels.problem}}</dt><dd>{{{problem_html}}}</dd>
+          <dt>{{#did_label}}{{did_label}}{{/did_label}}{{^did_label}}{{labels.did}}{{/did_label}}</dt><dd>{{{approach_html}}}</dd>
+          <dt>{{labels.result}}</dt><dd>{{{result_html}}}</dd>
+        </dl>
+        {{#how_any}}<h4 class="how">{{how_label}}</h4>
+        <ul class="how-list">{{#how}}<li>{{{text_html}}}</li>{{/how}}</ul>{{/how_any}}
+        {{#note}}<p class="note">{{{note_html}}}</p>{{/note}}
+        <p class="tools">{{tools}}</p>
+        {{#links_any}}<ul class="links">
+          {{#links}}<li><a href="{{url}}">{{label}}</a></li>
+          {{/links}}
+        </ul>{{/links_any}}
+      </article>

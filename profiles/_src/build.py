@@ -12,6 +12,10 @@ Templates use a small Mustache subset:
     {{#name}}..{{/name}} section: repeats for a list, shows once for a true value, hides for empty/false
     {{^name}}..{{/name}} shown only when name is empty or false
     {{.}}               the current list item  a.b          dotted names
+    {{> name}}          the contents of partials/name.html
+
+All page content, headings and labels included, lives in people/<slug>.toml. Projects, publications
+and talks each carry `order` (position) and `show` ("page" or "more", folded under "More ...").
 Every text field x also has x_html: the text with **bold**, *italic*, `code` and [links](url).
 """
 from __future__ import annotations
@@ -144,8 +148,21 @@ def render_tree(tree, ctx: list) -> str:
     return "".join(out)
 
 
+PARTIAL = re.compile(r"\{\{>\s*([\w-]+)\s*\}\}")
+
+
+def expand_partials(template: str) -> str:
+    """Replace {{> name}} with the contents of partials/name.html (partials may use partials)."""
+    for _ in range(5):
+        new = PARTIAL.sub(lambda m: (SRC / "partials" / f"{m.group(1)}.html").read_text(encoding="utf-8"), template)
+        if new == template:
+            return new
+        template = new
+    raise ValueError("template: partials nest too deeply")
+
+
 def render(template: str, data: dict) -> str:
-    return render_tree(parse(template), [data])
+    return render_tree(parse(expand_partials(template)), [data])
 
 
 # ---------------------------------------------------------------- page data
@@ -194,6 +211,20 @@ def jsonld(site: dict, p: dict, page_url: str) -> str:
     return text.replace("</", "<\\/")
 
 
+# Lists whose entries carry `order` (position, ascending) and `show` ("page" = on the page,
+# "more" = folded under the section's "More ..." toggle). The template uses <key>_page and <key>_more.
+ORDERED_LISTS = ("projects", "publications", "talks")
+
+
+def split_by_placement(slug: str, key: str, items: list) -> tuple[list, list]:
+    for item in items:
+        if not isinstance(item.get("order"), int) or item.get("show") not in ("page", "more"):
+            raise SystemExit(f"{slug}: every [[{key}]] entry needs order = <number> and show = \"page\" or \"more\" "
+                             f"(check '{item.get('title') or item.get('citation', '')[:40]}')")
+    items = sorted(items, key=lambda i: i["order"])
+    return [i for i in items if i["show"] == "page"], [i for i in items if i["show"] == "more"]
+
+
 def check_private(slug: str, raw_text: str) -> None:
     for pattern, what in PRIVATE_PATTERNS:
         m = re.search(pattern, raw_text, flags=re.I)
@@ -227,8 +258,8 @@ def build_person(site: dict, path: Path, template: str, redirect_template: str) 
     updated = dt.date.fromisoformat(p["updated"]) if "updated" in p else dt.date.today()
     p["updated_iso"] = updated.isoformat()
     p["updated_human"] = f"{updated.day} {updated:%B %Y}"
-    titles = [m["title"][:1].lower() + m["title"][1:] for m in p.get("more_projects", [])]
-    p["more_projects_titles"] = ", ".join(titles[:-1]) + " and " + titles[-1] if len(titles) > 1 else "".join(titles)
+    for key in ORDERED_LISTS:
+        p[key + "_page"], p[key + "_more"] = split_by_placement(slug, key, p.get(key, []))
     p["summary_plain"] = re.sub(r"\[([^\]]+)\]\([^)]+\)|[*`]", lambda m: m.group(1) or "", p["summary"])
 
     data = add_html_variants(p)
