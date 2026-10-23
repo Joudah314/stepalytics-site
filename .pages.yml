@@ -432,7 +432,7 @@ content:
             label: Line under it
             type: text
       - name: stages
-        label: Stages (in order; the first is stage 1, and the diagram's badges use these numbers)
+        label: Stages (in order; the first is stage 1)
         type: object
         list:
           collapsible:
@@ -474,25 +474,15 @@ content:
           - { name: description, label: "Text description (shown under the diagram)", type: text }
           - { name: direction, label: "Arrow note (wide screens)", type: string }
           - { name: timing, label: "Box: timing model", type: string }
-          - { name: timing_stage, label: "Badge: stage number", type: number }
           - { name: sources, label: "Box: job sources", type: string }
-          - { name: sources_stage, label: "Badge: stage number", type: number }
           - { name: rules, label: "Box: clean-up and rules", type: string }
-          - { name: rules_stage, label: "Badge: stage number", type: number }
           - { name: ml, label: "Box: machine-learning filter", type: string }
-          - { name: ml_stage, label: "Badge: stage number", type: number }
           - { name: screen, label: "Box: fast LLM screen", type: string }
-          - { name: screen_stage, label: "Badge: stage number", type: number }
           - { name: evaluate, label: "Box: strong LLM evaluation", type: string }
-          - { name: evaluate_stage, label: "Badge: stage number", type: number }
           - { name: human, label: "Box: me (the human step)", type: string }
-          - { name: human_stage, label: "Badge: stage number", type: number }
           - { name: facts, label: "Box: approved facts", type: string }
-          - { name: facts_stage, label: "Badge: stage number", type: number }
           - { name: grades, label: "Loop label: my grades", type: string }
-          - { name: grades_stage, label: "Badge: stage number", type: number }
           - { name: band, label: "Band: running underneath", type: string }
-          - { name: band_stage, label: "Badge: stage number", type: number }
       - name: labels
         label: Headings and fixed wording
         type: object

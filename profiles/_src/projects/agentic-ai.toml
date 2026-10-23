@@ -38,25 +38,15 @@ stages = [
 	{ title = 'Check at the right time, at scale', problem = 'Jobs appear at different times across thousands of employers’ own sites, and checking everything constantly wastes load and budget.', decision = 'A Bayesian model of when each source posts decides when to check it, and coverage includes the job pages of thousands of employers, checked under a load limit. Data-quality checks catch bad data: decoy links on some sites, which produced thousands of false jobs, were detected and excluded.', rejected = '', evidence = '' },
 ]
 diagram.title = 'Diagram of the system today'
-diagram.description = 'Job ads flow from left to right, from cheaper checks to costlier ones: job sources, then clean-up and rules in code, then a machine-learning filter, then a fast LLM screen, then a strong LLM evaluation, and finally me, reviewing and submitting. Approved facts and never-claim rules feed the evaluation and the prepared applications. Two loops feed back: my blind grades go back to the strong LLM evaluation, and a Bayesian timing model decides when each job source is checked. Monitoring, cost limits, backups and tests run underneath everything. The numbers on the diagram are the stages below that added each part.'
+diagram.description = 'Job ads flow from left to right, from cheaper checks to costlier ones: job sources, then clean-up and rules in code, then a machine-learning filter, then a fast LLM screen, then a strong LLM evaluation, and finally me, reviewing and submitting. Approved facts and never-claim rules feed the evaluation and the prepared applications. Two loops feed back: my blind grades go back to the strong LLM evaluation, and a Bayesian timing model decides when each job source is checked. Monitoring, cost limits, backups and tests run underneath everything.'
 diagram.direction = 'cheaper checks first, costlier last'
 diagram.sources = 'Job sources'
-diagram.sources_stage = 7
 diagram.rules = 'Clean-up and | rules in code'
-diagram.rules_stage = 3
 diagram.ml = 'Machine-learning | filter'
-diagram.ml_stage = 6
 diagram.screen = 'Fast LLM | screen'
-diagram.screen_stage = 3
 diagram.evaluate = 'Strong LLM | evaluation'
-diagram.evaluate_stage = 3
 diagram.human = 'Me: review | and submit'
-diagram.human_stage = 4
 diagram.facts = 'Approved facts | and never-claim | rules'
-diagram.facts_stage = 1
 diagram.grades = 'My blind | grades'
-diagram.grades_stage = 5
 diagram.timing = 'Bayesian | timing model'
-diagram.timing_stage = 7
 diagram.band = 'Running underneath: | monitoring · cost limits · backups · tests'
-diagram.band_stage = 2
