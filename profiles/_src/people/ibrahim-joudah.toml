@@ -154,7 +154,7 @@ publications = [
 	{ order = 6.0, show = 'more', citation = 'Alfuraidan, M. R., & **Joudah, I. N.** (2019). On a new formula for Fibonacci’s family m-step numbers and some applications. *Mathematics*, 7(9), 805. Main author; authors listed alphabetically.', why = 'a new recurrence-based formula for Fibonacci-type numbers, with applications in computing square roots.', venue = 'Mathematics', doi = '10.3390/math7090805' },
 ]
 education = [
-	{ degree = 'PhD in Statistics', place = 'Macquarie University', when = '2022–2026', detail = 'Passed examination with the outcome “Award with corrections” (October 2026). Thesis: *Feature Screening for Regression Models in Ultra-High Dimensional Settings*.' },
+	{ degree = 'PhD in Statistics', place = 'Macquarie University', when = '2022–2026', detail = "Passed examination with the outcome “Award with corrections” (October 2026).\nThesis: *Feature Screening for Regression Models in Ultra-High Dimensional Settings*." },
 	{ degree = 'Master of Research in Statistics', place = 'Macquarie University', when = '2021–2022', detail = 'Thesis: *The ROPE Framework for Model Selection in Linear Regression*.' },
 	{ degree = 'Bachelor of Science in Actuarial Science', place = 'King Fahd University of Petroleum & Minerals', when = '2016–2020' },
 ]
