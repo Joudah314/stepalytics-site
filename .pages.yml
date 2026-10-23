@@ -381,3 +381,132 @@ content:
         pattern:
           regex: "^\\d{4}-\\d{2}-\\d{2}$"
           message: "Use the form 2026-10-22."
+
+  # ---------------------------------------------------------------- project page
+  - name: project-agentic-ai
+    label: Project page – Agentic AI system (how it works)
+    type: file
+    path: profiles/_src/projects/agentic-ai.toml
+    format: toml
+    fields:
+      - name: title
+        label: Page title
+        type: string
+        required: true
+      - name: summary
+        label: One-line summary (under the title)
+        type: text
+      - name: since
+        label: Running since (e.g. October 2026)
+        type: string
+      - name: updated
+        label: Last reviewed (YYYY-MM-DD)
+        type: string
+        pattern:
+          regex: "^\\d{4}-\\d{2}-\\d{2}$"
+          message: "Use the form 2026-10-23."
+      - name: private_line
+        label: Line about the private implementation
+        type: text
+      - name: glance
+        label: At a glance – key-number cards
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{value}"
+        fields:
+          - name: value
+            label: Big text (number or short phrase)
+            type: string
+            required: true
+          - name: text
+            label: Line under it
+            type: text
+      - name: stages
+        label: Stages (in order; the first is stage 1, and the diagram's badges use these numbers)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title} ({status})"
+        fields:
+          - name: title
+            label: Stage title
+            type: string
+            required: true
+          - name: status
+            label: Status (e.g. Live, Done, Ongoing, Planned)
+            type: string
+          - name: problem
+            label: Problem (leave empty to hide)
+            type: text
+          - name: decision
+            label: Decision (leave empty to hide)
+            type: text
+          - name: rejected
+            label: Rejected (leave empty to hide)
+            type: text
+          - name: evidence
+            label: Evidence (leave empty to hide)
+            type: text
+      - name: underneath
+        label: Running underneath (one line)
+        type: text
+      - name: next
+        label: Next (list)
+        type: text
+        list: true
+      - name: learned
+        label: What I learned (list)
+        type: text
+        list: true
+      - name: diagram
+        label: Diagram (box labels; " | " breaks a line; keep each line under about 18 characters)
+        type: object
+        fields:
+          - { name: title, label: "Screen-reader title", type: string }
+          - { name: description, label: "Text description (shown under the diagram)", type: text }
+          - { name: direction, label: "Arrow note (wide screens)", type: string }
+          - { name: timing, label: "Box: timing model", type: string }
+          - { name: timing_stage, label: "Badge: stage number", type: number }
+          - { name: sources, label: "Box: job sources", type: string }
+          - { name: sources_stage, label: "Badge: stage number", type: number }
+          - { name: rules, label: "Box: clean-up and rules", type: string }
+          - { name: rules_stage, label: "Badge: stage number", type: number }
+          - { name: ml, label: "Box: machine-learning filter", type: string }
+          - { name: ml_stage, label: "Badge: stage number", type: number }
+          - { name: screen, label: "Box: fast LLM screen", type: string }
+          - { name: screen_stage, label: "Badge: stage number", type: number }
+          - { name: evaluate, label: "Box: strong LLM evaluation", type: string }
+          - { name: evaluate_stage, label: "Badge: stage number", type: number }
+          - { name: human, label: "Box: me (the human step)", type: string }
+          - { name: human_stage, label: "Badge: stage number", type: number }
+          - { name: facts, label: "Box: approved facts", type: string }
+          - { name: facts_stage, label: "Badge: stage number", type: number }
+          - { name: grades, label: "Loop label: my grades", type: string }
+          - { name: grades_stage, label: "Badge: stage number", type: number }
+          - { name: band, label: "Band: running underneath", type: string }
+          - { name: band_stage, label: "Badge: stage number", type: number }
+      - name: labels
+        label: Headings and fixed wording
+        type: object
+        fields:
+          - { name: back, label: "Link back to the profile", type: string }
+          - { name: running_since, label: "Running since", type: string }
+          - { name: last_reviewed, label: "Last reviewed", type: string }
+          - { name: glance, label: "Heading: At a glance", type: string }
+          - { name: system, label: "Heading: diagram", type: string }
+          - { name: stages, label: "Heading: stages", type: string }
+          - { name: problem, label: "Stage label: Problem", type: string }
+          - { name: decision, label: "Stage label: Decision", type: string }
+          - { name: rejected, label: "Stage label: Rejected", type: string }
+          - { name: evidence, label: "Stage label: Evidence", type: string }
+          - { name: stage, label: "Screen-reader word: Stage", type: string }
+          - { name: underneath, label: "Heading: Running underneath", type: string }
+          - { name: next, label: "Heading: Next", type: string }
+          - { name: learned, label: "Heading: What I learned", type: string }
+          - { name: updated, label: "Footer: Updated", type: string }
+      - name: description
+        label: Search-engine and link-preview description
+        type: text

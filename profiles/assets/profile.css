@@ -135,6 +135,68 @@ details ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
 .contact.shell { background: var(--panel); border-radius: 8px; padding: 1.25rem 1rem 1rem; width: calc(100% - 2 * var(--gutter)); max-width: calc(var(--shell) - 2 * var(--gutter)); }
 .email-big { font-size: 1.25rem; font-weight: 600; overflow-wrap: anywhere; }
 
+/* Project "how it works" pages (profiles/<slug>/projects/<project>/) */
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.pp-head { padding-top: 1.25rem; }
+.pp-head > * { max-width: 900px; }
+.pp-head h1 { font-size: 1.75rem; margin: 0.25rem 0 0.75rem; }
+.back { margin: 0 0 0.5rem; font-size: 0.9375rem; }
+.private { color: var(--muted); font-size: 0.9375rem; border-left: 3px solid var(--gold); padding-left: 0.6rem; }
+.project-page .block { max-width: 1232px; }
+.glance { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.glance li { background: var(--surface); border: 2px solid var(--border); padding: 0.6rem 0.8rem; line-height: 1.35; }
+.glance .kpi { font-size: 1.25rem; }
+@media (min-width: 760px) {
+  .pp-head h1 { font-size: 2.125rem; }
+  .pp-head { padding-top: 2.5rem; }
+  .glance { grid-template-columns: repeat(3, 1fr); }
+}
+
+.diagram { margin: 0; }
+.diagram figcaption { color: var(--muted); font-size: 0.9375rem; margin-top: 0.75rem; max-width: 900px; }
+.dg { display: block; width: 100%; height: auto; }
+.dg-wide { display: none; }
+.dg-tall { max-width: 460px; }
+@media (min-width: 1040px) { .dg-wide { display: block; } .diagram .dg-tall { display: none; } }
+.dg-box { fill: var(--surface); stroke: var(--navy); stroke-width: 2; }
+.dg-side { fill: var(--bg); stroke-dasharray: 6 4; }
+.dg-human { fill: var(--navy); }
+.dg-band { fill: var(--panel); stroke: none; }
+.dg-text { font: 600 15px var(--font); fill: var(--navy); text-anchor: middle; dominant-baseline: central; }
+.dg-human + .dg-text { fill: #fff; }
+.dg-loop { font-weight: 400; fill: var(--text); }
+.dg-note { font: italic 400 14px var(--font); fill: var(--muted); }
+.dg-arrow, .dg-axis { fill: none; stroke: var(--muted); stroke-width: 2; }
+.dg-axis { stroke-dasharray: 2 4; }
+.dg-head { fill: var(--muted); }
+.dg-badge circle { fill: var(--teal); stroke: var(--surface); stroke-width: 2; }
+.dg-badge text { font: 700 14px var(--font); fill: #fff; text-anchor: middle; dominant-baseline: central; }
+.dg a:hover .dg-badge circle, .dg a:focus-visible .dg-badge circle { fill: var(--navy); }
+
+.stages-wrap { display: grid; gap: 1.5rem; }
+.stages { list-style: none; margin: 0; padding: 0 0 0 1.25rem; border-left: 3px solid var(--border); display: grid; gap: 14px; }
+.stage { position: relative; background: var(--surface); border: 2px solid var(--border); padding: 0.9rem 1rem 0.4rem; scroll-margin-top: 1rem; }
+.stage:target { border-color: var(--teal); }
+.stage-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.75rem; margin-bottom: 0.4rem; }
+.stage-no {
+  position: absolute; left: calc(-1.25rem - 15px); top: 0.85rem; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--teal); color: #fff; font-weight: 700; font-size: 0.9375rem; display: grid; place-items: center;
+  border: 2px solid var(--bg);
+}
+.stage h3 { font-size: 1.125rem; flex: 1 1 14rem; }
+.status { font-size: 0.8125rem; font-weight: 700; color: var(--navy); background: var(--panel); padding: 0.15rem 0.55rem; border-radius: 999px; }
+.stages-aside { display: none; }
+@media (min-width: 1100px) {
+  .stages-wrap { grid-template-columns: minmax(0, 1fr) 340px; align-items: start; gap: 2.5rem; }
+  .stages-aside { display: block; position: sticky; top: 1rem; }
+  .stages-aside .dg-tall { display: block; }
+}
+
+.closing { display: grid; gap: 12px; }
+.closing h2 { font-size: 1.125rem; margin-bottom: 0.4rem; }
+.closing ul { margin: 0; padding-left: 1.2rem; }
+@media (min-width: 760px) { .closing { grid-template-columns: repeat(3, 1fr); } }
+
 @media print {
   .site-header, .toc, .cta, .skip { display: none; }
   body { background: #fff; font-size: 11pt; }

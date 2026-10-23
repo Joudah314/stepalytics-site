@@ -5,6 +5,8 @@
 For every people/<slug>.toml it writes
     profiles/<slug>/index.html      the profile page (from template.html)
     <short_path>/index.html         a redirect to it, if the person has a short_path (from redirect.html)
+and for every projects/<slug>.toml (a project's "how it works" page, owned by `person`)
+    profiles/<person>/projects/<slug>/index.html   (from project_page.html)
 
 Site-wide settings (site name, base URL, visitor counter) are in site.toml.
 Templates use a small Mustache subset:
@@ -295,11 +297,66 @@ def build_person(site: dict, path: Path, template: str, redirect_template: str) 
     return written
 
 
+# The boxes of a project page's system diagram (projects/<slug>.toml, [diagram]). Each label may use " | " to
+# break its line; each has a <key>_stage, the stage card its number badge links to.
+DIAGRAM_KEYS = ("sources", "rules", "ml", "screen", "evaluate", "human", "facts", "grades", "timing", "band")
+
+
+def diagram_data(diagram: dict) -> dict:
+    out = {}
+    for key in DIAGRAM_KEYS:
+        lines = [part.strip() for part in str(diagram.get(key, "")).split("|") if part.strip()]
+        n = len(lines)
+        out[key] = {
+            "lines": [{"t": t, "dy": f"{-(n - 1) * 0.6:.1f}em" if i == 0 else "1.2em"} for i, t in enumerate(lines)],
+            "one": " ".join(lines),
+            "stage": diagram.get(key + "_stage", ""),
+        }
+    return out
+
+
+def build_project(site: dict, path: Path, template: str) -> Path:
+    """projects/<slug>.toml -> profiles/<person>/projects/<slug>/index.html (a project's "how it works" page)."""
+    raw = path.read_text(encoding="utf-8")
+    p = whole_numbers(tomllib.loads(raw))
+    slug, owner = p["slug"], p["person"]
+    if path.stem != slug:
+        raise SystemExit(f"{path.name}: slug '{slug}' must match the file name")
+    person = whole_numbers(tomllib.loads((SRC / "people" / f"{owner}.toml").read_text(encoding="utf-8")))
+    allowed = privacy_check.allowed_emails(person)
+    check_private(slug, path.name, raw, allowed)
+    page_url = f"{site['base_url']}/profiles/{owner}/projects/{slug}/"
+
+    updated = dt.date.fromisoformat(p["updated"]) if "updated" in p else dt.date.today()
+    p["updated_iso"] = updated.isoformat()
+    p["updated_human"] = f"{updated.day} {updated:%B %Y}"
+    for i, stage in enumerate(p.get("stages", []), 1):
+        stage["number"] = i
+    data = add_html_variants(p)
+    data.update(
+        site=add_html_variants(site),
+        page_url=page_url,
+        person_name=person["name"],
+        d=diagram_data(p.get("diagram", {})),
+        aside_copy={"in_aside": True},
+        analytics=site.get("analytics", {}).get("enabled") and site["analytics"].get("goatcounter_code"),
+        goatcounter_code=site.get("analytics", {}).get("goatcounter_code", ""),
+    )
+    page = render(template, data)
+    check_private(slug, f"profiles/{owner}/projects/{slug}/index.html (page text)", privacy_check.page_text(page), allowed)
+    out_dir = PROFILES / owner / "projects" / slug
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out = out_dir / "index.html"
+    out.write_text(page, encoding="utf-8", newline="\n")
+    return out
+
+
 def main() -> int:
     site = tomllib.loads((SRC / "site.toml").read_text(encoding="utf-8"))
     site["base_url"] = site["base_url"].rstrip("/")
     template = (SRC / "template.html").read_text(encoding="utf-8")
     redirect_template = (SRC / "redirect.html").read_text(encoding="utf-8")
+    project_template = (SRC / "project_page.html").read_text(encoding="utf-8")
     people = sorted((SRC / "people").glob("*.toml"))
     if not people:
         print("no content files in profiles/_src/people/")
@@ -307,6 +364,8 @@ def main() -> int:
     for path in people:
         for out in build_person(site, path, template, redirect_template):
             print("wrote", out.relative_to(ROOT).as_posix())
+    for path in sorted((SRC / "projects").glob("*.toml")):
+        print("wrote", build_project(site, path, project_template).relative_to(ROOT).as_posix())
     return 0
 
 

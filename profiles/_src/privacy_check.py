@@ -2,8 +2,8 @@
 
     python profiles/_src/privacy_check.py        (run from the site root, after build.py)
 
-Checks every people/<slug>.toml and every built page (profiles/<slug>/index.html and its
-short-link redirect) for: a phone number, a street address, grades, visa or work-rights
+Checks every people/<slug>.toml and projects/<slug>.toml and every built page (profiles/<slug>/index.html,
+its short-link redirect, and each project page) for: a phone number, a street address, grades, visa or work-rights
 details, and any email address other than the person's contact email (so no university
 email). Exits with status 1 and says what was found, and where, without repeating the
 private text itself (the GitHub Actions log of a public repository is public).
@@ -85,6 +85,16 @@ def check_all() -> list[str]:
             if page.is_file():
                 problems += scan(page_text(page.read_text(encoding="utf-8")), allowed,
                                  page.relative_to(ROOT).as_posix() + " (page text)")
+    for toml_path in sorted((SRC / "projects").glob("*.toml")):
+        raw = toml_path.read_text(encoding="utf-8")
+        project = tomllib.loads(raw)
+        owner = tomllib.loads((SRC / "people" / f"{project['person']}.toml").read_text(encoding="utf-8"))
+        allowed = allowed_emails(owner)
+        problems += scan(raw, allowed, toml_path.relative_to(ROOT).as_posix())
+        page = ROOT / "profiles" / project["person"] / "projects" / project["slug"] / "index.html"
+        if page.is_file():
+            problems += scan(page_text(page.read_text(encoding="utf-8")), allowed,
+                             page.relative_to(ROOT).as_posix() + " (page text)")
     return problems
 
 
