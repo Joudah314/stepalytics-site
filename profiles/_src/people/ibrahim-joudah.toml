@@ -164,7 +164,7 @@ skills = [
 	{ group = 'AI and LLMs', items = 'Agentic AI, large language models (LLMs) and GenAI, LLM evaluation against human judgement, prompt design, text embeddings, generative models for synthetic data (CTGAN, CopulaGAN), AI-assisted development with careful human review' },
 	{ group = 'Machine learning and statistics', items = 'Machine learning (XGBoost), deep learning, predictive modelling and classification, statistical modelling and regression, Bayesian statistical modelling, forecasting, experimentation, feature selection for high-dimensional data, robust methods, anomaly detection, simulation, cross-validation and model evaluation' },
 	{ group = 'Data engineering and production', items = 'Data pipelines and automation, production deployment (cloud), CI/CD with Git, monitoring and alerts, cost tracking, automated testing, R package development (testthat), reproducible analysis, data preparation, validation and reconciliation, DataSHIELD federated analysis' },
-	{ group = 'Programming and tools', items = 'Python, SQL (DuckDB), R (my strongest language), Tableau, Power BI dashboards, Excel, Alteryx, MATLAB, Git and GitHub, LaTeX and R Markdown' },
+	{ group = 'Programming and tools', items = 'R (my strongest language), Python, SQL (DuckDB), Tableau, Power BI dashboards, Excel, Alteryx, MATLAB, Git and GitHub, LaTeX and R Markdown' },
 	{ group = 'Communication', items = 'Stakeholder presentations, practical recommendations for managers and executives, technical reporting, university teaching, research publication' },
 ]
 talks = [
