@@ -22,13 +22,12 @@
 <header class="site-header">
   <div class="shell bar">
     <a class="brand" href="../../../../"><img src="../../../assets/stepalytics-logo.png" width="62" height="40" alt="StepAlytics home"></a>
-    <nav aria-label="StepAlytics"><a href="../../../../activity-explorer/">Activity Explorer</a></nav>
+    <nav aria-label="StepAlytics"><a href="../../">{{person_name}}</a></nav>
   </div>
 </header>
 
 <main id="main" class="project-page">
   <section class="shell pp-head" aria-labelledby="title">
-    <p class="back"><a href="../../">← {{labels.back}}</a></p>
     <h1 id="title">{{title}}</h1>
     <p class="value">{{{summary_html}}}</p>
     <p class="meta">{{labels.running_since}} {{since}} · {{labels.last_reviewed}} <time datetime="{{updated_iso}}">{{updated_human}}</time></p>

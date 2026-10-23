@@ -492,7 +492,6 @@ content:
         label: Headings and fixed wording
         type: object
         fields:
-          - { name: back, label: "Link back to the profile", type: string }
           - { name: running_since, label: "Running since", type: string }
           - { name: last_reviewed, label: "Last reviewed", type: string }
           - { name: glance, label: "Heading: At a glance", type: string }

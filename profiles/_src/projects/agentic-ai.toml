@@ -17,7 +17,6 @@ learned = [
 	'test in shadow before going live',
 	'keep a human on every decision that matters',
 ]
-labels.back = 'Ibrahim Joudah’s profile'
 labels.running_since = 'Running since'
 labels.last_reviewed = 'Last reviewed'
 labels.glance = 'At a glance'
