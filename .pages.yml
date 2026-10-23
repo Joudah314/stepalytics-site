@@ -51,6 +51,10 @@ content:
             label: Line under the title
             type: string
             description: "A link is written as [link text](https://address); a link to a project on this page as [text](#project-id)."
+          - name: url
+            label: Where the whole box goes when clicked (optional)
+            type: string
+            description: "e.g. ./projects/agentic-ai/ or #education or https://… Leave empty for a box that is not clickable."
 
       # ------------------------------------------------------------ About
       - name: summary
@@ -103,6 +107,10 @@ content:
             label: Title
             type: string
             required: true
+          - name: url
+            label: Where the whole card goes when clicked (optional)
+            type: string
+            description: "e.g. ./projects/agentic-ai/ or https://… Leave empty for a card that is not clickable."
           - name: id
             label: Link name (optional)
             type: string

@@ -49,7 +49,7 @@
     </div>
     <p class="value">{{{value_html}}}</p>
     <ul class="proof" aria-label="{{labels.highlights}}">
-      {{#proof}}<li><span class="kpi">{{title}}</span><span class="kpi-label">{{{line_html}}}</span></li>
+      {{#proof}}<li{{#url}} class="linked"{{/url}}>{{#url}}<a class="kpi card-link" href="{{url}}">{{title}}</a>{{/url}}{{^url}}<span class="kpi">{{title}}</span>{{/url}}<span class="kpi-label">{{{line_html}}}</span></li>
       {{/proof}}
     </ul>
     <div class="cta">

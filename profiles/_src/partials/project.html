@@ -1,5 +1,5 @@
-<article class="card project"{{#id}} id="{{id}}"{{/id}}>
-        <h3>{{title}}</h3>
+<article class="card project{{#url}} linked{{/url}}"{{#id}} id="{{id}}"{{/id}}>
+        <h3>{{#url}}<a class="card-link" href="{{url}}">{{title}}</a>{{/url}}{{^url}}{{title}}{{/url}}</h3>
         <p class="meta">{{when}} · {{kind}}</p>
         <dl class="par">
           <dt>{{labels.problem}}</dt><dd>{{{problem_html}}}</dd>
