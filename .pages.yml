@@ -437,15 +437,12 @@ content:
         list:
           collapsible:
             collapsed: true
-            summary: "{title} ({status})"
+            summary: "{title}"
         fields:
           - name: title
             label: Stage title
             type: string
             required: true
-          - name: status
-            label: Status (e.g. Live, Done, Ongoing, Planned)
-            type: string
           - name: problem
             label: Problem (leave empty to hide)
             type: text

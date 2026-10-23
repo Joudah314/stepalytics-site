@@ -183,7 +183,6 @@ details ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
   border: 2px solid var(--bg);
 }
 .stage h3 { font-size: 1.125rem; flex: 1 1 14rem; }
-.status { font-size: 0.8125rem; font-weight: 700; color: var(--navy); background: var(--panel); padding: 0.15rem 0.55rem; border-radius: 999px; }
 .stages-aside { display: none; }
 @media (min-width: 1100px) {
   .stages-wrap { grid-template-columns: minmax(0, 1fr) 340px; align-items: start; gap: 2.5rem; }
