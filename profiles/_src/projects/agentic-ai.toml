@@ -6,17 +6,9 @@ title = 'Agentic AI job-market monitoring system: how it works'
 summary = 'An LLM system that watches the Australian job market around the clock, filters thousands of ads with machine learning and LLMs, and hands a short list to a person who decides.'
 private_line = 'Designed, built and run by me. The implementation is private; a walkthrough is available on request.'
 description = 'How Ibrahim Joudah’s agentic AI job-market monitoring system works, stage by stage: LLM screening and evaluation, machine-learning filters tested in shadow mode, checks against human judgement, and Bayesian timing.'
-underneath = 'health monitoring and alerts · a cost log and weekly ceilings with an automatic pause · encrypted nightly backups · every settings change logged'
-next = [
-	'an agreement figure between the AI and human grades',
-	'a fixed evaluation set re-run on every change',
-	'check frequency set by each employer’s own posting rate',
-]
-learned = [
-	'start simple and add complexity only when a measurement justifies it',
-	'test in shadow before going live',
-	'keep a human on every decision that matters',
-]
+underneath = ''
+next = []
+learned = []
 labels.running_since = 'Running since'
 labels.last_reviewed = 'Last reviewed'
 labels.glance = 'At a glance'
@@ -27,7 +19,7 @@ labels.decision = 'Decision'
 labels.rejected = 'Rejected'
 labels.evidence = 'Evidence'
 labels.stage = 'Stage'
-labels.underneath = 'Running underneath'
+labels.underneath = ''
 labels.next = 'Next'
 labels.learned = 'What I learned'
 labels.updated = 'Updated'

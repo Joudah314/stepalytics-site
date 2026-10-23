@@ -332,6 +332,8 @@ def build_project(site: dict, path: Path, template: str) -> Path:
     p["updated_human"] = f"{updated.day} {updated:%B %Y}"
     for i, stage in enumerate(p.get("stages", []), 1):
         stage["number"] = i
+    # The closing boxes (Running underneath, Next, What I learned) show only when filled in.
+    p["closing_any"] = bool(p.get("underneath") or p.get("next") or p.get("learned"))
     data = add_html_variants(p)
     data.update(
         site=add_html_variants(site),

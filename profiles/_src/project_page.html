@@ -76,20 +76,20 @@
     </div>
   </section>
 
-  <section class="shell block closing">
-    <div class="card">
+  {{#closing_any}}<section class="shell block closing">
+    {{#underneath}}<div class="card">
       <h2>{{labels.underneath}}</h2>
       <p>{{{underneath_html}}}</p>
-    </div>
-    <div class="card">
+    </div>{{/underneath}}
+    {{#next_any}}<div class="card">
       <h2>{{labels.next}}</h2>
       <ul>{{#next}}<li>{{{text_html}}}</li>{{/next}}</ul>
-    </div>
-    <div class="card">
+    </div>{{/next_any}}
+    {{#learned_any}}<div class="card">
       <h2>{{labels.learned}}</h2>
       <ul>{{#learned}}<li>{{{text_html}}}</li>{{/learned}}</ul>
-    </div>
-  </section>
+    </div>{{/learned_any}}
+  </section>{{/closing_any}}
 </main>
 
 <footer class="site-footer">

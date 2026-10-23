@@ -459,14 +459,14 @@ content:
             label: Evidence (leave empty to hide)
             type: text
       - name: underneath
-        label: Running underneath (one line)
+        label: "Box at the end: Running underneath (leave empty to hide)"
         type: text
       - name: next
-        label: Next (list)
+        label: "Box at the end: Next (leave empty to hide)"
         type: text
         list: true
       - name: learned
-        label: What I learned (list)
+        label: "Box at the end: What I learned (leave empty to hide)"
         type: text
         list: true
       - name: diagram
