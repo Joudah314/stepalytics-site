@@ -72,8 +72,10 @@
     <div class="themes">
       {{#themes}}<div class="card theme">
         <h3>{{title}}</h3>
-        <p>{{{text_html}}}</p>
-        <p class="evidence">{{{evidence_html}}}</p>
+        {{#points_any}}<ul class="points">{{#points}}<li>{{{text_html}}}</li>{{/points}}</ul>{{/points_any}}
+        {{#text}}<p>{{{text_html}}}</p>{{/text}}
+        {{#examples_any}}<p class="examples"><strong>Examples:</strong> {{#examples}}<a href="{{url}}">{{label}}</a>{{^last}} · {{/last}}{{/examples}}</p>{{/examples_any}}
+        {{#evidence}}<p class="evidence">{{{evidence_html}}}</p>{{/evidence}}
       </div>
       {{/themes}}
     </div>

@@ -72,11 +72,28 @@ content:
             label: Title
             type: string
             required: true
+          - name: points
+            label: Bullet points
+            type: text
+            list: true
+          - name: examples
+            label: Examples (links after “Examples:”)
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Link text
+                type: string
+                required: true
+              - name: url
+                label: Link (web address, or #card-id for a card on this page)
+                type: string
+                required: true
           - name: text
-            label: Text
+            label: Paragraph (optional, under the bullets)
             type: text
           - name: evidence
-            label: Evidence line (small text with links)
+            label: Small line under the box (e.g. a quote)
             type: text
 
       # ------------------------------------------------------------ Selected work

@@ -280,6 +280,9 @@ def build_person(site: dict, path: Path, template: str, redirect_template: str) 
         p[key + "_phone_more"] = [{**{k: v for k, v in i.items() if k != "id"}, "wide_only": False, "narrow_only": True}
                                   for i in extra]
         p[key + "_fold_any"] = bool(extra or p[key + "_more"])
+    for theme in p.get("themes", []):  # the Examples links, separated by " · " (none after the last)
+        for n, example in enumerate(theme.get("examples", []), 1):
+            example["last"] = n == len(theme["examples"])
     for group in p.get("skills", []):  # "R · Python · SQL" -> tags
         group["tags"] = [s.strip() for s in group.get("items", "").split("·") if s.strip()]
     p["summary_plain"] = re.sub(r"\[([^\]]+)\]\([^)]+\)|[*`]", lambda m: m.group(1) or "", p["summary"])
