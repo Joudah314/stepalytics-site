@@ -29,7 +29,7 @@
   "url": "https://stepalytics.com/profiles/ibrahim-joudah/",
   "name": "Ibrahim Joudah – Data Scientist, Statistician & Applied AI Specialist",
   "inLanguage": "en-AU",
-  "dateModified": "2026-10-23",
+  "dateModified": "2026-10-24",
   "isPartOf": {
     "@type": "WebSite",
     "name": "StepAlytics",
@@ -133,20 +133,20 @@
     <div class="cta">
       <a class="button primary" href="mailto:ibrahim.inj@gmail.com">Email me</a>
       <a class="button" href="https://www.linkedin.com/in/ibrahim-joudah/">LinkedIn</a>
-      <a class="button" href="Ibrahim-Joudah-CV.pdf">CV <span class="filetype">(PDF, 3 pages, 352 KB)</span></a>
+      <a class="button" href="Ibrahim-Joudah-CV.pdf">CV (PDF)</a>
     </div>
-    <p class="email-line"><a href="mailto:ibrahim.inj@gmail.com">ibrahim.inj@gmail.com</a></p>
   </section>
 
   <nav class="toc shell" aria-label="On this page">
     <ul>
+      <li><a href="#about">About</a></li>
       <li><a href="#work">Selected work</a></li>
       <li><a href="#experience">Experience</a></li>
-      <li><a href="#publications">Publications</a></li>
-      <li><a href="#talks">Talks</a></li>
-      <li><a href="#awards">Awards</a></li>
       <li><a href="#education">Education</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#talks">Conference talks</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#awards">Awards and grants</a></li>
       <li><a href="#contact">Contact</a></li>
       
     </ul>
@@ -190,11 +190,10 @@
         <p class="meta">2026 · Independent project · designed, built and run by me</p>
         <dl class="par">
           <dt>Problem</dt><dd>Good jobs appear on hundreds of different sites, and the best ones fill fast.</dd>
-          <dt>What I built</dt><dd>An agentic AI system that watches thousands of companies and other job sources around the clock, uses LLMs to judge which jobs fit, and sends notifications to phone.</dd>
-          <dt>Result</dt><dd>New openings are found within minutes, the AI’s judgement is measured against people’s, and a machine-learning filter cuts the number of paid AI calls.</dd>
+          <dt>What I built</dt><dd>An agentic AI system that watches thousands of companies around the clock, uses LLMs to judge which jobs fit, and sends notifications to phone.</dd>
+          <dt>Result</dt><dd>New openings are found within minutes, and the AI’s judgement is measured against people’s.</dd>
         </dl>
-        <h4 class="how">Key facts</h4>
-        <ul class="how-list"><li><strong>Agentic AI with LLMs (GenAI):</strong> an end-to-end system in Python and SQL on a cloud server, running 24/7. It collects job ads from multiple sources, uses LLMs to screen and evaluate each one, and sends notifications to phone.</li><li><strong>LLM evaluation:</strong> I compared the AI’s ratings with human judgements, so its decisions can be trusted and improved over time.</li><li><strong>Machine learning and statistics:</strong> a machine-learning model (XGBoost) reduces paid AI calls; it was tested safely in shadow mode before switching on. Bayesian statistical modelling keeps monitoring fast while keeping server load low.</li><li><strong>Production-grade:</strong> about 1,300 automated tests, CI/CD with Git, monitoring and alerts, cost tracking, and encrypted backups.</li></ul>
+        
         
         <p class="tools">Python · SQL · LLMs / GenAI · XGBoost · Bayesian modelling · cloud · CI/CD</p>
         <ul class="links">
@@ -206,9 +205,9 @@
         <h3>Predicting survey qualification rates with LLMs</h3>
         <p class="meta">2026 · Applied AI · predictive modelling</p>
         <dl class="par">
-          <dt>Problem</dt><dd>How many people will qualify for a new consumer survey, when the topic has no past data to learn from?</dd>
-          <dt>What I did</dt><dd>Asked a large language model (LLM) for a first estimate from the question wording and location alone, and treated it as data to correct rather than as truth. An R and Python pipeline then combined those estimates with text embeddings and machine learning (XGBoost).</dd>
-          <dt>Result</dt><dd>In cross-validation on held-out categories, prediction error (RMSE) was 21% lower than the calibrated LLM estimate alone. I translated the results into business terms: how many people a survey would need to recruit to fill its quota, and a rule that flags qualifying questions few people are likely to pass.</dd>
+          <dt>Problem</dt><dd>How many people will qualify for a new consumer survey, when the topic has no past data?</dd>
+          <dt>What I did</dt><dd>Treated an LLM’s first estimate as data to correct, then combined it with text embeddings and machine learning (XGBoost) in R and Python.</dd>
+          <dt>Result</dt><dd>Prediction error (RMSE) 21% lower than the calibrated LLM alone, in cross-validation on held-out categories, translated into how many people each survey needs to recruit.</dd>
         </dl>
         
         
@@ -220,8 +219,8 @@
         <p class="meta">2026 · Personal project · public dashboards</p>
         <dl class="par">
           <dt>Problem</dt><dd>Which patterns in a year of step-tracker data are real, and how much do the weather and a program change daily activity?</dd>
-          <dt>What I did</dt><dd>Built Python and SQL (DuckDB) workflows with data-quality checks; measured the weather’s effect with regression and the program’s effect with a before-and-after time-series design (interrupted time series, checked with placebo tests); forecast the next day’s activity, tested by time-series cross-validation; and published two interactive Tableau dashboards.</dd>
-          <dt>Result</dt><dd>The quality checks changed a conclusion: an apparent jump in walking speed came from a change in how the device estimated stride length, not from a gain in fitness. In the published (simulated-data) version, the forecast was 13% more accurate than the best simple rule (mean absolute error).</dd>
+          <dt>What I did</dt><dd>Python and SQL (DuckDB) workflows with data-quality checks; regression, an interrupted time-series design and forecasting; two interactive Tableau dashboards.</dd>
+          <dt>Result</dt><dd>The quality checks showed an apparent jump in walking speed came from a device change, not fitness; the forecast was 13% more accurate than the best simple rule (simulated-data version).</dd>
         </dl>
         
         <p class="note">Analysed first on my own tracker data, then published with a simulated version of the activity data to protect privacy.</p>
@@ -233,13 +232,13 @@
           
         </ul>
       </article>
-      <article class="card project linked">
+      <article class="card project linked wide-only">
         <h3><a class="card-link" href="https://doi.org/10.1007/s11222-025-10599-6">Air-HOLP and the AirScreen R package</a></h3>
         <p class="meta">2024–2025 · Research · first author · method and software</p>
         <dl class="par">
-          <dt>Problem</dt><dd>In data with thousands of possible factors, such as gene-expression data, find the few that really affect the outcome, even when the factors are strongly related.</dd>
-          <dt>What I did</dt><dd>Created Air-HOLP, a statistical method that extends an existing screening method (HOLP) with ridge regularisation that tunes itself, so no slow resampling is needed. Tested it across many simulated settings and on prostate cancer gene-expression data.</dd>
-          <dt>Result</dt><dd>Published as first author in <em>Statistics and Computing</em> (2025) and released on CRAN as AirScreen, an R package with unit tests.</dd>
+          <dt>Problem</dt><dd>Find the few factors that really affect an outcome among thousands of strongly related ones, such as gene-expression data.</dd>
+          <dt>What I did</dt><dd>Created Air-HOLP, a feature-screening method with self-tuning ridge regularisation, so no slow resampling is needed; tested in simulations and on prostate cancer gene-expression data.</dd>
+          <dt>Result</dt><dd>First-author paper in <em>Statistics and Computing</em> (2025), and the AirScreen R package on CRAN.</dd>
         </dl>
         
         
@@ -255,13 +254,31 @@
     <details class="more">
       <summary>More projects</summary>
       <div class="projects">
+        <article class="card project linked narrow-only">
+        <h3><a class="card-link" href="https://doi.org/10.1007/s11222-025-10599-6">Air-HOLP and the AirScreen R package</a></h3>
+        <p class="meta">2024–2025 · Research · first author · method and software</p>
+        <dl class="par">
+          <dt>Problem</dt><dd>Find the few factors that really affect an outcome among thousands of strongly related ones, such as gene-expression data.</dd>
+          <dt>What I did</dt><dd>Created Air-HOLP, a feature-screening method with self-tuning ridge regularisation, so no slow resampling is needed; tested in simulations and on prostate cancer gene-expression data.</dd>
+          <dt>Result</dt><dd>First-author paper in <em>Statistics and Computing</em> (2025), and the AirScreen R package on CRAN.</dd>
+        </dl>
+        
+        
+        <p class="tools">R · feature selection · simulation studies · testthat</p>
+        <ul class="links">
+          <li><a href="https://doi.org/10.1007/s11222-025-10599-6">Paper (Statistics and Computing)</a></li>
+          <li><a href="https://CRAN.R-project.org/package=AirScreen">AirScreen on CRAN</a></li>
+          
+        </ul>
+      </article>
+        
         <article class="card project">
         <h3>Privacy-preserving federated analysis</h3>
         <p class="meta">2026 – now · Consulting · Pacific Analytics Consulting</p>
         <dl class="par">
           <dt>Problem</dt><dd>Analyse sensitive data held on separate servers without anyone seeing or moving the individual records.</dd>
-          <dt>What I did</dt><dd>Built R functions and packages for DataSHIELD, a platform for federated analysis, that bring methods such as multiple imputation for missing data (MICE), survival analysis and regression modelling strategies (rms) to its client-server setup; tested and documented.</dd>
-          <dt>Result</dt><dd>The functions let an analyst run approved analyses on data stored on a separate server and get useful summaries back; only aggregate results that cannot identify anyone are exchanged. The packages are being tested before integration and release.</dd>
+          <dt>What I did</dt><dd>R functions and packages for DataSHIELD that bring multiple imputation (MICE), survival analysis and regression modelling (rms) to its client-server setup.</dd>
+          <dt>Result</dt><dd>Analysts get useful summaries while only aggregate, non-identifying results are exchanged; the packages are being tested before release.</dd>
         </dl>
         
         
@@ -272,9 +289,9 @@
         <h3><a class="card-link" href="https://doi.org/10.1016/j.caeai.2024.100293">Synthetic data with generative AI</a></h3>
         <p class="meta">2024 · Research · co-author</p>
         <dl class="par">
-          <dt>Problem</dt><dd>Can synthetic student records protect privacy and still support accurate prediction of learning outcomes?</dd>
-          <dt>What I did</dt><dd>Generated synthetic data with generative AI models (CTGAN and CopulaGAN), checked it against the real data (distributions, correlations and principal-component structure), and compared prediction on original, synthetic and combined data. My part: methodology, software and visualisation.</dd>
-          <dt>Result</dt><dd>Published in <em>Computers and Education: Artificial Intelligence</em> (2024). I also co-authored research that integrates generative AI with feature selection for high-dimensional cancer classification (IEEE ICDH 2026).</dd>
+          <dt>Problem</dt><dd>Can synthetic student records protect privacy and still support accurate prediction?</dd>
+          <dt>What I did</dt><dd>Generated synthetic data with generative AI models (CTGAN, CopulaGAN) and checked it against the real data. My part: methodology, software and visualisation.</dd>
+          <dt>Result</dt><dd>Published in <em>Computers and Education: Artificial Intelligence</em> (2024); related work on cancer classification at IEEE ICDH 2026.</dd>
         </dl>
         
         
@@ -296,52 +313,69 @@
       <li class="job">
         <h3>Consultant <span class="org">· Pacific Analytics Consulting</span></h3>
         <p class="meta">Mar 2026 – now</p>
-        <p>Build R software that lets analysts study sensitive data held on separate servers without seeing the individual records: DataSHIELD-based functions and packages for privacy-preserving (federated) analysis, including research and development of federated survival analysis methods.</p>
-        <details>
-          <summary>More about this role</summary>
-          <ul><li>Adapt statistical procedures to a constrained client-server architecture, resolve package-integration and communication issues, and document technical decisions.</li><li>Write automated tests for the packages, which are being tested before integration and release.</li></ul>
-        </details>
+        <p class="lead">R software for privacy-preserving (federated) analysis of sensitive data held on separate servers.</p>
+        <ul class="points"><li>DataSHIELD-based R functions and packages, including research and development of federated survival analysis methods.</li><li>Adapt statistical procedures to a constrained client-server architecture; resolve package-integration and communication issues; document technical decisions.</li><li>Automated tests for the packages, which are being tested before integration and release.</li></ul>
       </li>
       <li class="job">
         <h3>Teaching Associate <span class="org">· Macquarie University</span></h3>
         <p class="meta">Feb 2023 – now</p>
-        <p>Teach statistics and machine learning to undergraduate and postgraduate students through practical classes, workshops, consultations and assessment, using R and Excel.</p>
-        <details>
-          <summary>More about this role</summary>
-          <ul><li>Subjects include introductory and business statistics, data science, applied statistics, probability, statistical modelling and machine learning, often for students with mixed quantitative backgrounds.</li><li>Student evaluations consistently recognise the clarity of my explanations and my depth of knowledge.</li><li>Made an <a href="https://www.desmos.com/calculator/aqneubmue8">interactive Desmos visual</a> on Type I and Type II errors, outside my formal duties.</li></ul>
-        </details>
+        <p class="lead">Teach statistics and machine learning to undergraduate and postgraduate students.</p>
+        <ul class="points"><li>Practical classes, workshops, consultations and assessment, using R and Excel.</li><li>Subjects include introductory and business statistics, data science, applied statistics, probability, statistical modelling and machine learning.</li><li>Made an <a href="https://www.desmos.com/calculator/aqneubmue8">interactive Desmos visual</a> on Type I and Type II errors, outside my formal duties.</li></ul>
       </li>
       <li class="job">
         <h3>Quantitative Data Lead <span class="org">· Altamir AI &amp; Data Governance</span></h3>
         <p class="meta">Aug 2025 – Jun 2026</p>
-        <p>Led the data work for external AI and data-governance projects: study design, data-quality checks, reconciliation, analysis and reporting. My data reconciliation for the Australian Dental Association led to the release of continuing professional development (CPD) certificates to dentists.</p>
-        <details>
-          <summary>More about this role</summary>
-          <ul><li>Translated technical findings into practical recommendations for stakeholders: CEOs, managers and staff.</li><li>Supervised six UTS students through a three-month AI-governance project for the media sector, from survey design and recruitment to analysis and the final presentation.</li></ul>
-        </details>
+        <p class="lead">Led the data work for external AI and data-governance projects.</p>
+        <ul class="points"><li>Study design, data-quality checks, reconciliation, analysis and reporting.</li><li>My data reconciliation for the Australian Dental Association led to the release of continuing professional development (CPD) certificates to dentists.</li></ul>
       </li>
       <li class="job">
         <h3>Research Assistant <span class="org">· Environment Protection Authority Victoria</span></h3>
         <p class="meta">Dec 2022 – Jan 2023</p>
-        <p>Helped estimate the number of tyres in stockpiles from 3D spatial data (point clouds and meshes), contributing to the project’s design, implementation, data analysis and reporting.</p>
-        
+        <p class="lead">Estimated the number of tyres in stockpiles from 3D spatial data (point clouds and meshes).</p>
+        <ul class="points"><li>Contributed to the project’s design, implementation, data analysis and reporting.</li></ul>
       </li>
       <li class="job">
         <h3>Data Analyst Intern <span class="org">· Quant Data &amp; Analytics, Riyadh</span></h3>
         <p class="meta">Jan 2019 – Aug 2019</p>
-        <p>Contributed to Fruits360, an analytics platform for restaurants: prepared and joined data with millions of records in Alteryx, and worked on forecasting workflows and Tableau dashboards.</p>
-        <details>
-          <summary>More about this role</summary>
-          <ul><li>Developed automated anomaly detection and robust handling of outliers and data-entry errors; this work later became the foundation of my first-author paper in <em>IEEE Access</em> (2020).</li></ul>
-        </details>
+        <p class="lead">Contributed to Fruits360, an analytics platform for restaurants.</p>
+        <ul class="points"><li>Prepared and joined data with millions of records in Alteryx.</li><li>Forecasting workflows and Tableau dashboards.</li><li>Automated anomaly detection and robust handling of outliers and data-entry errors, later the foundation of my first-author paper in <em>IEEE Access</em> (2020).</li></ul>
       </li>
       
     </ol>
   </section>
 
+  <section class="shell block" id="education" aria-labelledby="education-h">
+    <h2 id="education-h">Education</h2>
+    <ul class="edu">
+      <li>
+        <h3>PhD in Statistics <span class="org">· Macquarie University</span></h3>
+        <p class="meta">2022–2026</p>
+        <p>Thesis: <em>Feature Screening for Regression Models in Ultra-High Dimensional Settings</em>.</p>
+      </li>
+      <li>
+        <h3>Master of Research in Statistics <span class="org">· Macquarie University</span></h3>
+        <p class="meta">2021–2022</p>
+        <p>Thesis: <em>The ROPE Framework for Model Selection in Linear Regression</em>.</p>
+      </li>
+      <li>
+        <h3>Bachelor of Science in Actuarial Science <span class="org">· King Fahd University of Petroleum &amp; Minerals</span></h3>
+        <p class="meta">2016–2020</p>
+        
+      </li>
+      
+    </ul>
+  </section>
+
   <section class="shell block" id="publications" aria-labelledby="publications-h">
     <h2 id="publications-h">Publications</h2>
-    <p>Six peer-reviewed papers (five journal articles and one IEEE conference paper), three as lead author, with more than 100 citations on <a href="https://scholar.google.com/citations?user=A4ikGPAAAAAJ">Google Scholar</a>. ORCID <a href="https://orcid.org/0000-0002-0397-6266">0000-0002-0397-6266</a>.</p>
+    <ul class="stats">
+      <li><span class="stat-n">6</span> <span class="stat-l">Peer-reviewed papers</span><span class="stat-note">5 journal articles + 1 conference paper</span></li>
+      <li><span class="stat-n">3</span> <span class="stat-l">First-author papers</span><span class="stat-note">incl. Statistics and Computing (2025)</span></li>
+      <li><span class="stat-n">100+</span> <span class="stat-l">Citations</span><span class="stat-note">Google Scholar</span></li>
+      <li><span class="stat-n">6</span> <span class="stat-l">Conference talks</span><span class="stat-note">national and international</span></li>
+      
+    </ul>
+    <p class="pubs-links">Full list on <a href="https://scholar.google.com/citations?user=A4ikGPAAAAAJ">Google Scholar</a> · ORCID <a href="https://orcid.org/0000-0002-0397-6266">0000-0002-0397-6266</a></p>
     <ul class="pubs">
       <li class="card pub">
         <p class="cite"><strong>Joudah, I.</strong>, Müller, S., &amp; Zhu, H. (2025). Air-HOLP: adaptive regularized feature screening for high-dimensional correlated data. <em>Statistics and Computing</em>, 35(3), 63.</p>
@@ -393,28 +427,29 @@
       </li>
       <li class="card talk">
         <h3>ROSE: Rank-based Order Statistics Ensemble for High-Dimensional Feature Screening</h3>
-        <p class="meta">Dec 2025</p>
-        <p class="event">Australian Statistical Conference (ASC 2025), Perth</p>
-      </li>
-      <li class="card talk">
-        <h3>ROSE: Rank-based Order Statistics Ensemble for High-Dimensional Feature Screening</h3>
         <p class="meta">Sep 2025</p>
         <p class="event">Royal Statistical Society International Conference, Edinburgh</p>
-      </li>
-      <li class="card talk">
-        <h3>Efficient Stability Screening for Ultra-High Dimensional Data</h3>
-        <p class="meta">Aug 2024 · Invited talk</p>
-        <p class="event">26th International Conference on Computational Statistics (COMPSTAT 2024), Giessen</p>
       </li>
       
     </ul>
     <details class="more">
       <summary>More talks</summary>
       <ul class="talks">
+        
+        <li class="card talk">
+        <h3>Efficient Stability Screening for Ultra-High Dimensional Data</h3>
+        <p class="meta">Aug 2024 · Invited talk</p>
+        <p class="event">26th International Conference on Computational Statistics (COMPSTAT 2024), Giessen</p>
+      </li>
         <li class="card talk">
         <h3>Air-HOLP: Adaptive Regularized Feature Screening</h3>
         <p class="meta">Nov 2024</p>
         <p class="event">Early Career &amp; Student Statisticians Conference (ECSSC 2024), Hobart</p>
+      </li>
+        <li class="card talk">
+        <h3>ROSE: Rank-based Order Statistics Ensemble for High-Dimensional Feature Screening</h3>
+        <p class="meta">Dec 2025</p>
+        <p class="event">Australian Statistical Conference (ASC 2025), Perth</p>
       </li>
         <li class="card talk">
         <h3>Air-HOLP: Adaptive Ridge Screening for Ultra-High Dimensional Data</h3>
@@ -424,6 +459,18 @@
         
       </ul>
     </details>
+  </section>
+
+  <section class="shell block" id="skills" aria-labelledby="skills-h">
+    <h2 id="skills-h">Skills</h2>
+    <dl class="skills">
+      <div><dt>Programming and tools</dt><dd><ul class="tags"><li>R</li><li>Python</li><li>SQL</li><li>Excel</li><li>Tableau</li><li>Power BI</li></ul></dd></div>
+      <div><dt>Statistics and machine learning</dt><dd><ul class="tags"><li>Statistical modelling and regression</li><li>Feature selection for high-dimensional data</li><li>Machine learning (XGBoost)</li><li>Robust methods and anomaly detection</li><li>Simulation studies</li><li>Forecasting</li><li>Experimentation</li></ul></dd></div>
+      <div><dt>AI and LLMs</dt><dd><ul class="tags"><li>LLMs and generative AI</li><li>LLM evaluation against human judgement</li><li>Agentic AI</li><li>Synthetic data with generative models</li><li>Prompt design</li><li>Text embeddings</li></ul></dd></div>
+      <div><dt>Data engineering and production</dt><dd><ul class="tags"><li>Data validation and reconciliation</li><li>R package development</li><li>Data pipelines and automation</li><li>Automated testing</li><li>Dashboards and reporting</li><li>Cloud deployment and monitoring</li></ul></dd></div>
+      
+    </dl>
+    <p class="personal"></p>
   </section>
 
   <section class="shell block" id="awards" aria-labelledby="awards-h">
@@ -437,41 +484,6 @@
     </ul>
   </section>
 
-  <section class="shell block" id="education" aria-labelledby="education-h">
-    <h2 id="education-h">Education</h2>
-    <ul class="edu">
-      <li>
-        <h3>PhD in Statistics <span class="org">· Macquarie University</span></h3>
-        <p class="meta">2022–2026</p>
-        <p>Thesis: <em>Feature Screening for Regression Models in Ultra-High Dimensional Settings</em>.</p>
-      </li>
-      <li>
-        <h3>Master of Research in Statistics <span class="org">· Macquarie University</span></h3>
-        <p class="meta">2021–2022</p>
-        <p>Thesis: <em>The ROPE Framework for Model Selection in Linear Regression</em>.</p>
-      </li>
-      <li>
-        <h3>Bachelor of Science in Actuarial Science <span class="org">· King Fahd University of Petroleum &amp; Minerals</span></h3>
-        <p class="meta">2016–2020</p>
-        
-      </li>
-      
-    </ul>
-  </section>
-
-  <section class="shell block" id="skills" aria-labelledby="skills-h">
-    <h2 id="skills-h">Skills</h2>
-    <dl class="skills">
-      <div><dt>AI and LLMs</dt><dd>Agentic AI, large language models (LLMs) and GenAI, LLM evaluation against human judgement, prompt design, text embeddings, generative models for synthetic data (CTGAN, CopulaGAN), AI-assisted development with careful human review</dd></div>
-      <div><dt>Machine learning and statistics</dt><dd>Machine learning (XGBoost), deep learning, predictive modelling and classification, statistical modelling and regression, Bayesian statistical modelling, forecasting, experimentation, feature selection for high-dimensional data, robust methods, anomaly detection, simulation, cross-validation and model evaluation</dd></div>
-      <div><dt>Data engineering and production</dt><dd>Data pipelines and automation, production deployment (cloud), CI/CD with Git, monitoring and alerts, cost tracking, automated testing, R package development (testthat), reproducible analysis, data preparation, validation and reconciliation, DataSHIELD federated analysis</dd></div>
-      <div><dt>Programming and tools</dt><dd>R (my strongest language), Python, SQL (DuckDB), Tableau, Power BI dashboards, Excel, Alteryx, MATLAB, Git and GitHub, LaTeX and R Markdown</dd></div>
-      <div><dt>Communication</dt><dd>Stakeholder presentations, practical recommendations for managers and executives, technical reporting, university teaching, research publication</dd></div>
-      
-    </dl>
-    <p class="personal"></p>
-  </section>
-
   <section class="shell block contact" id="contact" aria-labelledby="contact-h">
     <h2 id="contact-h">Contact</h2>
     <p>Open to data science, statistics and applied AI roles in Sydney or remote. The quickest way to reach me is email.</p>
@@ -479,14 +491,14 @@
     <ul class="links">
       <li><a href="https://www.linkedin.com/in/ibrahim-joudah/">LinkedIn</a></li>
       <li><a href="https://github.com/Joudah314">GitHub</a></li>
-      <li><a href="Ibrahim-Joudah-CV.pdf">CV (PDF, 3 pages, 352 KB, October 2026)</a></li>
+      <li><a href="Ibrahim-Joudah-CV.pdf">CV (PDF)</a></li>
     </ul>
   </section>
 </main>
 
 <footer class="site-footer">
   <div class="shell">
-    <p>Ibrahim Joudah · Sydney, Australia · Updated <time datetime="2026-10-23">23 October 2026</time> · <a href="../../">StepAlytics</a></p>
+    <p>Ibrahim Joudah · Sydney, Australia · Updated <time datetime="2026-10-24">24 October 2026</time> · <a href="../../">StepAlytics</a></p>
   </div>
 </footer>
 

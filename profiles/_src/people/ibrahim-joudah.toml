@@ -1,14 +1,20 @@
 
 slug = 'ibrahim-joudah'
 short_path = 'ibrahim-joudah'
-updated = '2026-10-23'
+updated = '2026-10-24'
 name = 'Ibrahim Joudah'
 headline = 'Data Scientist, Statistician & Applied AI Specialist'
 location = 'Sydney, Australia'
 description = 'Data scientist and statistician in Sydney: agentic AI and LLM systems, machine learning, statistical modelling, data pipelines and dashboards. Projects, publications and CV.'
 value = 'I build reliable data and AI tools end-to-end, from statistical models and machine learning to an agentic AI system that runs around the clock in the cloud.'
 summary = 'I’m a data scientist and statistician with a PhD in statistics. My work covers four areas: building **AI and LLM systems**, including agentic AI, and testing whether their outputs can be trusted; **machine learning and statistical modelling**, from choosing and validating models to explaining them; **data pipelines, analytics and dashboards** that turn raw data into dependable answers; and **communication, teaching and mentoring**, so that results are understood and acted on. I work in R, Python and SQL. As a consultant, I build privacy-preserving (federated) analysis software in R, and I teach statistics and machine learning at Macquarie University.'
-pubs_intro = 'Six peer-reviewed papers (five journal articles and one IEEE conference paper), three as lead author, with more than 100 citations on [Google Scholar](https://scholar.google.com/citations?user=A4ikGPAAAAAJ). ORCID [0000-0002-0397-6266](https://orcid.org/0000-0002-0397-6266).'
+pubs_intro = 'Full list on [Google Scholar](https://scholar.google.com/citations?user=A4ikGPAAAAAJ) · ORCID [0000-0002-0397-6266](https://orcid.org/0000-0002-0397-6266)'
+pub_stats = [
+	{ number = '6', label = 'Peer-reviewed papers', note = '5 journal articles + 1 conference paper' },
+	{ number = '3', label = 'First-author papers', note = 'incl. Statistics and Computing (2025)' },
+	{ number = '100+', label = 'Citations', note = 'Google Scholar' },
+	{ number = '6', label = 'Conference talks', note = 'national and international' },
+]
 contact.email = 'ibrahim.inj@gmail.com'
 contact.linkedin = 'https://www.linkedin.com/in/ibrahim-joudah/'
 contact.github = 'https://github.com/Joudah314'
@@ -88,13 +94,14 @@ proof = [
 	{ title = 'R packages', line = 'e.g. [AirScreen](https://CRAN.R-project.org/package=AirScreen)', url = 'https://CRAN.R-project.org/package=AirScreen' },
 ]
 sections = [
+	{ label = 'About', id = 'about' },
 	{ label = 'Selected work', id = 'work' },
 	{ label = 'Experience', id = 'experience' },
-	{ label = 'Publications', id = 'publications' },
-	{ label = 'Talks', id = 'talks' },
-	{ label = 'Awards', id = 'awards' },
 	{ label = 'Education', id = 'education' },
+	{ label = 'Publications', id = 'publications' },
+	{ label = 'Conference talks', id = 'talks' },
 	{ label = 'Skills', id = 'skills' },
+	{ label = 'Awards and grants', id = 'awards' },
 	{ label = 'Contact', id = 'contact' },
 ]
 themes = [
@@ -104,47 +111,47 @@ themes = [
 	{ title = 'Communication, teaching and mentoring', text = 'Making complex analysis clear and useful. I turn technical findings into recommendations for managers and executives, have taught statistics and machine learning at Macquarie University since 2023, and supervised six UTS students through a three-month AI governance project.', evidence = '“He just knows how to teach, and knows what to say and how to say it without making it too confusing.” (student evaluation, 2024)' },
 ]
 projects = [
-	{ order = 1.0, show = 'page', title = 'Agentic AI job-market monitoring system', id = 'agentic-ai', url = './projects/agentic-ai/', when = '2026', kind = 'Independent project · designed, built and run by me', problem = 'Good jobs appear on hundreds of different sites, and the best ones fill fast.', did_label = 'What I built', approach = 'An agentic AI system that watches thousands of companies and other job sources around the clock, uses LLMs to judge which jobs fit, and sends notifications to phone.', result = 'New openings are found within minutes, the AI’s judgement is measured against people’s, and a machine-learning filter cuts the number of paid AI calls.', how_label = 'Key facts', how = [
-		'**Agentic AI with LLMs (GenAI):** an end-to-end system in Python and SQL on a cloud server, running 24/7. It collects job ads from multiple sources, uses LLMs to screen and evaluate each one, and sends notifications to phone.',
-		'**LLM evaluation:** I compared the AI’s ratings with human judgements, so its decisions can be trusted and improved over time.',
-		'**Machine learning and statistics:** a machine-learning model (XGBoost) reduces paid AI calls; it was tested safely in shadow mode before switching on. Bayesian statistical modelling keeps monitoring fast while keeping server load low.',
-		'**Production-grade:** about 1,300 automated tests, CI/CD with Git, monitoring and alerts, cost tracking, and encrypted backups.',
-	], tools = 'Python · SQL · LLMs / GenAI · XGBoost · Bayesian modelling · cloud · CI/CD', links = [
+	{ order = 1.0, show = 'page', title = 'Agentic AI job-market monitoring system', id = 'agentic-ai', url = './projects/agentic-ai/', when = '2026', kind = 'Independent project · designed, built and run by me', problem = 'Good jobs appear on hundreds of different sites, and the best ones fill fast.', did_label = 'What I built', approach = 'An agentic AI system that watches thousands of companies around the clock, uses LLMs to judge which jobs fit, and sends notifications to phone.', result = 'New openings are found within minutes, and the AI’s judgement is measured against people’s.', tools = 'Python · SQL · LLMs / GenAI · XGBoost · Bayesian modelling · cloud · CI/CD', links = [
 		{ label = 'How it works', url = './projects/agentic-ai/' },
 	] },
-	{ order = 2.0, show = 'page', title = 'Predicting survey qualification rates with LLMs', when = '2026', kind = 'Applied AI · predictive modelling', problem = 'How many people will qualify for a new consumer survey, when the topic has no past data to learn from?', approach = 'Asked a large language model (LLM) for a first estimate from the question wording and location alone, and treated it as data to correct rather than as truth. An R and Python pipeline then combined those estimates with text embeddings and machine learning (XGBoost).', result = 'In cross-validation on held-out categories, prediction error (RMSE) was 21% lower than the calibrated LLM estimate alone. I translated the results into business terms: how many people a survey would need to recruit to fill its quota, and a rule that flags qualifying questions few people are likely to pass.', tools = 'R · Python · LLMs · text embeddings · XGBoost · cross-validation' },
-	{ order = 3.0, show = 'page', title = 'StepAlytics Activity Explorer', url = 'https://stepalytics.com/activity-explorer/', when = '2026', kind = 'Personal project · public dashboards', problem = 'Which patterns in a year of step-tracker data are real, and how much do the weather and a program change daily activity?', approach = 'Built Python and SQL (DuckDB) workflows with data-quality checks; measured the weather’s effect with regression and the program’s effect with a before-and-after time-series design (interrupted time series, checked with placebo tests); forecast the next day’s activity, tested by time-series cross-validation; and published two interactive Tableau dashboards.', result = 'The quality checks changed a conclusion: an apparent jump in walking speed came from a change in how the device estimated stride length, not from a gain in fitness. In the published (simulated-data) version, the forecast was 13% more accurate than the best simple rule (mean absolute error).', note = 'Analysed first on my own tracker data, then published with a simulated version of the activity data to protect privacy.', tools = 'Python · SQL (DuckDB) · regression · forecasting · Tableau', links = [
+	{ order = 2.0, show = 'page', title = 'Predicting survey qualification rates with LLMs', when = '2026', kind = 'Applied AI · predictive modelling', problem = 'How many people will qualify for a new consumer survey, when the topic has no past data?', approach = 'Treated an LLM’s first estimate as data to correct, then combined it with text embeddings and machine learning (XGBoost) in R and Python.', result = 'Prediction error (RMSE) 21% lower than the calibrated LLM alone, in cross-validation on held-out categories, translated into how many people each survey needs to recruit.', tools = 'R · Python · LLMs · text embeddings · XGBoost · cross-validation' },
+	{ order = 3.0, show = 'page', title = 'StepAlytics Activity Explorer', url = 'https://stepalytics.com/activity-explorer/', when = '2026', kind = 'Personal project · public dashboards', problem = 'Which patterns in a year of step-tracker data are real, and how much do the weather and a program change daily activity?', approach = 'Python and SQL (DuckDB) workflows with data-quality checks; regression, an interrupted time-series design and forecasting; two interactive Tableau dashboards.', result = 'The quality checks showed an apparent jump in walking speed came from a device change, not fitness; the forecast was 13% more accurate than the best simple rule (simulated-data version).', note = 'Analysed first on my own tracker data, then published with a simulated version of the activity data to protect privacy.', tools = 'Python · SQL (DuckDB) · regression · forecasting · Tableau', links = [
 		{ label = 'Open the dashboards', url = 'https://stepalytics.com/activity-explorer/' },
 		{ label = 'Tableau Public', url = 'https://public.tableau.com/app/profile/ibrahim.joudah/viz/StepAlyticsActivityExplorer/Patterns' },
 		{ label = 'Analysis notes and report (GitHub)', url = 'https://github.com/Joudah314/StepAlytics-Activity-Explorer' },
 	] },
-	{ order = 4.0, show = 'page', title = 'Air-HOLP and the AirScreen R package', url = 'https://doi.org/10.1007/s11222-025-10599-6', when = '2024–2025', kind = 'Research · first author · method and software', problem = 'In data with thousands of possible factors, such as gene-expression data, find the few that really affect the outcome, even when the factors are strongly related.', approach = 'Created Air-HOLP, a statistical method that extends an existing screening method (HOLP) with ridge regularisation that tunes itself, so no slow resampling is needed. Tested it across many simulated settings and on prostate cancer gene-expression data.', result = 'Published as first author in *Statistics and Computing* (2025) and released on CRAN as AirScreen, an R package with unit tests.', tools = 'R · feature selection · simulation studies · testthat', links = [
+	{ order = 4.0, show = 'page', title = 'Air-HOLP and the AirScreen R package', url = 'https://doi.org/10.1007/s11222-025-10599-6', when = '2024–2025', kind = 'Research · first author · method and software', problem = 'Find the few factors that really affect an outcome among thousands of strongly related ones, such as gene-expression data.', approach = 'Created Air-HOLP, a feature-screening method with self-tuning ridge regularisation, so no slow resampling is needed; tested in simulations and on prostate cancer gene-expression data.', result = 'First-author paper in *Statistics and Computing* (2025), and the AirScreen R package on CRAN.', tools = 'R · feature selection · simulation studies · testthat', links = [
 		{ label = 'Paper (Statistics and Computing)', url = 'https://doi.org/10.1007/s11222-025-10599-6' },
 		{ label = 'AirScreen on CRAN', url = 'https://CRAN.R-project.org/package=AirScreen' },
 	] },
-	{ order = 5.0, show = 'more', title = 'Privacy-preserving federated analysis', when = '2026 – now', kind = 'Consulting · Pacific Analytics Consulting', problem = 'Analyse sensitive data held on separate servers without anyone seeing or moving the individual records.', approach = 'Built R functions and packages for DataSHIELD, a platform for federated analysis, that bring methods such as multiple imputation for missing data (MICE), survival analysis and regression modelling strategies (rms) to its client-server setup; tested and documented.', result = 'The functions let an analyst run approved analyses on data stored on a separate server and get useful summaries back; only aggregate results that cannot identify anyone are exchanged. The packages are being tested before integration and release.', tools = 'R · DataSHIELD · testthat' },
-	{ order = 6.0, show = 'more', title = 'Synthetic data with generative AI', url = 'https://doi.org/10.1016/j.caeai.2024.100293', when = '2024', kind = 'Research · co-author', problem = 'Can synthetic student records protect privacy and still support accurate prediction of learning outcomes?', approach = 'Generated synthetic data with generative AI models (CTGAN and CopulaGAN), checked it against the real data (distributions, correlations and principal-component structure), and compared prediction on original, synthetic and combined data. My part: methodology, software and visualisation.', result = 'Published in *Computers and Education: Artificial Intelligence* (2024). I also co-authored research that integrates generative AI with feature selection for high-dimensional cancer classification (IEEE ICDH 2026).', tools = 'CTGAN · CopulaGAN · PCA', links = [
+	{ order = 5.0, show = 'more', title = 'Privacy-preserving federated analysis', when = '2026 – now', kind = 'Consulting · Pacific Analytics Consulting', problem = 'Analyse sensitive data held on separate servers without anyone seeing or moving the individual records.', approach = 'R functions and packages for DataSHIELD that bring multiple imputation (MICE), survival analysis and regression modelling (rms) to its client-server setup.', result = 'Analysts get useful summaries while only aggregate, non-identifying results are exchanged; the packages are being tested before release.', tools = 'R · DataSHIELD · testthat' },
+	{ order = 6.0, show = 'more', title = 'Synthetic data with generative AI', url = 'https://doi.org/10.1016/j.caeai.2024.100293', when = '2024', kind = 'Research · co-author', problem = 'Can synthetic student records protect privacy and still support accurate prediction?', approach = 'Generated synthetic data with generative AI models (CTGAN, CopulaGAN) and checked it against the real data. My part: methodology, software and visualisation.', result = 'Published in *Computers and Education: Artificial Intelligence* (2024); related work on cancer classification at IEEE ICDH 2026.', tools = 'CTGAN · CopulaGAN · PCA', links = [
 		{ label = 'Paper (Computers and Education: AI)', url = 'https://doi.org/10.1016/j.caeai.2024.100293' },
 		{ label = 'Cancer classification paper (IEEE ICDH 2026)', url = 'https://doi.org/10.1109/ICDH72779.2026.00048' },
 	] },
 ]
 experience = [
-	{ title = 'Consultant', org = 'Pacific Analytics Consulting', when = 'Mar 2026 – now', summary = 'Build R software that lets analysts study sensitive data held on separate servers without seeing the individual records: DataSHIELD-based functions and packages for privacy-preserving (federated) analysis, including research and development of federated survival analysis methods.', more = [
-		'Adapt statistical procedures to a constrained client-server architecture, resolve package-integration and communication issues, and document technical decisions.',
-		'Write automated tests for the packages, which are being tested before integration and release.',
+	{ title = 'Consultant', org = 'Pacific Analytics Consulting', when = 'Mar 2026 – now', summary = 'R software for privacy-preserving (federated) analysis of sensitive data held on separate servers.', more = [
+		'DataSHIELD-based R functions and packages, including research and development of federated survival analysis methods.',
+		'Adapt statistical procedures to a constrained client-server architecture; resolve package-integration and communication issues; document technical decisions.',
+		'Automated tests for the packages, which are being tested before integration and release.',
 	] },
-	{ title = 'Teaching Associate', org = 'Macquarie University', when = 'Feb 2023 – now', summary = 'Teach statistics and machine learning to undergraduate and postgraduate students through practical classes, workshops, consultations and assessment, using R and Excel.', more = [
-		'Subjects include introductory and business statistics, data science, applied statistics, probability, statistical modelling and machine learning, often for students with mixed quantitative backgrounds.',
-		'Student evaluations consistently recognise the clarity of my explanations and my depth of knowledge.',
+	{ title = 'Teaching Associate', org = 'Macquarie University', when = 'Feb 2023 – now', summary = 'Teach statistics and machine learning to undergraduate and postgraduate students.', more = [
+		'Practical classes, workshops, consultations and assessment, using R and Excel.',
+		'Subjects include introductory and business statistics, data science, applied statistics, probability, statistical modelling and machine learning.',
 		'Made an [interactive Desmos visual](https://www.desmos.com/calculator/aqneubmue8) on Type I and Type II errors, outside my formal duties.',
 	] },
-	{ title = 'Quantitative Data Lead', org = 'Altamir AI & Data Governance', when = 'Aug 2025 – Jun 2026', summary = 'Led the data work for external AI and data-governance projects: study design, data-quality checks, reconciliation, analysis and reporting. My data reconciliation for the Australian Dental Association led to the release of continuing professional development (CPD) certificates to dentists.', more = [
-		'Translated technical findings into practical recommendations for stakeholders: CEOs, managers and staff.',
-		'Supervised six UTS students through a three-month AI-governance project for the media sector, from survey design and recruitment to analysis and the final presentation.',
+	{ title = 'Quantitative Data Lead', org = 'Altamir AI & Data Governance', when = 'Aug 2025 – Jun 2026', summary = 'Led the data work for external AI and data-governance projects.', more = [
+		'Study design, data-quality checks, reconciliation, analysis and reporting.',
+		'My data reconciliation for the Australian Dental Association led to the release of continuing professional development (CPD) certificates to dentists.',
 	] },
-	{ title = 'Research Assistant', org = 'Environment Protection Authority Victoria', when = 'Dec 2022 – Jan 2023', summary = 'Helped estimate the number of tyres in stockpiles from 3D spatial data (point clouds and meshes), contributing to the project’s design, implementation, data analysis and reporting.' },
-	{ title = 'Data Analyst Intern', org = 'Quant Data & Analytics, Riyadh', when = 'Jan 2019 – Aug 2019', summary = 'Contributed to Fruits360, an analytics platform for restaurants: prepared and joined data with millions of records in Alteryx, and worked on forecasting workflows and Tableau dashboards.', more = [
-		'Developed automated anomaly detection and robust handling of outliers and data-entry errors; this work later became the foundation of my first-author paper in *IEEE Access* (2020).',
+	{ title = 'Research Assistant', org = 'Environment Protection Authority Victoria', when = 'Dec 2022 – Jan 2023', summary = 'Estimated the number of tyres in stockpiles from 3D spatial data (point clouds and meshes).', more = [
+		'Contributed to the project’s design, implementation, data analysis and reporting.',
+	] },
+	{ title = 'Data Analyst Intern', org = 'Quant Data & Analytics, Riyadh', when = 'Jan 2019 – Aug 2019', summary = 'Contributed to Fruits360, an analytics platform for restaurants.', more = [
+		'Prepared and joined data with millions of records in Alteryx.',
+		'Forecasting workflows and Tableau dashboards.',
+		'Automated anomaly detection and robust handling of outliers and data-entry errors, later the foundation of my first-author paper in *IEEE Access* (2020).',
 	] },
 ]
 publications = [
@@ -161,18 +168,17 @@ education = [
 	{ degree = 'Bachelor of Science in Actuarial Science', place = 'King Fahd University of Petroleum & Minerals', when = '2016–2020' },
 ]
 skills = [
-	{ group = 'AI and LLMs', items = 'Agentic AI, large language models (LLMs) and GenAI, LLM evaluation against human judgement, prompt design, text embeddings, generative models for synthetic data (CTGAN, CopulaGAN), AI-assisted development with careful human review' },
-	{ group = 'Machine learning and statistics', items = 'Machine learning (XGBoost), deep learning, predictive modelling and classification, statistical modelling and regression, Bayesian statistical modelling, forecasting, experimentation, feature selection for high-dimensional data, robust methods, anomaly detection, simulation, cross-validation and model evaluation' },
-	{ group = 'Data engineering and production', items = 'Data pipelines and automation, production deployment (cloud), CI/CD with Git, monitoring and alerts, cost tracking, automated testing, R package development (testthat), reproducible analysis, data preparation, validation and reconciliation, DataSHIELD federated analysis' },
-	{ group = 'Programming and tools', items = 'R (my strongest language), Python, SQL (DuckDB), Tableau, Power BI dashboards, Excel, Alteryx, MATLAB, Git and GitHub, LaTeX and R Markdown' },
-	{ group = 'Communication', items = 'Stakeholder presentations, practical recommendations for managers and executives, technical reporting, university teaching, research publication' },
+	{ group = 'Programming and tools', items = 'R · Python · SQL · Excel · Tableau · Power BI' },
+	{ group = 'Statistics and machine learning', items = 'Statistical modelling and regression · Feature selection for high-dimensional data · Machine learning (XGBoost) · Robust methods and anomaly detection · Simulation studies · Forecasting · Experimentation' },
+	{ group = 'AI and LLMs', items = 'LLMs and generative AI · LLM evaluation against human judgement · Agentic AI · Synthetic data with generative models · Prompt design · Text embeddings' },
+	{ group = 'Data engineering and production', items = 'Data validation and reconciliation · R package development · Data pipelines and automation · Automated testing · Dashboards and reporting · Cloud deployment and monitoring' },
 ]
 talks = [
 	{ order = 1.0, show = 'page', title = 'Optimizing Cancer Classification in High-Dimensional Data by Integrating Generative AI with Feature Selection', when = 'Jul 2026', event = 'IEEE International Conference on Digital Health (ICDH 2026), Sydney' },
-	{ order = 2.0, show = 'page', title = 'ROSE: Rank-based Order Statistics Ensemble for High-Dimensional Feature Screening', when = 'Dec 2025', event = 'Australian Statistical Conference (ASC 2025), Perth' },
-	{ order = 3.0, show = 'page', title = 'ROSE: Rank-based Order Statistics Ensemble for High-Dimensional Feature Screening', when = 'Sep 2025', event = 'Royal Statistical Society International Conference, Edinburgh' },
-	{ order = 4.0, show = 'page', title = 'Efficient Stability Screening for Ultra-High Dimensional Data', when = 'Aug 2024', kind = 'Invited talk', event = '26th International Conference on Computational Statistics (COMPSTAT 2024), Giessen' },
-	{ order = 5.0, show = 'more', title = 'Air-HOLP: Adaptive Regularized Feature Screening', when = 'Nov 2024', event = 'Early Career & Student Statisticians Conference (ECSSC 2024), Hobart' },
+	{ order = 5.0, show = 'more', title = 'ROSE: Rank-based Order Statistics Ensemble for High-Dimensional Feature Screening', when = 'Dec 2025', event = 'Australian Statistical Conference (ASC 2025), Perth' },
+	{ order = 2.0, show = 'page', title = 'ROSE: Rank-based Order Statistics Ensemble for High-Dimensional Feature Screening', when = 'Sep 2025', event = 'Royal Statistical Society International Conference, Edinburgh' },
+	{ order = 3.0, show = 'more', title = 'Efficient Stability Screening for Ultra-High Dimensional Data', when = 'Aug 2024', kind = 'Invited talk', event = '26th International Conference on Computational Statistics (COMPSTAT 2024), Giessen' },
+	{ order = 4.0, show = 'more', title = 'Air-HOLP: Adaptive Regularized Feature Screening', when = 'Nov 2024', event = 'Early Career & Student Statisticians Conference (ECSSC 2024), Hobart' },
 	{ order = 6.0, show = 'more', title = 'Air-HOLP: Adaptive Ridge Screening for Ultra-High Dimensional Data', when = 'Dec 2023', event = 'Australian Statistical Conference (ASC 2023), Wollongong' },
 ]
 awards = [

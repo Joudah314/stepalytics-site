@@ -186,14 +186,33 @@ content:
             label: Summary
             type: text
           - name: more
-            label: More about this role (bullet points, folded)
+            label: Bullet points (shown under the summary)
             type: text
             list: true
 
       # ------------------------------------------------------------ Publications
       - name: pubs_intro
-        label: Publications – intro paragraph
+        label: Publications – links line (under the numbers)
         type: text
+      - name: pub_stats
+        label: Publications – numbers
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{number} {label}"
+        fields:
+          - name: number
+            label: Number
+            type: string
+            required: true
+          - name: label
+            label: Label
+            type: string
+            required: true
+          - name: note
+            label: Small note
+            type: string
       - name: publications
         label: Publications
         description: "Order: 1 comes first. Show: on the page, or under “More publications”."
@@ -323,6 +342,7 @@ content:
           - name: items
             label: Skills
             type: text
+            description: "Separate skills with · (each becomes a tag). Order: strongest first."
       - name: personal
         label: Personal line (under Skills)
         type: text

@@ -55,9 +55,8 @@
     <div class="cta">
       <a class="button primary" href="mailto:{{contact.email}}">{{labels.email_me}}</a>
       <a class="button" href="{{contact.linkedin}}">LinkedIn</a>
-      {{#cv}}<a class="button" href="{{file}}">CV <span class="filetype">(PDF, {{pages}} pages, {{size}})</span></a>{{/cv}}
+      {{#cv}}<a class="button" href="{{file}}">CV (PDF)</a>{{/cv}}
     </div>
-    <p class="email-line"><a href="mailto:{{contact.email}}">{{contact.email}}</a></p>
   </section>
 
   <nav class="toc shell" aria-label="{{labels.on_this_page}}">
@@ -95,13 +94,15 @@
       {{#projects_page}}{{> project}}
       {{/projects_page}}
     </div>
-    {{#projects_more_any}}<details class="more">
+    {{#projects_fold_any}}<details class="more{{^projects_more_any}} narrow-only{{/projects_more_any}}">
       <summary>{{labels.more_projects}}</summary>
       <div class="projects">
+        {{#projects_phone_more}}{{> project}}
+        {{/projects_phone_more}}
         {{#projects_more}}{{> project}}
         {{/projects_more}}
       </div>
-    </details>{{/projects_more_any}}
+    </details>{{/projects_fold_any}}
   </section>
 
   <section class="shell block" id="experience" aria-labelledby="experience-h">
@@ -110,19 +111,32 @@
       {{#experience}}<li class="job">
         <h3>{{title}} <span class="org">· {{org}}</span></h3>
         <p class="meta">{{when}}</p>
-        <p>{{{summary_html}}}</p>
-        {{#more_any}}<details>
-          <summary>{{labels.more_role}}</summary>
-          <ul>{{#more}}<li>{{{text_html}}}</li>{{/more}}</ul>
-        </details>{{/more_any}}
+        <p class="lead">{{{summary_html}}}</p>
+        {{#more_any}}<ul class="points">{{#more}}<li>{{{text_html}}}</li>{{/more}}</ul>{{/more_any}}
       </li>
       {{/experience}}
     </ol>
   </section>
 
+  <section class="shell block" id="education" aria-labelledby="education-h">
+    <h2 id="education-h">{{labels.education}}</h2>
+    <ul class="edu">
+      {{#education}}<li>
+        <h3>{{degree}} <span class="org">· {{place}}</span></h3>
+        <p class="meta">{{when}}</p>
+        {{#detail}}<p>{{{detail_html}}}</p>{{/detail}}
+      </li>
+      {{/education}}
+    </ul>
+  </section>
+
   <section class="shell block" id="publications" aria-labelledby="publications-h">
     <h2 id="publications-h">{{labels.publications}}</h2>
-    <p>{{{pubs_intro_html}}}</p>
+    {{#pub_stats_any}}<ul class="stats">
+      {{#pub_stats}}<li><span class="stat-n">{{number}}</span> <span class="stat-l">{{label}}</span>{{#note}}<span class="stat-note">{{note}}</span>{{/note}}</li>
+      {{/pub_stats}}
+    </ul>{{/pub_stats_any}}
+    <p class="pubs-links">{{{pubs_intro_html}}}</p>
     <ul class="pubs">
       {{#publications_page}}{{> publication}}
       {{/publications_page}}
@@ -142,13 +156,24 @@
       {{#talks_page}}{{> talk}}
       {{/talks_page}}
     </ul>
-    {{#talks_more_any}}<details class="more">
+    {{#talks_fold_any}}<details class="more{{^talks_more_any}} narrow-only{{/talks_more_any}}">
       <summary>{{labels.more_talks}}</summary>
       <ul class="talks">
+        {{#talks_phone_more}}{{> talk}}
+        {{/talks_phone_more}}
         {{#talks_more}}{{> talk}}
         {{/talks_more}}
       </ul>
-    </details>{{/talks_more_any}}
+    </details>{{/talks_fold_any}}
+  </section>
+
+  <section class="shell block" id="skills" aria-labelledby="skills-h">
+    <h2 id="skills-h">{{labels.skills}}</h2>
+    <dl class="skills">
+      {{#skills}}<div><dt>{{group}}</dt><dd><ul class="tags">{{#tags}}<li>{{{text_html}}}</li>{{/tags}}</ul></dd></div>
+      {{/skills}}
+    </dl>
+    <p class="personal">{{{personal_html}}}</p>
   </section>
 
   <section class="shell block" id="awards" aria-labelledby="awards-h">
@@ -159,27 +184,6 @@
     </ul>
   </section>
 
-  <section class="shell block" id="education" aria-labelledby="education-h">
-    <h2 id="education-h">{{labels.education}}</h2>
-    <ul class="edu">
-      {{#education}}<li>
-        <h3>{{degree}} <span class="org">· {{place}}</span></h3>
-        <p class="meta">{{when}}</p>
-        {{#detail}}<p>{{{detail_html}}}</p>{{/detail}}
-      </li>
-      {{/education}}
-    </ul>
-  </section>
-
-  <section class="shell block" id="skills" aria-labelledby="skills-h">
-    <h2 id="skills-h">{{labels.skills}}</h2>
-    <dl class="skills">
-      {{#skills}}<div><dt>{{group}}</dt><dd>{{{items_html}}}</dd></div>
-      {{/skills}}
-    </dl>
-    <p class="personal">{{{personal_html}}}</p>
-  </section>
-
   <section class="shell block contact" id="contact" aria-labelledby="contact-h">
     <h2 id="contact-h">{{labels.contact}}</h2>
     <p>{{{contact.open_to_html}}}</p>
@@ -187,7 +191,7 @@
     <ul class="links">
       <li><a href="{{contact.linkedin}}">LinkedIn</a></li>
       <li><a href="{{contact.github}}">GitHub</a></li>
-      {{#cv}}<li><a href="{{file}}">CV (PDF, {{pages}} pages, {{size}}, {{date}})</a></li>{{/cv}}
+      {{#cv}}<li><a href="{{file}}">CV (PDF)</a></li>{{/cv}}
     </ul>
   </section>
 </main>

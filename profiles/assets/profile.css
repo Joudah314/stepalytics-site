@@ -214,3 +214,21 @@ details ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
   .card, .proof li { border-color: #999; }
   a { color: inherit; }
 }
+
+/* Cards shown on wide screens only, and their copies under "More ..." on phones (4 on desktop, 3 on phone). */
+@media (max-width: 759.98px) { .wide-only { display: none !important; } }
+@media (min-width: 760px) { .narrow-only { display: none !important; } }
+
+/* Skimmable lists (Ibrahim, 24 Oct): Experience bullets, publication numbers, skill tags. */
+.job .lead { margin-bottom: 0.35rem; }
+.points { margin: 0; padding-left: 1.2rem; }
+.points li { margin: 0.15rem 0; }
+.stats { list-style: none; padding: 0; margin: 0 0 0.75rem; display: grid; gap: 8px; grid-template-columns: 1fr 1fr; }
+@media (min-width: 760px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+.stats li { background: var(--surface); border: 2px solid var(--border); padding: 0.45rem 0.75rem; line-height: 1.25; }
+.stat-n { display: block; font-size: 1.5rem; font-weight: 700; }
+.stat-l { display: block; font-weight: 600; }
+.stat-note { display: block; font-size: 0.875rem; opacity: 0.8; }
+.pubs-links { font-size: 0.9375rem; }
+.tags { list-style: none; padding: 0; margin: 0.25rem 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.tags li { border: 1px solid var(--border); background: var(--surface); padding: 0.15rem 0.6rem; border-radius: 999px; font-size: 0.9375rem; line-height: 1.5; }
