@@ -10,10 +10,9 @@ value = 'I build reliable data and AI tools end-to-end, from statistical models 
 summary = 'I’m a data scientist and statistician with a PhD in statistics. My work covers four areas: building **AI and LLM systems**, including agentic AI, and testing whether their outputs can be trusted; **machine learning and statistical modelling**, from choosing and validating models to explaining them; **data pipelines, analytics and dashboards** that turn raw data into dependable answers; and **communication, teaching and mentoring**, so that results are understood and acted on. I work in R, Python and SQL.'
 pubs_intro = 'Full list on [Google Scholar](https://scholar.google.com/citations?user=A4ikGPAAAAAJ) · ORCID [0000-0002-0397-6266](https://orcid.org/0000-0002-0397-6266)'
 pub_stats = [
-	{ number = '6', label = 'Peer-reviewed papers', note = '5 journal articles + 1 conference paper' },
-	{ number = '3', label = 'First-author papers', note = 'incl. Statistics and Computing (2025)' },
-	{ number = '100+', label = 'Citations', note = 'Google Scholar' },
-	{ number = '6', label = 'Conference talks', note = 'national and international' },
+	{ number = '6', label = 'peer-reviewed papers' },
+	{ number = '100+', label = 'citations' },
+	{ number = '6', label = 'conference talks' },
 ]
 contact.email = 'ibrahim.inj@gmail.com'
 contact.linkedin = 'https://www.linkedin.com/in/ibrahim-joudah/'
@@ -30,11 +29,12 @@ labels.did = 'What I did'
 labels.result = 'Result'
 labels.experience = 'Experience'
 labels.more_role = 'More about this role'
-labels.publications = 'Publications'
+labels.publications = 'Publications and talks'
+labels.papers = 'Papers'
 labels.why_it_matters = 'Why it matters:'
 labels.read_paper = 'Read the paper in'
-labels.more_publications = 'More publications'
-labels.talks = 'Conference talks'
+labels.more_publications = 'More papers'
+labels.talks = 'Talks'
 labels.more_talks = 'More talks'
 labels.awards = 'Awards and grants'
 labels.education = 'Education'
@@ -98,8 +98,7 @@ sections = [
 	{ label = 'Selected work', id = 'work' },
 	{ label = 'Experience', id = 'experience' },
 	{ label = 'Education', id = 'education' },
-	{ label = 'Publications', id = 'publications' },
-	{ label = 'Conference talks', id = 'talks' },
+	{ label = 'Publications and talks', id = 'publications' },
 	{ label = 'Skills', id = 'skills' },
 	{ label = 'Awards and grants', id = 'awards' },
 	{ label = 'Contact', id = 'contact' },
@@ -184,7 +183,7 @@ experience = [
 publications = [
 	{ order = 1.0, show = 'page', citation = '**Joudah, I.**, Müller, S., & Zhu, H. (2025). Air-HOLP: adaptive regularized feature screening for high-dimensional correlated data. *Statistics and Computing*, 35(3), 63.', why = 'a fast, stable way to find the few variables that matter when thousands of predictors are strongly related.', venue = 'Statistics and Computing', doi = '10.1007/s11222-025-10599-6' },
 	{ order = 2.0, show = 'page', citation = 'Farhood, H., **Joudah, I.**, Beheshti, A., & Müller, S. (2024). Advancing student outcome predictions through generative adversarial networks. *Computers and Education: Artificial Intelligence*, 7, 100293.', why = 'tests whether synthetic records made by generative AI can protect privacy and still help predict student outcomes.', venue = 'Computers and Education: AI', doi = '10.1016/j.caeai.2024.100293' },
-	{ order = 3.0, show = 'page', citation = 'Farhood, H., **Joudah, I.**, Beheshti, A., & Müller, S. (2026). Optimizing cancer classification in high-dimensional data by integrating generative AI with feature selection. *2026 IEEE International Conference on Digital Health (ICDH)*, 359–367.', why = 'combines synthetic training data with feature selection to improve cancer classification in high-dimensional data.', venue = 'IEEE ICDH 2026', doi = '10.1109/ICDH72779.2026.00048' },
+	{ order = 3.0, show = 'more', citation = 'Farhood, H., **Joudah, I.**, Beheshti, A., & Müller, S. (2026). Optimizing cancer classification in high-dimensional data by integrating generative AI with feature selection. *2026 IEEE International Conference on Digital Health (ICDH)*, 359–367.', why = 'combines synthetic training data with feature selection to improve cancer classification in high-dimensional data.', venue = 'IEEE ICDH 2026', doi = '10.1109/ICDH72779.2026.00048' },
 	{ order = 4.0, show = 'more', citation = 'Farhood, H., **Joudah, I.**, Beheshti, A., & Müller, S. (2024). Evaluating and enhancing artificial intelligence models for predicting student learning outcomes. *Informatics*, 11(3), 46.', why = 'compares ten machine-learning and deep-learning models for predicting student learning outcomes, checked with cross-validation and holdout testing.', venue = 'Informatics', doi = '10.3390/informatics11030046' },
 	{ order = 5.0, show = 'more', citation = '**Joudah, I. N.**, & Abbas, N. (2020). Asymptotically unbiased estimation of mean and standard deviation in the presence of outlying errors. *IEEE Access*, 8, 110623–110632.', why = 'estimates the mean and standard deviation reliably when data contain outlying errors; it grew from my anomaly-detection work in industry.', venue = 'IEEE Access', doi = '10.1109/ACCESS.2020.3002958' },
 	{ order = 6.0, show = 'more', citation = 'Alfuraidan, M. R., & **Joudah, I. N.** (2019). On a new formula for Fibonacci’s family m-step numbers and some applications. *Mathematics*, 7(9), 805. Main author; authors listed alphabetically.', why = 'a new recurrence-based formula for Fibonacci-type numbers, with applications in computing square roots.', venue = 'Mathematics', doi = '10.3390/math7090805' },
@@ -196,15 +195,15 @@ education = [
 ]
 skills = [
 	{ group = 'Programming and tools', items = 'R · Python · SQL · Excel · Tableau · Power BI' },
-	{ group = 'Statistics and machine learning', items = 'Statistical modelling and regression · Feature selection for high-dimensional data · Machine learning (XGBoost) · Robust methods and anomaly detection · Simulation studies · Forecasting · Experimentation' },
-	{ group = 'AI and LLMs', items = 'LLMs and generative AI · LLM evaluation against human judgement · Agentic AI · Synthetic data with generative models · Prompt design · Text embeddings' },
-	{ group = 'Data engineering and production', items = 'Data validation and reconciliation · R package development · Data pipelines and automation · Automated testing · Dashboards and reporting · Cloud deployment and monitoring' },
+	{ group = 'Statistics and machine learning', items = 'Regression · XGBoost · Forecasting · Feature selection · High-dimensional data · Anomaly detection · Robust methods · Simulation studies' },
+	{ group = 'AI and LLMs', items = 'Agentic AI · Generative AI · LLM evaluation · Synthetic data · Prompt design · Text embeddings' },
+	{ group = 'Data engineering and visualisation', items = 'Data pipelines · Workflow automation · Data validation · Reconciliation · Data visualisation · Dashboards · Automated testing · Cloud deployment' },
 ]
 talks = [
 	{ order = 1.0, show = 'page', title = 'Optimizing Cancer Classification in High-Dimensional Data by Integrating Generative AI with Feature Selection', when = 'Jul 2026', event = 'IEEE International Conference on Digital Health (ICDH 2026), Sydney' },
-	{ order = 5.0, show = 'more', title = 'ROSE: Rank-based Order Statistics Ensemble for High-Dimensional Feature Screening', when = 'Dec 2025', event = 'Australian Statistical Conference (ASC 2025), Perth' },
+	{ order = 3.0, show = 'more', title = 'ROSE: Rank-based Order Statistics Ensemble for High-Dimensional Feature Screening', when = 'Dec 2025', event = 'Australian Statistical Conference (ASC 2025), Perth' },
 	{ order = 2.0, show = 'page', title = 'ROSE: Rank-based Order Statistics Ensemble for High-Dimensional Feature Screening', when = 'Sep 2025', event = 'Royal Statistical Society International Conference, Edinburgh' },
-	{ order = 3.0, show = 'more', title = 'Efficient Stability Screening for Ultra-High Dimensional Data', when = 'Aug 2024', kind = 'Invited talk', event = '26th International Conference on Computational Statistics (COMPSTAT 2024), Giessen' },
+	{ order = 5.0, show = 'more', title = 'Efficient Stability Screening for Ultra-High Dimensional Data', when = 'Aug 2024', kind = 'Invited talk', event = '26th International Conference on Computational Statistics (COMPSTAT 2024), Giessen' },
 	{ order = 4.0, show = 'more', title = 'Air-HOLP: Adaptive Regularized Feature Screening', when = 'Nov 2024', event = 'Early Career & Student Statisticians Conference (ECSSC 2024), Hobart' },
 	{ order = 6.0, show = 'more', title = 'Air-HOLP: Adaptive Ridge Screening for Ultra-High Dimensional Data', when = 'Dec 2023', event = 'Australian Statistical Conference (ASC 2023), Wollongong' },
 ]

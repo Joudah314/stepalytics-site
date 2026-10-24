@@ -227,9 +227,7 @@ content:
             label: Label
             type: string
             required: true
-          - name: note
-            label: Small note
-            type: string
+
       - name: publications
         label: Publications
         description: "Order: 1 comes first. Show: on the page, or under “More publications”."
@@ -384,11 +382,12 @@ content:
           - { name: result, label: "Project label: Result", type: string }
           - { name: experience, label: "Heading: Experience", type: string }
           - { name: more_role, label: "Toggle: More about this role", type: string }
-          - { name: publications, label: "Heading: Publications", type: string }
+          - { name: publications, label: "Heading: Publications and talks", type: string }
+          - { name: papers, label: "Subheading: Papers", type: string }
           - { name: why_it_matters, label: "Label: Why it matters", type: string }
           - { name: read_paper, label: "Link start: Read the paper in", type: string }
-          - { name: more_publications, label: "Toggle: More publications", type: string }
-          - { name: talks, label: "Heading: Conference talks", type: string }
+          - { name: more_publications, label: "Toggle: More papers", type: string }
+          - { name: talks, label: "Subheading: Talks", type: string }
           - { name: more_talks, label: "Toggle: More talks", type: string }
           - { name: awards, label: "Heading: Awards and grants", type: string }
           - { name: education, label: "Heading: Education", type: string }

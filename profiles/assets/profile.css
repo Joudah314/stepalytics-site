@@ -121,7 +121,7 @@ details ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
 .cite { margin-bottom: 0.4rem; }
 .why { margin-bottom: 0.4rem; }
 .doi { margin: 0; }
-.talk h3 { font-size: 1.0625rem; }
+.talk h4 { font-size: 1.0625rem; color: var(--navy); line-height: 1.2; margin: 0; }
 .talk .meta { margin: 0.3rem 0 0.2rem; }
 .event { margin: 0; }
 .more > .projects, .more > .pubs, .more > .talks { margin-top: 0.5rem; }
@@ -223,12 +223,11 @@ details ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
 .job .lead { margin-bottom: 0.35rem; }
 .points { margin: 0; padding-left: 1.2rem; }
 .points li { margin: 0.15rem 0; }
-.stats { list-style: none; padding: 0; margin: 0 0 0.75rem; display: grid; gap: 8px; grid-template-columns: 1fr 1fr; }
-@media (min-width: 760px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+.stats { list-style: none; padding: 0; margin: 0 0 0.75rem; display: grid; gap: 8px; grid-template-columns: repeat(3, 1fr); }
 .stats li { background: var(--surface); border: 2px solid var(--border); padding: 0.45rem 0.75rem; line-height: 1.25; }
-.stat-n { display: block; font-size: 1.5rem; font-weight: 700; }
+.stat-n { display: block; font-size: 2.25rem; font-weight: 700; line-height: 1.1; color: var(--navy); }
+@media (min-width: 760px) { .stat-n { font-size: 2.75rem; } }
 .stat-l { display: block; font-weight: 600; }
-.stat-note { display: block; font-size: 0.875rem; opacity: 0.8; }
 .pubs-links { font-size: 0.9375rem; }
 .tags { list-style: none; padding: 0; margin: 0.25rem 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
 .tags li { border: 1px solid var(--border); background: var(--surface); padding: 0.15rem 0.6rem; border-radius: 999px; font-size: 0.9375rem; line-height: 1.5; }
@@ -236,3 +235,6 @@ details ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
 /* About boxes (Ibrahim, 25 Oct): bullets, and an Examples line in the normal text colour. */
 .theme .points { margin: 0 0 0.5rem; }
 .examples { margin: 0; font-size: 0.9375rem; }
+
+/* "Publications and talks" (Ibrahim, 25 Oct): the Papers and Talks subheadings. */
+.subhead { font-size: 1.25rem; margin: 1.25rem 0 0.6rem; }

@@ -135,10 +135,12 @@
   <section class="shell block" id="publications" aria-labelledby="publications-h">
     <h2 id="publications-h">{{labels.publications}}</h2>
     {{#pub_stats_any}}<ul class="stats">
-      {{#pub_stats}}<li><span class="stat-n">{{number}}</span> <span class="stat-l">{{label}}</span>{{#note}}<span class="stat-note">{{note}}</span>{{/note}}</li>
+      {{#pub_stats}}<li><span class="stat-n">{{number}}</span> <span class="stat-l">{{label}}</span></li>
       {{/pub_stats}}
     </ul>{{/pub_stats_any}}
     <p class="pubs-links">{{{pubs_intro_html}}}</p>
+
+    <h3 class="subhead" id="papers">{{labels.papers}}</h3>
     <ul class="pubs">
       {{#publications_page}}{{> publication}}
       {{/publications_page}}
@@ -150,10 +152,8 @@
         {{/publications_more}}
       </ul>
     </details>{{/publications_more_any}}
-  </section>
 
-  <section class="shell block" id="talks" aria-labelledby="talks-h">
-    <h2 id="talks-h">{{labels.talks}}</h2>
+    <h3 class="subhead" id="talks">{{labels.talks}}</h3>
     <ul class="talks">
       {{#talks_page}}{{> talk}}
       {{/talks_page}}
