@@ -329,9 +329,10 @@ def figure_set(name: str, panels: list[dict], caption: str, credit: str, legend:
         title = (f'<p class="figset-title"><strong>{esc(p["title"])}</strong>'
                  f'{sub}</p>'
                  if p.get("title") else "")
-        cells.append(f'<div class="figset-panel" data-p="{i}">{title}<a class="figset-img" href="{esc(p["src"])}" '
-                     f'aria-label="Open full size: {esc(full)}"><img src="{esc(p["src"])}" alt="{esc(p["alt"])}" '
-                     f'width="{p.get("width", 600)}" height="{p.get("height", 500)}"></a></div>')
+        body = (f'<div class="figset-svg">{p["svg_html"]}</div>' if p.get("svg_html") else
+                f'<a class="figset-img" href="{esc(p["src"])}" aria-label="Open full size: {esc(full)}"><img src="{esc(p["src"])}" '
+                f'alt="{esc(p["alt"])}" width="{p.get("width", 600)}" height="{p.get("height", 500)}"></a>')
+        cells.append(f'<div class="figset-panel" data-p="{i}">{title}{body}</div>')
     first = panels[0]["label"].partition("|")
     first_full = f"{first[0]}: {first[2]}" if first[2] else first[0]
     switch = (f'<fieldset class="figset-switch"><legend class="figset-instr">{esc(legend)}</legend>'
@@ -345,7 +346,224 @@ def figure_set(name: str, panels: list[dict], caption: str, credit: str, legend:
                                          for j, c in enumerate(r)) + "</tr>" for r in table["rows"])
         numbers = (f'<details class="chart-data"><summary>{esc(table["label"])}</summary><table><thead><tr>{head}</tr>'
                    f'</thead><tbody>{body}</tbody></table><p class="fig-credit">{esc(table["note"])}</p></details>')
-    return (f'<figure class="chart figset {"figset-quad" if quad else "figset-pair"}"><div class="figset-cq">{switch}'
+    kind = "figset-trio" if len(panels) == 3 else "figset-quad" if quad else "figset-pair"
+    return (f'<figure class="chart figset {kind}"><div class="figset-cq">{switch}'
             f'<div class="figset-grid">{"".join(cells)}</div></div>'
             f'<figcaption>{esc(caption)} <span class="fig-credit">{esc(credit)}</span></figcaption>'
             f'{f"<dl class=fig-measures>{dl}</dl>" if dl else ""}{numbers}</figure>')
+
+
+# --- Air-HOLP figures, redrawn from the paper's data in the page's style ---------------------------------------------
+METHOD_STYLE = {  # colour, dash, marker; the same encodings across every figure
+    "Air-HOLP": ("#018182", "", "dot"), "Ridge-HOLP": ("#d9733b", "7 5", "square"), "r = 10": ("#d9733b", "7 5", "square"),
+    "r = 50": ("#b25a26", "7 5", "diamond"), "r = 200": ("#8a4119", "7 5", "triangle"), "r = 600": ("#5c2a0e", "7 5", "box"),
+    "SIS": ("#8e5bb8", "2 5", "ring"), "Ridge-OLS": ("#012150", "2 5", "triangle"),
+}
+
+
+def _dash(d: str) -> str:
+    return f' stroke-dasharray="{d}"' if d else ""
+
+
+def _marker(kind: str, x: float, y: float, colour: str, tip: str) -> str:
+    t = f"<title>{esc(tip)}</title>"
+    if kind == "dot":
+        return f'<circle cx="{x:.1f}" cy="{y:.1f}" r="5.5" fill="{colour}">{t}</circle>'
+    if kind == "ring":
+        return f'<circle cx="{x:.1f}" cy="{y:.1f}" r="5" fill="#fff" stroke="{colour}" stroke-width="2.5">{t}</circle>'
+    if kind == "square":
+        return f'<rect x="{x - 5:.1f}" y="{y - 5:.1f}" width="10" height="10" fill="{colour}">{t}</rect>'
+    if kind == "box":
+        return (f'<rect x="{x - 5:.1f}" y="{y - 5:.1f}" width="10" height="10" fill="#fff" stroke="{colour}" '
+                f'stroke-width="2.5">{t}</rect>')
+    if kind == "diamond":
+        return (f'<path d="M{x:.1f},{y - 7:.1f} L{x + 7:.1f},{y:.1f} L{x:.1f},{y + 7:.1f} L{x - 7:.1f},{y:.1f}Z" '
+                f'fill="{colour}">{t}</path>')
+    return f'<path d="M{x:.1f},{y - 7:.1f} L{x + 7:.1f},{y + 5:.1f} L{x - 7:.1f},{y + 5:.1f}Z" fill="{colour}">{t}</path>'
+
+
+def _legend(names: list[str], w: float, x0: float = 0) -> str:
+    widths = [44 + len(n) * 8.4 for n in names]
+    x = x0 + (w - sum(widths)) / 2
+    out = []
+    for n, wd in zip(names, widths):
+        c, dash, mk = METHOD_STYLE[n]
+        out.append(f'<line x1="{x:.1f}" x2="{x + 30:.1f}" y1="16" y2="16" stroke="{c}" stroke-width="2.5"{_dash(dash)}/>'
+                   f'{_marker(mk, x + 15, 16, c, n)}<text class="pf-leg" x="{x + 36:.1f}" y="21">{esc(n)}</text>')
+        x += wd
+    return "".join(out)
+
+
+def _frame(w, h, l, r, t, b, x_label, y_label, title, desc):
+    return (f'<svg class="pf" viewBox="0 0 {w} {h}" role="img"><title>{esc(title)}</title><desc>{esc(desc)}</desc>'
+            f'<rect class="pf-plot" x="{l}" y="{t}" width="{w - l - r}" height="{h - t - b}"/>'
+            f'<text class="pf-axis" x="{l + (w - l - r) / 2:.0f}" y="{h - 8}" text-anchor="middle">{esc(x_label)}</text>'
+            f'<text class="pf-axis" transform="translate(18 {t + (h - t - b) / 2:.0f}) rotate(-90)" '
+            f'text-anchor="middle">{esc(y_label)}</text>')
+
+
+def line_panel(x: list, series: dict, xlim, ylim, xticks, yticks, x_label, y_label, title, desc, fmt=None) -> str:
+    """One of the paper's line charts: the same series, markers and axes, drawn in the page's style."""
+    fmt = fmt or (lambda v: f"{v:g}")
+    w, h, l, r, t, b = 600, 470, 74, 18, 40, 58
+    X = lambda v: l + (v - xlim[0]) / (xlim[1] - xlim[0]) * (w - l - r)  # noqa: E731
+    Y = lambda v: t + (1 - (v - ylim[0]) / (ylim[1] - ylim[0])) * (h - t - b)  # noqa: E731
+    out = [_frame(w, h, l, r, t, b, x_label, y_label, title, desc), _legend(list(series), w)]
+    for v in yticks:
+        out.append(f'<line class="pf-grid" x1="{l}" x2="{w - r}" y1="{Y(v):.1f}" y2="{Y(v):.1f}"/>'
+                   f'<text class="pf-tick" x="{l - 8}" y="{Y(v) + 5:.1f}" text-anchor="end">{fmt(v)}</text>')
+    for v in xticks:
+        out.append(f'<line class="pf-grid" x1="{X(v):.1f}" x2="{X(v):.1f}" y1="{t}" y2="{h - b}"/>'
+                   f'<text class="pf-tick" x="{X(v):.1f}" y="{h - b + 22}" text-anchor="middle">{v:,g}</text>')
+    for name in reversed(list(series)):
+        c, dash, mk = METHOD_STYLE[name]
+        pts = " ".join(f"{X(a):.1f},{Y(v):.1f}" for a, v in zip(x, series[name]))
+        out.append(f'<polyline points="{pts}" fill="none" stroke="{c}" '
+                   f'stroke-width="{3 if name == "Air-HOLP" else 2.5}"{_dash(dash)}/>')
+        out += [_marker(mk, X(a), Y(v), c, f"{name}: {v:.3f} at {a:g}") for a, v in zip(x, series[name])]
+    out.append("</svg>")
+    return "".join(out)
+
+
+def heat_panel(z: list[list[float]], n: list, p: list, label: str, diff: bool, title: str, desc: str) -> str:
+    """One heat map of Figure 2 (rows p, columns n), each cell's value printed as in the paper."""
+    w, h, l, t, b = 420, 380, 78, 36, 60
+    cell_w, cell_h = (w - l - 10) / len(n), (h - t - b) / len(p)
+    out = [f'<svg class="pf" viewBox="0 0 {w} {h}" role="img"><title>{esc(title)}</title><desc>{esc(desc)}</desc>'
+           f'<text class="pf-head" x="{l + (w - l - 10) / 2:.0f}" y="22" text-anchor="middle">{esc(label)}</text>']
+    for i, pv in enumerate(p):
+        y = t + (len(p) - 1 - i) * cell_h
+        out.append(f'<text class="pf-tick" x="{l - 8}" y="{y + cell_h / 2 + 5:.1f}" text-anchor="end">{pv:,}</text>')
+        for j, nv in enumerate(n):
+            v = z[i][j]
+            a = min(abs(v), 1)
+            if diff:
+                fill = (f"rgba(31,110,54,{0.08 + 0.9 * a:.2f})" if v > 0 else
+                        f"rgba(179,38,30,{0.08 + 0.9 * a:.2f})" if v < 0 else "#eef1f3")
+            else:
+                fill = f"rgba(1,129,130,{0.06 + 0.94 * v:.2f})"
+            dark = a > 0.55
+            txt = "0" if abs(v) < 0.005 else f"{v:.2f}".rstrip("0").rstrip(".")
+            out.append(f'<rect x="{l + j * cell_w + 1:.1f}" y="{y + 1:.1f}" width="{cell_w - 2:.1f}" height="{cell_h - 2:.1f}" '
+                       f'rx="3" fill="{fill}"><title>n = {nv:,}, p = {pv:,}: {v:.3f}</title></rect>'
+                       f'<text class="pf-cell{" on" if dark else ""}" x="{l + (j + 0.5) * cell_w:.1f}" '
+                       f'y="{y + cell_h / 2 + 6:.1f}" text-anchor="middle">{txt}</text>')
+    for j, nv in enumerate(n):
+        out.append(f'<text class="pf-tick" x="{l + (j + 0.5) * cell_w:.1f}" y="{h - b + 22}" text-anchor="middle">{nv:,}</text>')
+    out.append(f'<text class="pf-axis" x="{l + (w - l - 10) / 2:.0f}" y="{h - 10}" text-anchor="middle">n</text>'
+               f'<text class="pf-axis" transform="translate(16 {t + (h - t - b) / 2:.0f}) rotate(-90)" '
+               f'text-anchor="middle">p</text></svg>')
+    return "".join(out)
+
+
+def box_panel(cats: list[str], boxes: list[dict], methods: list[str], ylim, yticks, x_label, y_label, title, desc,
+              lines: list | None = None, fmt=None, single: bool = False) -> str:
+    """The paper's box plots (median, quartiles, whiskers to 1.5 IQR, outliers), drawn in the page's style."""
+    fmt = fmt or (lambda v: f"{v:g}")
+    w, h, l, r, t, b = 600, 470, 74, 18, 40, 58
+    Y = lambda v: t + (1 - (v - ylim[0]) / (ylim[1] - ylim[0])) * (h - t - b)  # noqa: E731
+    slot = (w - l - r) / len(cats)
+    out = [_frame(w, h, l, r, t, b, x_label, y_label, title, desc)]
+    if not single:
+        out.append(_legend(methods, w - 170 if lines else w))
+    for v in yticks:
+        out.append(f'<line class="pf-grid" x1="{l}" x2="{w - r}" y1="{Y(v):.1f}" y2="{Y(v):.1f}"/>'
+                   f'<text class="pf-tick" x="{l - 8}" y="{Y(v) + 5:.1f}" text-anchor="end">{fmt(v)}</text>')
+    for i, cat in enumerate(cats):
+        cx = l + (i + 0.5) * slot
+        out.append(f'<text class="pf-tick" x="{cx:.1f}" y="{h - b + 22}" text-anchor="middle">{esc(cat)}</text>')
+        bw = min(slot * 0.34, 70)
+        ms = [cat] if single else methods
+        for k, m in enumerate(ms):
+            c = METHOD_STYLE[m][0]
+            x0 = cx + (k - len(ms) / 2) * (bw + 4) + 2
+            bx = boxes[i][m]
+            out.append(
+                f'<g><title>{esc(m)}, {esc(cat)}: median {bx["med"]:.2f}, quartiles {bx["q1"]:.2f} to {bx["q3"]:.2f}</title>'
+                f'<line x1="{x0 + bw / 2:.1f}" x2="{x0 + bw / 2:.1f}" y1="{Y(bx["hi"]):.1f}" y2="{Y(bx["lo"]):.1f}" '
+                f'stroke="#333" stroke-width="1.5"/>'
+                f'<rect x="{x0:.1f}" y="{Y(bx["q3"]):.1f}" width="{bw:.1f}" height="{max(Y(bx["q1"]) - Y(bx["q3"]), 1.5):.1f}" '
+                f'fill="{c}" stroke="#333" stroke-width="1.5" rx="2"/>'
+                f'<line x1="{x0:.1f}" x2="{x0 + bw:.1f}" y1="{Y(bx["med"]):.1f}" y2="{Y(bx["med"]):.1f}" stroke="#fff" stroke-width="3"/>'
+                + "".join(f'<circle cx="{x0 + bw / 2:.1f}" cy="{Y(o):.1f}" r="2.6" fill="none" stroke="#333" stroke-width="1"/>'
+                          for o in bx["out"]) + "</g>")
+    for name, value, dash, colour in (lines or []):
+        out.append(f'<line x1="{l}" x2="{w - r}" y1="{Y(value):.1f}" y2="{Y(value):.1f}" stroke="{colour}" '
+                   f'stroke-width="2"{_dash(dash)}/>')
+    x = w - 165
+    for k, (name, value, dash, colour) in enumerate(lines or []):
+        out.append(f'<line x1="{x + k * 82}" x2="{x + k * 82 + 26}" y1="16" y2="16" stroke="{colour}" stroke-width="2"{_dash(dash)}/>'
+                   f'<text class="pf-leg" x="{x + k * 82 + 31}" y="21">{esc(name)}</text>')
+    out.append("</svg>")
+    return "".join(out)
+
+
+def band_bar(bands: list, caption: str, label: str) -> str:
+    """All settings in one bar, split by how far Air-HOLP was above or below Ridge-HOLP: red below, grey equal, green above."""
+    colours = ["#b3261e", "#e8908a", "#d5dadd", "#a8d5b0", "#6bb67a", "#3a9150", "#1f6e36", "#0b4a20"]
+    total = sum(c for _, c in bands)
+    segs, rows = [], []
+    for (name, c), col in zip(bands, colours):
+        share = c / total * 100
+        on = col in ("#b3261e", "#3a9150", "#1f6e36", "#0b4a20")
+        lab = f'<span class="bb-in{" on" if on else ""}">{share:.0f}%</span>' if share >= 6 else ""
+        segs.append(f'<span class="bb-seg" style="flex:{c} 0 0;background:{col}" '
+                    f'title="{esc(name)}: {c:,} settings ({share:.1f}%)">{lab}</span>')
+        rows.append(f'<li><span class="bb-sw" style="background:{col}"></span><span class="bb-name">{esc(name)}</span>'
+                    f'<span class="bb-num">{share:.1f}%</span><span class="bb-cnt">{c:,} settings</span></li>')
+    lower = sum(c for n, c in bands if n.startswith("Lower")) / total * 100
+    higher = sum(c for n, c in bands if n.startswith("Higher")) / total * 100
+    return (f'<figure class="chart bb"><div class="bb-ends"><span class="bb-lo">Air-HOLP lower: {lower:.0f}%</span>'
+            f'<span class="bb-hi">Air-HOLP higher: {higher:.0f}%</span></div>'
+            f'<div class="bb-bar" role="img" aria-label="{esc(label)}">{"".join(segs)}</div>'
+            f'<ol class="bb-list">{"".join(rows)}</ol><figcaption>{esc(caption)}</figcaption></figure>')
+
+
+def _nice(lo: float, hi: float, step: float) -> tuple[float, float, list[float]]:
+    a, b = math.floor(lo / step) * step, math.ceil(hi / step) * step
+    ticks = [round(a + i * step, 6) for i in range(int(round((b - a) / step)) + 1)]
+    return a, b, ticks
+
+
+def airholp_svgs(d: dict) -> dict:
+    """Every figure of the Air-HOLP paper, from its own data, as inline charts keyed for the page's panels."""
+    out = {}
+    two = lambda v: f"{v:.2f}"  # noqa: E731
+    for key, f in zip(("fig1a", "fig1b"), d["fig1"]):
+        out[key] = line_panel(f["x"], f["series"], (-0.03, 0.93), (0, 1), [0, 0.3, 0.6, 0.9], [0, 0.25, 0.5, 0.75, 1],
+                              "Correlation (ρ)", "Sure screening probability", "Sure screening probability against correlation",
+                              "Air-HOLP, Ridge-HOLP with r = 10, 50, 200 and 600, and SIS, at correlations 0 to 0.9.", two)
+    g = d["fig2"]
+    diff = [[round(a - r, 2) for a, r in zip(ra, rr)] for ra, rr in zip(g["air"], g["ridge"])]
+    for key, z, lab, is_diff in (("fig2a", g["air"], "Air-HOLP", False), ("fig2b", g["ridge"], "Ridge-HOLP", False),
+                                 ("fig2c", diff, "Difference", True)):
+        out[key] = heat_panel(z, g["n"], g["p"], lab, is_diff, f"Sure screening probability: {lab}",
+                              "Rows are the number of features p, columns the sample size n; each cell shows its value.")
+    for key, f, cats, xl in (("fig3a", d["fig3"][0], ["0.25", "0.5", "0.75", "0.9", "0.95"], "Theoretical R²"),
+                             ("fig3b", d["fig3"][1], ["3", "6", "9", "12", "15"], "Number of true features (p₀)")):
+        boxes = [{"Air-HOLP": b["air"], "Ridge-HOLP": b["ridge"]} for b in f["boxes"]]
+        vals = [v for b in f["boxes"] for m in ("air", "ridge") for v in [b[m]["lo"], b[m]["hi"]] + b[m]["out"]] + [f["logp"], f["cut"]]
+        lo, hi, ticks = _nice(min(vals), max(vals), 1)
+        out[key] = box_panel(cats, boxes, ["Air-HOLP", "Ridge-HOLP"], (lo, hi), ticks, xl, "log(Sure screening threshold)",
+                             "Sure screening threshold, Air-HOLP and Ridge-HOLP",
+                             "Box plots of the log sure screening threshold; the dashed line is n/log(n), the dotted line p.",
+                             [("n/log(n)", f["cut"], "7 5", "#b3261e"), ("p", f["logp"], "2 4", "#333")])
+    for key, f in zip(("fig4a", "fig4b", "fig4c", "fig4d"), d["fig4"]):
+        vals = [v for s in f["series"].values() for v in s]
+        lo, hi, ticks = _nice(min(vals) - 0.01, max(vals) + 0.01, 0.05 if max(vals) - min(vals) < 0.3 else 0.1)
+        out[key] = line_panel(list(range(1, 9)), f["series"], (0.7, 8.3), (lo, hi), [2, 4, 6, 8], ticks, "Model size",
+                              "Maximum multiple correlation coefficient", "Maximum multiple R against model size",
+                              "Air-HOLP, Ridge-HOLP and SIS for models of 1 to 8 genes.", two)
+    f = d["fig5"][0]
+    vals = [v for s in f["series"].values() for v in s]
+    lo, hi, ticks = _nice(min(vals), max(vals), 2)
+    out["fig5a"] = line_panel(f["x"], f["series"], (0, 6800), (lo, hi), [0, 2000, 4000, 6000], ticks,
+                              "Number of features (p)", "log(Execution time (ms))", "Execution time against the number of features",
+                              "Air-HOLP, Ridge-HOLP and Ridge-OLS; 10%-trimmed mean of 10 runs.")
+    bx = d["fig5"][1]["boxes"]
+    vals = [v for b in bx.values() for v in [b["lo"], b["hi"]] + b["out"]]
+    lo, hi, ticks = _nice(min(vals) - 0.02, max(vals) + 0.02, 0.05)
+    out["fig5b"] = box_panel(["Air-HOLP", "Ridge-HOLP"], [{"Air-HOLP": bx["Air-HOLP"]}, {"Ridge-HOLP": bx["Ridge-HOLP"]}],
+                             ["Air-HOLP", "Ridge-HOLP"], (lo, hi), ticks, "Method", "Execution time (seconds)",
+                             "Execution time of Air-HOLP and Ridge-HOLP", "Box plots of 10 runs each.", None, two, single=True)
+    return out

@@ -6,13 +6,14 @@ title = 'Air-HOLP and the AirScreen R package'
 summary = 'When a dataset has thousands of possible predictors, such as genes, but only a few of them affect the outcome, **feature screening** ranks all the predictors and keeps a short list that should contain every one that matters, so a model can then be built from far fewer. Ridge-HOLP screens well even when predictors are **highly correlated**, but only with a well-chosen penalty, and choosing it by cross-validation means re-running the method many times. **Air-HOLP selects the penalty from the data, adaptively and efficiently.**'
 meta = 'Published as first author in *Statistics and Computing* (2025) and released as the AirScreen R package on CRAN.'
 description = 'Air-HOLP, Ibrahim Joudah’s feature screening method for high-dimensional correlated data (Statistics and Computing, 2025): selecting the ridge penalty adaptively and efficiently, the simulation and prostate cancer results, and the AirScreen R package.'
-figure_credit = 'Figure from Joudah, Müller and Zhu (2025), Statistics and Computing, CC BY 4.0.'
+figure_credit = 'Source: Joudah, Müller and Zhu (2025), Statistics and Computing.'
+figures_json = 'data/air-holp.json'
 labels.glance = 'At a glance'
 labels.updated = 'Updated'
 labels.data_table = 'Show the numbers'
 labels.model_card = 'Method card'
 glance = [
-	{ value = '40% higher · 12% lower', text = 'sure screening probability than Ridge-HOLP across **2,800 simulation settings**; equal in the other 48%' },
+	{ value = '72% higher · 20% lower', text = 'sure screening probability than Ridge-HOLP across **2,800 simulation settings**; equal in the other 8%' },
 	{ value = 'Best on prostate cancer data', text = 'its genes predict each of the four stages best; for prostate cancer, multiple R **0.85** vs 0.80 (Ridge-HOLP) and 0.70 (SIS)' },
 	{ value = 'On CRAN', text = '**AirScreen**, an R package implementing the method' },
 ]
@@ -30,18 +31,18 @@ sections = [
 		'**Repeat** until the penalty changes by less than 1%. In most simulations this took 3 to 6 iterations.',
 	], after = 'The costly step, an eigendecomposition, is computed once and reused in every iteration: no grid of penalties, no data splitting, and the same answer on every run.' },
 	{ id = 'adapt', heading = 'In one setting low penalties win, in the other high penalties win; Air-HOLP does well in both', chart = 'figure_set', legend = 'Tap a setting to show its chart', caption = 'Figure 1(a) and 1(b): sure screening probability as the correlation between features rises. Ridge-HOLP is shown with four fixed penalties, r = 10, 50, 200 and 600; Air-HOLP selects its own.', panels = [
-		{ label = 'Setting 1|low penalties do best', title = 'Setting 1: low penalties do best', sub = 'n = 125 observations, p = 250 features, 9 true features, R² = 0.95', src = 'fig1a.png', height = 448, alt = 'Sure screening probability against correlation in Setting 1: Air-HOLP is at the top with r = 10 and r = 50; r = 200, r = 600 and SIS are lower.' },
-		{ label = 'Setting 2|high penalties do best', title = 'Setting 2: high penalties do best', sub = 'n = 1,000 observations, p = 1,250 features, 15 true features, R² = 0.5', src = 'fig1b.png', height = 448, alt = 'Sure screening probability against correlation in Setting 2: Air-HOLP is at the top with r = 200 and r = 600; r = 10, r = 50 and SIS are lower.' },
+		{ label = 'Setting 1|low penalties do best', title = 'Setting 1: low penalties do best', sub = 'n = 125 observations, p = 250 features, 9 true features, R² = 0.95', svg = 'fig1a' },
+		{ label = 'Setting 2|high penalties do best', title = 'Setting 2: high penalties do best', sub = 'n = 1,000 observations, p = 1,250 features, 15 true features, R² = 0.5', svg = 'fig1b' },
 	], measures = [
 		{ term = 'Sure screening probability', text = 'the share of the 500 simulated datasets in which all the true features are among the top ⌈n/log(n)⌉ screened features. Higher is better.' },
 		{ term = 'Penalty r', text = 'the ridge tuning parameter of Ridge-HOLP, fixed in advance; Air-HOLP selects it from the data.' },
 		{ term = 'Correlation (ρ)', text = 'the correlation between every pair of features in the simulated data.' },
 	], text = 'Small penalties (r = 10, 50) do well in Setting 1 but not in Setting 2, and large ones (r = 200, 600) the opposite; Air-HOLP does well in both. SIS works best when features are uncorrelated but poorly when they are highly correlated.' },
 	{ id = 'prostate', heading = 'Applied to prostate cancer: better at predicting each stage', chart = 'figure_set', grid = 'quad', legend = 'Tap a stage to show its chart', caption = 'Figure 4: the largest multiple R for models of 1 to 8 genes, chosen from the 21 genes each method screened, for each stage.', panels = [
-		{ label = 'Benign epithelium', src = 'fig4a.png', alt = 'Benign epithelium: maximum multiple R against model size; Air-HOLP highest from 4 genes on.' },
-		{ label = 'Intraepithelial neoplasia', src = 'fig4b.png', alt = 'Prostatic intraepithelial neoplasia: maximum multiple R against model size; Air-HOLP highest from 3 genes on.' },
-		{ label = 'Prostate cancer', src = 'fig4c.png', alt = 'Prostate cancer: maximum multiple R against model size; Air-HOLP highest, SIS levels off lowest.' },
-		{ label = 'Metastatic disease', src = 'fig4d.png', alt = 'Metastatic disease: maximum multiple R against model size; Air-HOLP and Ridge-HOLP close together, above SIS.' },
+		{ label = 'Benign epithelium', title = 'Benign epithelium', svg = 'fig4a' },
+		{ label = 'Intraepithelial neoplasia', title = 'Prostatic intraepithelial neoplasia', svg = 'fig4b' },
+		{ label = 'Prostate cancer', title = 'Prostate cancer', svg = 'fig4c' },
+		{ label = 'Metastatic disease', title = 'Metastatic disease', svg = 'fig4d' },
 	], measures = [
 		{ term = 'Multiple R', text = 'the correlation between the stage (yes or no) and a model’s fitted values, from 0 to 1. For a fixed number of genes it ranks models the same way as R², the likelihood and in-sample prediction error. Higher is better.' },
 		{ term = 'Model size', text = 'the number of genes in the model; for each size, the best combination of the 21 screened genes is shown.' },
@@ -51,18 +52,21 @@ sections = [
 		'**Prostate cancer:** actual cancer cells.',
 		'**Metastatic disease:** cancer cells that have spread to other parts of the body.',
 	], after = 'For each stage, each method screened 21 genes. Ridge-HOLP and Air-HOLP outperform SIS, especially for larger models, because the genes are correlated in this dataset; and Air-HOLP consistently outperforms Ridge-HOLP.' },
-	{ id = 'overall', heading = 'Across 2,800 settings, Air-HOLP matched or improved on Ridge-HOLP', chart = 'figures', caption = 'Figure 2: sure screening probability by sample size n and number of features p (correlation 0.6, 6 true features, R² = 0.5). Left: Air-HOLP; middle: Ridge-HOLP with r = 10; right: the difference.', panels = [
-		{ src = 'fig2.png', alt = 'Three heat maps of sure screening probability over n and p for Air-HOLP, Ridge-HOLP and their difference; the largest differences are where n is close to p.', width = 1200, height = 350 },
-	], text = 'The simulations varied the sample size, the number of features, the correlation and how it is structured, the number of true features and the signal strength (R²), giving 2,800 settings. Air-HOLP’s sure screening probability was **higher in 40%** of them and **lower in 12%**; in the other 48% the two were equal, typically when both probabilities were 0 or 1. When all the features are correlated (1,600 settings), it was higher in 45% and lower in 8%. The gap is most pronounced when n is close to p (for example n = 1,000 and p = 1,250), but it can still be significant elsewhere (n = 500, p = 1,250).' },
+	{ id = 'overall', heading = 'Across 2,800 settings, Air-HOLP matched or improved on Ridge-HOLP', chart = 'figure_set', legend = 'Tap to choose a panel', caption = 'Figure 2: sure screening probability by sample size n and number of features p (correlation 0.6, 6 true features, R² = 0.5), for Air-HOLP, Ridge-HOLP with r = 10, and the difference between them.', panels = [
+		{ label = 'Air-HOLP', svg = 'fig2a' },
+		{ label = 'Ridge-HOLP', svg = 'fig2b' },
+		{ label = 'Difference', svg = 'fig2c' },
+	], text = 'The simulations varied the sample size, the number of features, the correlation and how it is structured, the number of true features and the signal strength (R²), giving 2,800 settings. Air-HOLP’s sure screening probability was **higher in 72%** of them and **lower in 20%**; in the other 8% the two were equal. The gap is most pronounced when n is close to p (for example n = 1,000 and p = 1,250), but it can still be significant elsewhere (n = 500, p = 1,250).' },
+	{ id = 'spread', heading = 'When Air-HOLP is lower, it is by little; when higher, often by much more', chart = 'bands', caption = 'All 2,800 simulation settings, by the difference in sure screening probability between Air-HOLP and Ridge-HOLP (r = 10), in percentage points.', bar_label = 'Air-HOLP lower in 20% of settings, by at most 6 points; equal in 8%; higher in 72%, by up to 60 points.' },
 	{ id = 'threshold', heading = 'Fewer features needed to keep all the true ones', chart = 'figure_set', legend = 'Tap to choose a chart', caption = 'Figure 3: the sure screening threshold, on a log scale, for Air-HOLP and Ridge-HOLP (r = 10). The dashed line is the screening cut-off ⌈n/log(n)⌉; values below it are runs in which all the true features were screened in.', panels = [
-		{ label = 'By signal strength (R²)', title = 'By signal strength (R²)', sub = 'n = 500, p = 1,250, correlation 0.6, 12 true features', src = 'fig3a.png', alt = 'Box plots of the log sure screening threshold against theoretical R squared for Air-HOLP and Ridge-HOLP; both fall as R squared rises, Air-HOLP lower.' },
-		{ label = 'By number of true features', title = 'By number of true features', sub = 'n = 1,000, p = 5,000, correlation 0.3, R² = 0.25', src = 'fig3b.png', alt = 'Box plots of the log sure screening threshold against the number of true features for Air-HOLP and Ridge-HOLP; both rise with more true features, Air-HOLP lower.' },
+		{ label = 'By signal strength (R²)', title = 'By signal strength (R²)', sub = 'n = 500, p = 1,250, correlation 0.6, 12 true features', svg = 'fig3a' },
+		{ label = 'By number of true features', title = 'By number of true features', sub = 'n = 1,000, p = 5,000, correlation 0.3, R² = 0.25', svg = 'fig3b' },
 	], measures = [
 		{ term = 'Sure screening threshold', text = 'the smallest short list that keeps every true feature, which is the worst rank among them. If three true features rank 37, 12 and 54, the threshold is 54, because 54 features must be kept to include all three. Lower is better.' },
 	], text = 'Screening gets easier as R² rises and harder as the number of true features grows. Air-HOLP consistently outperforms Ridge-HOLP across most settings of both.' },
 	{ id = 'speed', heading = 'Fast: the same time complexity as Ridge-HOLP', chart = 'figure_set', legend = 'Tap to choose a chart', caption = 'Figure 5: execution time of Air-HOLP, Ridge-HOLP and ordinary ridge regression (Ridge-OLS), over 10 simulations.', panels = [
-		{ label = 'Time against features', title = 'Time against the number of features', sub = 'log execution time in milliseconds', src = 'fig5a.png', alt = 'Line chart of log execution time against the number of features: Ridge-OLS rises steeply, Air-HOLP and Ridge-HOLP rise slowly.' },
-		{ label = 'Air-HOLP vs Ridge-HOLP', title = 'Air-HOLP against Ridge-HOLP', sub = 'execution time in seconds', src = 'fig5b.png', alt = 'Box plot of execution time in seconds for Air-HOLP and Ridge-HOLP.' },
+		{ label = 'Time against features', title = 'Time against the number of features', sub = 'log execution time in milliseconds', svg = 'fig5a' },
+		{ label = 'Air-HOLP vs Ridge-HOLP', title = 'Air-HOLP against Ridge-HOLP', sub = 'execution time in seconds', svg = 'fig5b' },
 	], text = 'The eigendecomposition is the only step that costs O(n²p + n³), and it is not repeated; every other step costs O(np + n²) or less, so Air-HOLP has the same time complexity as Ridge-HOLP. Both are considerably faster than ordinary ridge regression when p is much larger than n, and Air-HOLP takes roughly twice as long as a single Ridge-HOLP run with a fixed penalty, where cross-validation over a grid would multiply that run by the grid size × k.' },
 	{ id = 'software', heading = 'Use it: the AirScreen R package', text = 'AirScreen implements Air-HOLP for p ≥ n and its counterpart Air-OLS for n > p, through one function, `Air()`, which also runs Ridge-HOLP with a fixed penalty for comparison. The example below is the package’s own.', code = '''install.packages("AirScreen")
 library(AirScreen)

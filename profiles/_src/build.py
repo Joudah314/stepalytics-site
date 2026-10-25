@@ -367,6 +367,12 @@ def build_project(site: dict, path: Path, template: str) -> Path:
         labels = p.get("labels", {})
         table_label = labels.get("data_table", "Data")
         daily = charts.read_daily(SRC / "projects" / p["daily_csv"]) if p.get("daily_csv") else []
+        svgs = charts.airholp_svgs(json.loads((SRC / "projects" / p["figures_json"]).read_text(encoding="utf-8")))             if p.get("figures_json") else {}
+        figdata = json.loads((SRC / "projects" / p["figures_json"]).read_text(encoding="utf-8")) if p.get("figures_json") else {}
+        for sec in data.get("sections", []):
+            for panel in sec.get("panels", []):
+                if panel.get("svg"):
+                    panel["svg_html"] = svgs[panel["svg"]]
         for sec in data.get("sections", []):
             chart = sec.get("chart")
             cap = sec.get("caption", "")
@@ -392,6 +398,8 @@ def build_project(site: dict, path: Path, template: str) -> Path:
                 sec["chart_html"] = charts.figure_set(sec["id"], sec["panels"], cap, p.get("figure_credit", ""),
                                                       sec.get("legend", "Tap to choose a chart"), sec.get("measures", []),
                                                       sec.get("grid") == "quad", p.get("tables", {}).get(sec["id"]))
+            elif chart == "bands":
+                sec["chart_html"] = charts.band_bar(figdata["bands"], cap, sec.get("bar_label", ""))
             elif chart == "figures":
                 sec["chart_html"] = charts.figures(sec["panels"], cap, p.get("figure_credit", ""))
             elif chart == "ladder":

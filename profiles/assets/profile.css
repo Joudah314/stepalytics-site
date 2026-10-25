@@ -371,3 +371,30 @@ details ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
 .paper-fig .fig-measures { margin-top: 0.75rem; }
 .pp-head .value { font-size: inherit; }
 .points + p { margin-top: 0.6rem; }
+
+/* Air-HOLP figures redrawn in the page's style (Ibrahim, 25 Oct). */
+.figset-svg { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 6px; }
+.pf { display: block; width: 100%; height: auto; font-family: var(--font); }
+.pf-plot { fill: #fbfcfc; stroke: var(--border); }
+.pf-grid { stroke: #e3e8eb; stroke-width: 1; }
+.pf-tick { font-size: 15px; fill: var(--muted); }
+.pf-axis { font-size: 17px; fill: var(--text); font-weight: 600; }
+.pf-leg { font-size: 15px; fill: var(--text); }
+.pf-head { font-size: 18px; font-weight: 700; fill: var(--navy); }
+.pf-cell { font-size: 16px; fill: var(--text); font-weight: 600; }
+.pf-cell.on { fill: #fff; }
+@container (min-width: 600px) { .figset-trio .figset-grid { grid-template-columns: 1fr 1fr 1fr; } }
+.figset-trio .figset-opts { grid-template-columns: 1fr 1fr 1fr; }
+.bb-ends { display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 0.35rem; }
+.bb-lo { color: #b3261e; }
+.bb-hi { color: #1f6e36; }
+.bb-bar { display: flex; gap: 2px; height: 46px; border-radius: 6px; overflow: hidden; }
+.bb-seg { display: flex; align-items: center; justify-content: center; min-width: 3px; }
+.bb-in { font-weight: 700; font-size: 0.9375rem; color: var(--text); }
+.bb-in.on { color: #fff; }
+.bb-list { list-style: none; margin: 0.75rem 0 0; padding: 0; display: grid; gap: 0.3rem 1.5rem; grid-template-columns: 1fr; }
+@media (min-width: 760px) { .bb-list { grid-template-columns: 1fr 1fr; grid-auto-flow: column; grid-template-rows: repeat(4, auto); } }
+.bb-list li { display: grid; grid-template-columns: 16px 1fr auto auto; gap: 0.6rem; align-items: center; }
+.bb-sw { width: 16px; height: 16px; border-radius: 3px; }
+.bb-num { font-weight: 700; text-align: right; min-width: 3.5rem; }
+.bb-cnt { color: var(--muted); font-size: 0.9375rem; text-align: right; min-width: 7.5rem; }
