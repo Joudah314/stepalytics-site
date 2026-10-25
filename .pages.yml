@@ -540,3 +540,51 @@ content:
       - name: description
         label: Search-engine and link-preview description
         type: text
+
+  # ---------------------------------------------------------------- Air-HOLP page (study; the figures' settings stay in the file)
+  - name: project-air-holp
+    label: Project page – Air-HOLP and AirScreen (study)
+    type: file
+    path: profiles/_src/projects/air-holp.toml
+    format: toml
+    fields:
+      - { name: title, label: Page title, type: string, required: true }
+      - { name: summary, label: The story in two or three sentences (under the title), type: text }
+      - { name: second, label: Second line , type: text }
+      - { name: meta, label: Small line (e.g. Completed 2026 · tools), type: string }
+      - { name: updated, label: "Last updated (YYYY-MM-DD)", type: string }
+      - { name: description, label: Search-engine and link-preview description, type: text }
+      - name: glance
+        label: At a glance – key-number cards
+        type: object
+        list: true
+        fields:
+          - { name: value, label: Big text (number or short phrase), type: string, required: true }
+          - { name: text, label: Line under it, type: text }
+      - name: sections
+        label: Sections (in page order)
+        type: object
+        list: true
+        fields:
+          - { name: id, label: "Short id (letters and dashes)", type: string, required: true }
+          - { name: heading, label: Heading, type: string, required: true }
+          - { name: lead, label: Highlighted line (gold bar), type: text }
+          - name: chart
+            label: Chart
+            type: select
+            options:
+              values: ["", figures]
+          - { name: caption, label: Chart caption, type: text }
+          - { name: text, label: Paragraph, type: text }
+          - { name: points, label: Bullet points, type: text, list: true }
+          - { name: code, label: Code block, type: text }
+          - { name: after, label: Line after the code, type: text }
+          - { name: fold, label: Folded list title, type: string }
+          - { name: fold_points, label: Folded list, type: text, list: true }
+      - name: model_card
+        label: Method card rows
+        type: object
+        list: true
+        fields:
+          - { name: term, label: Row name, type: string, required: true }
+          - { name: text, label: Text, type: text }

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="{{site.language}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}} – {{person_name}}</title>
+<meta name="description" content="{{description}}">
+<meta name="author" content="{{person_name}}">
+<link rel="canonical" href="{{page_url}}">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="{{site.site_name}}">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:url" content="{{page_url}}">
+<meta name="color-scheme" content="light">
+<link rel="icon" type="image/png" href="../../../../assets/favicon.png">
+<link rel="apple-touch-icon" href="../../../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../../assets/profile.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="shell bar">
+    <a class="brand" href="../../../../"><img src="../../../assets/stepalytics-logo.png" width="62" height="40" alt="StepAlytics home"></a>
+    <nav aria-label="StepAlytics"><a href="../../">{{person_name}}</a></nav>
+  </div>
+</header>
+
+<main id="main" class="project-page study">
+  <section class="shell pp-head" aria-labelledby="title">
+    <h1 id="title">{{title}}</h1>
+    <p class="value">{{{summary_html}}}</p>
+    {{#second}}<p class="second">{{{second_html}}}</p>{{/second}}
+    <p class="meta">{{meta}}</p>
+  </section>
+
+  <section class="shell block" aria-labelledby="glance-h">
+    <h2 id="glance-h">{{labels.glance}}</h2>
+    <ul class="glance">
+      {{#glance}}<li><span class="kpi">{{value}}</span><span class="kpi-label">{{{text_html}}}</span></li>
+      {{/glance}}
+    </ul>
+  </section>
+
+  {{#sections}}<section class="shell block study-sec" id="{{id}}" aria-labelledby="{{id}}-h">
+    <h2 id="{{id}}-h">{{heading}}</h2>
+    {{#lead}}<p class="lead-note">{{{lead_html}}}</p>{{/lead}}
+    {{#chart_html}}{{{chart_html}}}{{/chart_html}}
+    {{#text}}<p>{{{text_html}}}</p>{{/text}}
+    {{#points_any}}<ul class="points">{{#points}}<li>{{{text_html}}}</li>{{/points}}</ul>{{/points_any}}
+    {{#code}}<pre class="code"><code>{{code}}</code></pre>{{/code}}
+    {{#after}}<p>{{{after_html}}}</p>{{/after}}
+    {{#fold}}<details class="fold"><summary>{{fold}}</summary><ul class="points">{{#fold_points}}<li>{{{text_html}}}</li>{{/fold_points}}</ul></details>{{/fold}}
+  </section>
+  {{/sections}}
+
+  {{#model_card_any}}<section class="shell block" id="model-card" aria-labelledby="model-card-h">
+    <h2 id="model-card-h">{{labels.model_card}}</h2>
+    <dl class="model-card card">
+      {{#model_card}}<div><dt>{{term}}</dt><dd>{{{text_html}}}</dd></div>
+      {{/model_card}}
+    </dl>
+  </section>{{/model_card_any}}
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <p><a href="../../">{{person_name}}</a> · {{labels.updated}} <time datetime="{{updated_iso}}">{{updated_human}}</time> · <a href="../../../../">{{site.site_name}}</a></p>
+  </div>
+</footer>
+<script>
+// The calendar's highlight buttons (the only script on study pages): they switch a data attribute; the chart is drawn
+// at build time, so without the script it simply shows daily steps.
+// Figure sets: the radios switch panels by CSS; this only keeps the "Showing:" line in step.
+document.querySelectorAll(".figset").forEach(function (fig) {
+  var status = fig.querySelector(".figset-status");
+  if (!status) return;
+  status.hidden = false;
+  fig.querySelectorAll(".figset-switch input").forEach(function (r) {
+    r.addEventListener("change", function () { if (r.checked) status.textContent = "Showing: " + r.dataset.name; });
+  });
+});
+// The same buttons switch the panels of a published figure.
+document.querySelectorAll(".fig-tabs").forEach(function (fig) {
+  fig.querySelectorAll(".fig-tab").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      fig.querySelectorAll(".fig-panel").forEach(function (img) { img.hidden = img.dataset.panel !== btn.dataset.panel; });
+      fig.querySelectorAll(".fig-tab").forEach(function (o) { o.setAttribute("aria-pressed", o === btn ? "true" : "false"); });
+    });
+  });
+});
+document.querySelectorAll(".cal-fig").forEach(function (fig) {
+  fig.querySelectorAll(".cal-mode").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      fig.dataset.mode = btn.dataset.mode;
+      fig.querySelectorAll(".cal-mode").forEach(function (o) { o.setAttribute("aria-pressed", o === btn ? "true" : "false"); });
+    });
+  });
+});
+</script>
+{{#analytics}}<script data-goatcounter="https://{{goatcounter_code}}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>{{/analytics}}
+</body>
+</html>

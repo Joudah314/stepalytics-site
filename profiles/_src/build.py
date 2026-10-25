@@ -5,8 +5,10 @@
 For every people/<slug>.toml it writes
     profiles/<slug>/index.html      the profile page (from template.html)
     <short_path>/index.html         a redirect to it, if the person has a short_path (from redirect.html)
-and for every projects/<slug>.toml (a project's "how it works" page, owned by `person`)
-    profiles/<person>/projects/<slug>/index.html   (from project_page.html)
+and for every projects/<slug>.toml (a project's page, owned by `person`)
+    profiles/<person>/projects/<slug>/index.html   (from project_page.html, a running system told in stages, or
+                                                    study_page.html when kind = "study": a finished study told
+                                                    as sections, with charts drawn by charts.py)
 
 Site-wide settings (site name, base URL, visitor counter) are in site.toml.
 Templates use a small Mustache subset:
@@ -34,6 +36,7 @@ SRC = Path(__file__).resolve().parent          # profiles/_src
 PROFILES = SRC.parent                          # profiles
 ROOT = PROFILES.parent                         # site root
 
+import charts  # noqa: E402  (same folder)
 import privacy_check  # noqa: E402  (same folder)
 
 
@@ -352,6 +355,46 @@ def build_project(site: dict, path: Path, template: str) -> Path:
     # The closing boxes (Running underneath, Next, What I learned) show only when filled in.
     p["closing_any"] = bool(p.get("underneath") or p.get("next") or p.get("learned"))
     data = add_html_variants(p)
+    if p.get("kind") == "study":
+        template = (SRC / "study_page.html").read_text(encoding="utf-8")
+        labels = p.get("labels", {})
+        table_label = labels.get("data_table", "Data")
+        daily = charts.read_daily(SRC / "projects" / p["daily_csv"]) if p.get("daily_csv") else []
+        for sec in data.get("sections", []):
+            chart = sec.get("chart")
+            cap = sec.get("caption", "")
+            if chart == "calendar":
+                c = p["calendar"]
+                sec["chart_html"] = charts.calendar(daily, cap, c["modes"], c["title"], c["description"], table_label)
+            elif chart == "device":
+                c = p["device"]
+                sec["chart_html"] = charts.device_check(
+                    daily, dt.date.fromisoformat(c["start"]), dt.date.fromisoformat(c["end"]),
+                    dt.date.fromisoformat(c["marker"]), c["marker_label"], cap, c["title"], c["description"])
+            elif chart == "phases":
+                c = p["phases"]
+                sec["chart_html"] = charts.phases(daily, dt.date.fromisoformat(c["start"]), dt.date.fromisoformat(c["end"]),
+                                                  c["periods"], cap, c["title"], c["description"])
+            elif chart == "effects":
+                c = p["effects"]
+                sec["chart_html"] = charts.effects(c["rows"], c["low"], c["high"], cap, table_label)
+            elif chart == "picture":
+                c = p["picture"]
+                sec["chart_html"] = charts.picture_link(c["src"], c["alt"], c["href"], c["label"], cap, c["width"], c["height"])
+            elif chart == "figure_set":
+                sec["chart_html"] = charts.figure_set(sec["id"], sec["panels"], cap, p.get("figure_credit", ""),
+                                                      sec.get("legend", "Tap to choose a chart"), sec.get("measures", []),
+                                                      sec.get("grid") == "quad", p.get("tables", {}).get(sec["id"]))
+            elif chart == "figures":
+                sec["chart_html"] = charts.figures(sec["panels"], cap, p.get("figure_credit", ""))
+            elif chart == "ladder":
+                sec["chart_html"] = charts.ladder(p["ladder"], sec.get("caption", ""), labels.get("data_table", "Data"))
+            elif chart == "recruit":
+                sec["chart_html"] = charts.recruit(sec.get("caption", ""), p["recruit_title"], p["recruit_description"])
+            elif chart == "flow":
+                sec["chart_html"] = charts.flow(p["flow"], p["flow_title"], p["flow_description"])
+            elif chart:
+                raise SystemExit(f"{slug}: unknown chart '{chart}'")
     data.update(
         site=add_html_variants(site),
         page_url=page_url,
