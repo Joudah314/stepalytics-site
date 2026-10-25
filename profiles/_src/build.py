@@ -25,6 +25,7 @@ Every text field x also has x_html: the text with **bold**, *italic*, `code` and
 from __future__ import annotations
 
 import datetime as dt
+import hashlib
 import html
 import json
 import re
@@ -38,6 +39,12 @@ ROOT = PROFILES.parent                         # site root
 
 import charts  # noqa: E402  (same folder)
 import privacy_check  # noqa: E402  (same folder)
+
+
+def css_versioned(page: str) -> str:
+    """Tag the stylesheet link with a hash of its contents, so browsers fetch it again whenever it changes."""
+    css = (PROFILES / "assets" / "profile.css").read_bytes().replace(b"\r\n", b"\n")
+    return page.replace('profile.css">', f'profile.css?v={hashlib.sha256(css).hexdigest()[:10]}">')
 
 
 # ---------------------------------------------------------------- text helpers
@@ -303,7 +310,7 @@ def build_person(site: dict, path: Path, template: str, redirect_template: str) 
     page = render(template, data)
     check_private(slug, f"profiles/{slug}/index.html (page text)", privacy_check.page_text(page), allowed)
     out = page_dir / "index.html"
-    out.write_text(page, encoding="utf-8", newline="\n")
+    out.write_text(css_versioned(page),encoding="utf-8", newline="\n")
     written.append(out)
 
     short = p.get("short_path")
@@ -409,7 +416,7 @@ def build_project(site: dict, path: Path, template: str) -> Path:
     out_dir = PROFILES / owner / "projects" / slug
     out_dir.mkdir(parents=True, exist_ok=True)
     out = out_dir / "index.html"
-    out.write_text(page, encoding="utf-8", newline="\n")
+    out.write_text(css_versioned(page),encoding="utf-8", newline="\n")
     return out
 
 
