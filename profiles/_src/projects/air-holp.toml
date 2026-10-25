@@ -3,9 +3,8 @@ person = 'ibrahim-joudah'
 kind = 'study'
 updated = '2026-10-25'
 title = 'Air-HOLP and the AirScreen R package'
-summary = 'Feature screening is a fast first step for data with **far more features than observations**, such as gene expression: it ranks the features and keeps a short list that aims to hold every feature that truly matters. Ridge-HOLP screens well when **features are highly correlated**, but it depends on a penalty, and the best value differs from one dataset to the next. Choosing it the usual way, by cross-validation over a grid of values, means re-running the method many times, and random data splits can change which features are kept. **Air-HOLP selects the penalty adaptively and efficiently**: it updates it from the data, with no grid and no random splits, at the same time complexity as Ridge-HOLP.'
-second = 'Published as first author in *Statistics and Computing* (2025), with Samuel Müller and Houying Zhu, and released as the AirScreen R package on CRAN. Tested across a large range of simulation settings and on prostate cancer gene-expression data.'
-meta = 'Published 2025 · R · feature screening · simulation and real data'
+summary = 'When a dataset has thousands of possible predictors, such as genes, but only a few of them affect the outcome, **feature screening** ranks all the predictors and keeps a short list that should contain every one that matters, so a model can then be built from far fewer. Ridge-HOLP screens well even when predictors are **highly correlated**, but only with a well-chosen penalty, and choosing it by cross-validation means re-running the method many times. **Air-HOLP selects the penalty from the data, adaptively and efficiently.**'
+meta = 'Published as first author in *Statistics and Computing* (2025) and released as the AirScreen R package on CRAN.'
 description = 'Air-HOLP, Ibrahim Joudah’s feature screening method for high-dimensional correlated data (Statistics and Computing, 2025): selecting the ridge penalty adaptively and efficiently, the simulation and prostate cancer results, and the AirScreen R package.'
 figure_credit = 'Figure from Joudah, Müller and Zhu (2025), Statistics and Computing, CC BY 4.0.'
 labels.glance = 'At a glance'
@@ -13,14 +12,16 @@ labels.updated = 'Updated'
 labels.data_table = 'Show the numbers'
 labels.model_card = 'Method card'
 glance = [
-	{ value = '45% higher · 8% lower', text = 'sure screening probability than Ridge-HOLP across **1,600 simulation settings**; equal in the other 47%' },
-	{ value = 'Better at predicting prostate cancer stages', text = 'with 8 genes, multiple R of **0.85** against 0.80 for Ridge-HOLP and 0.70 for SIS on prostate cancer; higher than both at every stage' },
+	{ value = '40% higher · 12% lower', text = 'sure screening probability than Ridge-HOLP across **2,800 simulation settings**; equal in the other 48%' },
+	{ value = 'Best on prostate cancer data', text = 'its genes predict each of the four stages best; for prostate cancer, multiple R **0.85** vs 0.80 (Ridge-HOLP) and 0.70 (SIS)' },
 	{ value = 'On CRAN', text = '**AirScreen**, an R package implementing the method' },
 ]
 sections = [
-	{ id = 'problem', heading = 'The problem: thousands of correlated features, and a penalty to choose', text = 'In data such as gene expression, the number of features p can far exceed the number of observations n, and the features are often highly correlated. **Feature screening** is a dimensionality reduction step, usually used before model selection: it aims to remove as many irrelevant features as possible while keeping all the **true features**, those that really affect the response. A good screening method has the **sure screening property**: as the sample size grows, the probability that its short list keeps every true feature approaches 1. The popular **Sure Independence Screening (SIS)** ranks each feature by its own correlation with the response, one at a time, so it can perform poorly when features are highly correlated. **HOLP** (Wang and Leng, 2016) measures the joint relation between all the features and the response instead, and **Ridge-HOLP** adds a ridge penalty r that keeps it stable and handles multicollinearity. Choosing r well is crucial: it balances bias and variance.', points = [
-		'**Why choosing r is the hard part.** Bootstrapping and cross-validation recompute Ridge-HOLP again and again: k-fold cross-validation over a grid of penalty values needs (grid size × k) runs, so 100 values and 10 folds mean 1,000 runs, and leave-one-out needs (grid size × n).',
-		'**And it is not stable.** Cross-validation splits the data at random, and different splits may lead to different screened features.',
+	{ id = 'problem', heading = 'The problem: correlated predictors, and a penalty to choose', text = 'In data such as gene expression, there can be far more predictors (features) than observations, and they are often highly correlated. Screening should keep every **true feature**, one that really affects the outcome, while dropping most of the rest; a method that does this with probability approaching 1 as the sample grows has the **sure screening property**. The challenges:', points = [
+		'**One at a time fails under correlation.** Sure Independence Screening (SIS) ranks each feature by its own correlation with the outcome, so it can perform poorly when features are highly correlated.',
+		'**Joint screening needs a penalty.** HOLP (Wang and Leng, 2016) looks at all the features together; Ridge-HOLP adds a ridge penalty r for stability, but the best r differs from one dataset to the next.',
+		'**Choosing it is slow.** Cross-validation over a grid re-runs Ridge-HOLP (grid size × k) times: 100 values and 10 folds mean 1,000 runs, and leave-one-out needs (grid size × n).',
+		'**And unstable.** Cross-validation splits the data at random, and different splits can lead to different screened features.',
 	] },
 	{ id = 'method', heading = 'The method: Air-HOLP updates the penalty from the data', text = 'Air-HOLP (adaptive iterative ridge-HOLP) chooses the penalty that best predicts the noise-free signal, the part of the response the features explain. That signal is unknown, so Air-HOLP estimates it and repeats:', points = [
 		'**Start** from the recommended penalty r = 10 and compute Ridge-HOLP.',
@@ -29,13 +30,13 @@ sections = [
 		'**Repeat** until the penalty changes by less than 1%. In most simulations this took 3 to 6 iterations.',
 	], after = 'The costly step, an eigendecomposition, is computed once and reused in every iteration: no grid of penalties, no data splitting, and the same answer on every run.' },
 	{ id = 'adapt', heading = 'In one setting low penalties win, in the other high penalties win; Air-HOLP does well in both', chart = 'figure_set', legend = 'Tap a setting to show its chart', caption = 'Figure 1(a) and 1(b): sure screening probability as the correlation between features rises. Ridge-HOLP is shown with four fixed penalties, r = 10, 50, 200 and 600; Air-HOLP selects its own.', panels = [
-		{ label = 'Setting 1|low penalties do best', title = 'Setting 1: low penalties do best', sub = 'n = 125 observations, p = 250 features, 9 true features, R² = 0.95', src = 'fig1a.png', alt = 'Sure screening probability against correlation in Setting 1: Air-HOLP is at the top with r = 10 and r = 50; r = 200, r = 600 and SIS are lower.' },
-		{ label = 'Setting 2|high penalties do best', title = 'Setting 2: high penalties do best', sub = 'n = 1,000 observations, p = 1,250 features, 15 true features, R² = 0.5', src = 'fig1b.png', alt = 'Sure screening probability against correlation in Setting 2: Air-HOLP is at the top with r = 200 and r = 600; r = 10, r = 50 and SIS are lower.' },
+		{ label = 'Setting 1|low penalties do best', title = 'Setting 1: low penalties do best', sub = 'n = 125 observations, p = 250 features, 9 true features, R² = 0.95', src = 'fig1a.png', height = 448, alt = 'Sure screening probability against correlation in Setting 1: Air-HOLP is at the top with r = 10 and r = 50; r = 200, r = 600 and SIS are lower.' },
+		{ label = 'Setting 2|high penalties do best', title = 'Setting 2: high penalties do best', sub = 'n = 1,000 observations, p = 1,250 features, 15 true features, R² = 0.5', src = 'fig1b.png', height = 448, alt = 'Sure screening probability against correlation in Setting 2: Air-HOLP is at the top with r = 200 and r = 600; r = 10, r = 50 and SIS are lower.' },
 	], measures = [
 		{ term = 'Sure screening probability', text = 'the share of the 500 simulated datasets in which all the true features are among the top ⌈n/log(n)⌉ screened features. Higher is better.' },
 		{ term = 'Penalty r', text = 'the ridge tuning parameter of Ridge-HOLP, fixed in advance; Air-HOLP selects it from the data.' },
 		{ term = 'Correlation (ρ)', text = 'the correlation between every pair of features in the simulated data.' },
-	], text = 'The smaller penalties (r = 10 and 50) perform well in Setting 1 but not in Setting 2, and the larger ones (r = 200 and 600) show the opposite trend. Air-HOLP consistently performs well in both. SIS works best when features are uncorrelated but performs poorly when they are highly correlated, where Ridge-HOLP and Air-HOLP are superior.' },
+	], text = 'Small penalties (r = 10, 50) do well in Setting 1 but not in Setting 2, and large ones (r = 200, 600) the opposite; Air-HOLP does well in both. SIS works best when features are uncorrelated but poorly when they are highly correlated.' },
 	{ id = 'prostate', heading = 'Applied to prostate cancer: better at predicting each stage', chart = 'figure_set', grid = 'quad', legend = 'Tap a stage to show its chart', caption = 'Figure 4: the largest multiple R for models of 1 to 8 genes, chosen from the 21 genes each method screened, for each stage.', panels = [
 		{ label = 'Benign epithelium', src = 'fig4a.png', alt = 'Benign epithelium: maximum multiple R against model size; Air-HOLP highest from 4 genes on.' },
 		{ label = 'Intraepithelial neoplasia', src = 'fig4b.png', alt = 'Prostatic intraepithelial neoplasia: maximum multiple R against model size; Air-HOLP highest from 3 genes on.' },
@@ -44,10 +45,15 @@ sections = [
 	], measures = [
 		{ term = 'Multiple R', text = 'the correlation between the stage (yes or no) and a model’s fitted values, from 0 to 1. For a fixed number of genes it ranks models the same way as R², the likelihood and in-sample prediction error. Higher is better.' },
 		{ term = 'Model size', text = 'the number of genes in the model; for each size, the best combination of the 21 screened genes is shown.' },
-	], lead = 'Simulations show how a method behaves when the truth is known; the real data shows it works in practice.', text = 'The Tomlins-V2 prostate cancer data (Tomlins et al., 2006) has 92 samples and 1,288 genes, collected to understand the genetic changes as prostate cancer progresses through four stages: **benign epithelium** (normal, healthy prostate cells), **prostatic intraepithelial neoplasia** (early changes in cells that might become cancer), **prostate cancer** (actual cancer cells) and **metastatic disease** (cancer cells that have spread to other parts of the body). For each stage, each method screened 21 genes (⌈n/log(n)⌉). Ridge-HOLP and Air-HOLP outperform SIS, especially for larger models, because the genes are correlated in this dataset; and Air-HOLP consistently outperforms Ridge-HOLP.' },
-	{ id = 'overall', heading = 'Across 1,600 settings, Air-HOLP matched or improved on Ridge-HOLP', chart = 'figures', caption = 'Figure 2: sure screening probability by sample size n and number of features p (correlation 0.6, 6 true features, R² = 0.5). Left: Air-HOLP; middle: Ridge-HOLP with r = 10; right: the difference.', panels = [
+	], lead = 'Simulations show how a method behaves when the truth is known; real data shows it works in practice.', text = 'The Tomlins-V2 prostate cancer data (Tomlins et al., 2006) has 92 samples and 1,288 genes from four stages of the disease:', points = [
+		'**Benign epithelium:** normal, healthy prostate cells.',
+		'**Prostatic intraepithelial neoplasia:** early changes in cells that might become cancer.',
+		'**Prostate cancer:** actual cancer cells.',
+		'**Metastatic disease:** cancer cells that have spread to other parts of the body.',
+	], after = 'For each stage, each method screened 21 genes. Ridge-HOLP and Air-HOLP outperform SIS, especially for larger models, because the genes are correlated in this dataset; and Air-HOLP consistently outperforms Ridge-HOLP.' },
+	{ id = 'overall', heading = 'Across 2,800 settings, Air-HOLP matched or improved on Ridge-HOLP', chart = 'figures', caption = 'Figure 2: sure screening probability by sample size n and number of features p (correlation 0.6, 6 true features, R² = 0.5). Left: Air-HOLP; middle: Ridge-HOLP with r = 10; right: the difference.', panels = [
 		{ src = 'fig2.png', alt = 'Three heat maps of sure screening probability over n and p for Air-HOLP, Ridge-HOLP and their difference; the largest differences are where n is close to p.', width = 1200, height = 350 },
-	], text = 'The simulations varied the sample size, the number of features, the correlation, the number of true features and the signal strength (R²), giving 1,600 settings. Air-HOLP’s sure screening probability was **higher in 45%** of settings and **lower in 8%**; in the other 47% the two were equal, typically when both probabilities were 0 or 1. The difference ranged from −0.02 to 0.60. The gap is most pronounced when n is close to p (for example n = 1,000 and p = 1,250), but it can still be significant elsewhere (n = 500, p = 1,250). The same conclusions apply to a second correlation structure in which only some of the features are correlated.' },
+	], text = 'The simulations varied the sample size, the number of features, the correlation and how it is structured, the number of true features and the signal strength (R²), giving 2,800 settings. Air-HOLP’s sure screening probability was **higher in 40%** of them and **lower in 12%**; in the other 48% the two were equal, typically when both probabilities were 0 or 1. When all the features are correlated (1,600 settings), it was higher in 45% and lower in 8%. The gap is most pronounced when n is close to p (for example n = 1,000 and p = 1,250), but it can still be significant elsewhere (n = 500, p = 1,250).' },
 	{ id = 'threshold', heading = 'Fewer features needed to keep all the true ones', chart = 'figure_set', legend = 'Tap to choose a chart', caption = 'Figure 3: the sure screening threshold, on a log scale, for Air-HOLP and Ridge-HOLP (r = 10). The dashed line is the screening cut-off ⌈n/log(n)⌉; values below it are runs in which all the true features were screened in.', panels = [
 		{ label = 'By signal strength (R²)', title = 'By signal strength (R²)', sub = 'n = 500, p = 1,250, correlation 0.6, 12 true features', src = 'fig3a.png', alt = 'Box plots of the log sure screening threshold against theoretical R squared for Air-HOLP and Ridge-HOLP; both fall as R squared rises, Air-HOLP lower.' },
 		{ label = 'By number of true features', title = 'By number of true features', sub = 'n = 1,000, p = 5,000, correlation 0.3, R² = 0.25', src = 'fig3b.png', alt = 'Box plots of the log sure screening threshold against the number of true features for Air-HOLP and Ridge-HOLP; both rise with more true features, Air-HOLP lower.' },
@@ -81,15 +87,6 @@ result$rank_adaptive[1:4]   # ranks of the 4 true features (top 38 are screened)
 	] },
 	{ id = 'next', heading = 'Where it goes next', text = 'Many screening methods use the HOLP formula, including group HOLP, Dynamic Tilted Current Correlation and HOLP-DF, and the paper expects that using Air-HOLP within them will also lead to improvements; the R code already integrates it into group HOLP. The iterative framework may also be extended to other L2-regularised penalties and generalised to non-linear models. Air-HOLP was the first method of my PhD research on feature screening.' },
 ]
-tables.prostate.label = 'Show the numbers'
-tables.prostate.head = ['Stage (8 genes)', 'Air-HOLP', 'Ridge-HOLP', 'SIS']
-tables.prostate.rows = [
-	['Benign epithelium', '0.897', '0.886', '0.887'],
-	['Intraepithelial neoplasia', '0.816', '0.755', '0.751'],
-	['Prostate cancer', '0.848', '0.802', '0.705'],
-	['Metastatic disease', '0.957', '0.952', '0.884'],
-]
-tables.prostate.note = 'Largest multiple R with 8 genes, from a re-run of the paper’s code, which reproduces Figure 4.'
 model_card = [
 	{ term = 'Question', text = 'Can the ridge penalty of HOLP screening be selected from the data, efficiently and stably, without cross-validation over a grid?' },
 	{ term = 'Data', text = 'Simulations over 2,800 settings (500 datasets each), with compound symmetry and spatial correlation; the Tomlins-V2 prostate cancer data (92 samples, 1,288 genes, four stages).' },
