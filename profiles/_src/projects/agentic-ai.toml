@@ -2,10 +2,10 @@ slug = 'agentic-ai'
 person = 'ibrahim-joudah'
 updated = '2026-10-23'
 since = 'October 2026'
-title = 'Agentic AI job-market monitoring system: how it works'
-summary = 'An LLM system that watches the Australian job market around the clock, filters thousands of ads with machine learning and LLMs, and hands a short list to a person who decides.'
+title = 'Agentic AI monitoring and decision-support platform: how it works'
+summary = 'An agentic AI platform that watches the Australian labour market around the clock: it detects new postings across thousands of organisations, triages them with machine learning and LLMs, drafts grounded documents, and hands a short list to a person who decides.'
 private_line = 'Designed, built and run by me. The implementation is private; a walkthrough is available on request.'
-description = 'How Ibrahim Joudah’s agentic AI job-market monitoring system works, stage by stage: LLM screening and evaluation, machine-learning filters tested in shadow mode, checks against human judgement, and Bayesian timing.'
+description = 'How Ibrahim Joudah’s agentic AI monitoring and decision-support platform works, stage by stage: LLM screening and evaluation, machine-learning filters tested in shadow mode, checks against human judgement, grounded text generation and Bayesian timing.'
 underneath = ''
 next = []
 learned = []
@@ -24,29 +24,29 @@ labels.next = 'Next'
 labels.learned = 'What I learned'
 labels.updated = 'Updated'
 glance = [
-	{ value = 'About two-thirds', text = 'of strong-LLM calls avoided in a pilot on 691 ads, with no good or strong job missed compared with the full evaluation' },
+	{ value = 'About two-thirds', text = 'of strong-LLM calls avoided in a pilot on 691 postings, with no high-value posting missed compared with the full evaluation' },
 	{ value = '1,300+', text = 'automated tests run on every change' },
-	{ value = 'Every application', text = 'is decided and submitted by me; the system never presses Submit' },
+	{ value = 'Every action', text = 'is decided by a person; the platform recommends and drafts, and never acts on its own' },
 ]
 stages = [
-	{ title = 'Set the ground truth before automating', problem = 'A system that writes about me must never claim anything untrue.', decision = 'Before any code, I built a bank of about 150 statements about my work, each approved by me, and a list of claims never to make. The system enforces both in code, not only in the prompt.', rejected = 'Letting an LLM write freely and checking afterwards.', evidence = '' },
+	{ title = 'Set the ground truth before generating text', problem = 'Text an LLM drafts about real people and organisations must never claim anything untrue.', decision = 'Before any code, a verified knowledge base of about 150 statements, each approved, and a list of claims never to make. Drafts are built only from the knowledge base, and the platform enforces both in code, not only in the prompt.', rejected = 'Letting an LLM write freely and checking afterwards.', evidence = '' },
 	{ title = 'Design first, then build', problem = 'A system with many parts can drift into inconsistency.', decision = 'A written design with fixed contracts between parts (one database, one message queue, each part with one owner), automated tests and secret scanning on every change, and review before shared code changes.', rejected = '', evidence = 'An independent review before launch found 2 blocking and 12 minor issues; all were fixed before going live.' },
-	{ title = 'Screen cheaply, evaluate carefully', problem = 'Most ads are poor fits, and reading every one with a strong LLM is slow and costly.', decision = 'A cascade. Duplicates are removed and fixed rules applied in code, a fast LLM screens, and a stronger LLM evaluates the rest against my profile, returning structured output that is validated in code.', rejected = 'One strong model on everything.', evidence = '' },
-	{ title = 'Go live with a human deciding', problem = 'Automated applications are a real concern for employers.', decision = 'The system recommends and prepares; I review and submit every application myself.', rejected = '', evidence = 'A review of the first 30 prepared applications found no claim outside the approved facts.' },
-	{ title = 'Check the AI against people', problem = 'An LLM’s ratings can’t be trusted just because they sound reasonable.', decision = 'I grade ads blind, and a weekly sample compares my grades with the AI’s. Any change to the evaluator restarts the comparison.', rejected = '', evidence = '' },
-	{ title = 'Cut paid calls without missing good jobs', problem = 'The AI budget is fixed.', decision = 'Machine-learning filters (XGBoost, and a model built on the fast LLM’s probabilities) decide which ads need the strong LLM. They ran in shadow mode first and switch on only if pre-set limits on missed jobs hold.', rejected = '', evidence = 'In a pilot on 691 ads, about two-thirds of strong-LLM calls were avoided with no good or strong job missed. The first filter on its own saved little; most of the gain came from the second.' },
-	{ title = 'Check at the right time, at scale', problem = 'Jobs appear at different times across thousands of employers’ own sites, and checking everything constantly wastes load and budget.', decision = 'A Bayesian model of when each source posts decides when to check it, and coverage includes the job pages of thousands of employers, checked under a load limit. Data-quality checks catch bad data: decoy links on some sites, which produced thousands of false jobs, were detected and excluded.', rejected = '', evidence = '' },
+	{ title = 'Screen cheaply, evaluate carefully', problem = 'Most postings do not meet the criteria, and reading every one with a strong LLM is slow and costly.', decision = 'A cascade. Duplicates are removed and fixed rules applied in code, a fast LLM screens, and a stronger LLM evaluates the rest against the criteria, returning structured output that is validated in code.', rejected = 'One strong model on everything.', evidence = '' },
+	{ title = 'Go live with a person deciding', problem = 'Fully automated actions on real-world postings carry real risk.', decision = 'The platform recommends and drafts; a person reviews every draft and takes every action.', rejected = '', evidence = 'A review of the first 30 drafts found no claim outside the approved facts.' },
+	{ title = 'Check the AI against people', problem = 'An LLM’s ratings can’t be trusted just because they sound reasonable.', decision = 'I grade postings blind, and a weekly sample compares my grades with the AI’s. Any change to the evaluator restarts the comparison.', rejected = '', evidence = '' },
+	{ title = 'Cut paid calls without missing what matters', problem = 'The AI budget is fixed.', decision = 'Machine-learning filters (XGBoost, and a model built on the fast LLM’s probabilities) decide which postings need the strong LLM. They ran in shadow mode first and switch on only if pre-set limits on missed high-value postings hold.', rejected = '', evidence = 'In a pilot on 691 postings, about two-thirds of strong-LLM calls were avoided with no high-value posting missed. The first filter on its own saved little; most of the gain came from the second.' },
+	{ title = 'Check at the right time, at scale', problem = 'New postings appear at different times across thousands of organisations’ own sites, and checking everything constantly wastes load and budget.', decision = 'A Bayesian model of when each source posts decides when to check it, and coverage includes the sites of thousands of organisations, checked under a load limit. Data-quality checks catch bad data: decoy links on some sites, which produced thousands of false postings, were detected and excluded.', rejected = '', evidence = '' },
 ]
 diagram.title = 'Diagram of the system today'
-diagram.description = 'Job ads flow from left to right, from cheaper checks to costlier ones: job sources, then clean-up and rules in code, then a machine-learning filter, then a fast LLM screen, then a strong LLM evaluation, and finally me, reviewing and submitting. Approved facts and never-claim rules feed the evaluation and the prepared applications. Two loops feed back: my blind grades go back to the strong LLM evaluation, and a Bayesian timing model decides when each job source is checked. Monitoring, cost limits, backups and tests run underneath everything.'
+diagram.description = 'Postings flow from left to right, from cheaper checks to costlier ones: data sources, then clean-up and rules in code, then a machine-learning filter, then a fast LLM screen, then a strong LLM evaluation, and finally a person, reviewing and deciding. Approved facts and never-claim rules feed the evaluation and the generated drafts. Two loops feed back: blind human grades go back to the strong LLM evaluation, and a Bayesian timing model decides when each source is checked. Monitoring, cost limits, backups and tests run underneath everything.'
 diagram.direction = 'cheaper checks first, costlier last'
-diagram.sources = 'Job sources'
+diagram.sources = 'Data sources'
 diagram.rules = 'Clean-up and | rules in code'
 diagram.ml = 'Machine-learning | filter'
 diagram.screen = 'Fast LLM | screen'
 diagram.evaluate = 'Strong LLM | evaluation'
-diagram.human = 'Me: review | and submit'
+diagram.human = 'A person: | review and decide'
 diagram.facts = 'Approved facts | and never-claim | rules'
-diagram.grades = 'My blind | grades'
+diagram.grades = 'Blind human | grades'
 diagram.timing = 'Bayesian | timing model'
 diagram.band = 'Running underneath: | monitoring · cost limits · backups · tests'
