@@ -440,20 +440,8 @@ content:
       - name: summary
         label: One-line summary (under the title)
         type: text
-      - name: since
-        label: Running since (e.g. October 2026)
-        type: string
-      - name: updated
-        label: Last reviewed (YYYY-MM-DD)
-        type: string
-        pattern:
-          regex: "^\\d{4}-\\d{2}-\\d{2}$"
-          message: "Use the form 2026-10-23."
-      - name: private_line
-        label: Line about the private implementation
-        type: text
       - name: glance
-        label: At a glance – key-number cards
+        label: Core capabilities – the three boxes
         type: object
         list:
           collapsible:
@@ -461,11 +449,11 @@ content:
             summary: "{value}"
         fields:
           - name: value
-            label: Big text (number or short phrase)
+            label: Box title (short)
             type: string
             required: true
           - name: text
-            label: Line under it
+            label: Text under the title
             type: text
       - name: stages
         label: Stages (in order; the first is stage 1)
@@ -523,9 +511,7 @@ content:
         label: Headings and fixed wording
         type: object
         fields:
-          - { name: running_since, label: "Running since", type: string }
-          - { name: last_reviewed, label: "Last reviewed", type: string }
-          - { name: glance, label: "Heading: At a glance", type: string }
+          - { name: glance, label: "Heading: Core capabilities", type: string }
           - { name: system, label: "Heading: diagram", type: string }
           - { name: stages, label: "Heading: stages", type: string }
           - { name: problem, label: "Stage label: Problem", type: string }
@@ -536,7 +522,6 @@ content:
           - { name: underneath, label: "Heading: Running underneath", type: string }
           - { name: next, label: "Heading: Next", type: string }
           - { name: learned, label: "Heading: What I learned", type: string }
-          - { name: updated, label: "Footer: Updated", type: string }
       - name: description
         label: Search-engine and link-preview description
         type: text

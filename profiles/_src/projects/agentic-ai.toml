@@ -1,16 +1,12 @@
 slug = 'agentic-ai'
 person = 'ibrahim-joudah'
 updated = '2026-10-23'
-since = 'October 2026'
 title = 'Agentic AI monitoring and decision-support platform: how it works'
 summary = 'An agentic AI platform that watches the Australian labour market around the clock: it detects new postings across thousands of organisations, filters and evaluates them with machine learning and LLMs, drafts grounded documents, and hands a short list to a person who decides.'
-private_line = 'Designed, built and run by me. The implementation is private; a walkthrough is available on request.'
 description = 'How Ibrahim Joudah’s agentic AI monitoring and decision-support platform works, stage by stage: LLM screening and evaluation, machine-learning filters tested in shadow mode, checks against human judgement, grounded text generation and Bayesian timing.'
 underneath = ''
 next = []
 learned = []
-labels.running_since = 'Running since'
-labels.last_reviewed = 'Last reviewed'
 labels.glance = 'Core capabilities'
 labels.system = 'System architecture'
 labels.stages = 'How it was built, stage by stage'
@@ -22,7 +18,6 @@ labels.stage = 'Stage'
 labels.underneath = ''
 labels.next = 'Next'
 labels.learned = 'What I learned'
-labels.updated = 'Updated'
 glance = [
 	{ value = 'Real-time monitoring', text = 'Watches thousands of organisations’ websites and data feeds around the clock and detects new postings within minutes; a Bayesian model decides when to check each source' },
 	{ value = 'Cost-optimised filtering', text = 'Each posting moves from the cheapest checks to the costliest: rules in code, a machine-learning filter, a fast LLM, then a strong LLM, so careful evaluation is spent only where it matters' },
