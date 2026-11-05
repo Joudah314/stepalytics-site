@@ -108,11 +108,11 @@
         <li class="stage" id="stage-5">
           <div class="stage-head">
             <span class="stage-no" aria-hidden="true">5</span>
-            <h3><span class="visually-hidden">Stage 5: </span>Check the AI against people</h3>
+            <h3><span class="visually-hidden">Stage 5: </span>Check the AI’s ratings against a person’s</h3>
           </div>
           <dl class="par">
-            <dt>Problem</dt><dd>An LLM’s ratings can’t be trusted just because they sound reasonable.</dd>
-            <dt>Decision</dt><dd>I grade postings blind, and a weekly sample compares my grades with the AI’s. Any change to the evaluator restarts the comparison.</dd>
+            <dt>Problem</dt><dd>The AI’s rating of a posting can sound convincing and still be wrong, so it has to be checked against an independent judgement.</dd>
+            <dt>Decision</dt><dd>I rate postings myself without seeing the AI’s rating first. Each week, a sample of postings rated by both of us is compared to measure how often we agree.</dd>
             
             
           </dl>
@@ -120,11 +120,11 @@
         <li class="stage" id="stage-6">
           <div class="stage-head">
             <span class="stage-no" aria-hidden="true">6</span>
-            <h3><span class="visually-hidden">Stage 6: </span>Cut paid calls without missing what matters</h3>
+            <h3><span class="visually-hidden">Stage 6: </span>Reduce paid AI calls without missing good postings</h3>
           </div>
           <dl class="par">
-            <dt>Problem</dt><dd>The AI budget is fixed.</dd>
-            <dt>Decision</dt><dd>Machine-learning filters (XGBoost, and a model built on the fast LLM’s probabilities) decide which postings need the strong LLM. They ran in shadow mode first and switch on only if pre-set limits on missed high-value postings hold.</dd>
+            <dt>Problem</dt><dd>Each call to a paid AI model costs money, and the budget is fixed. Sending every posting to the strongest model would exceed it.</dd>
+            <dt>Decision</dt><dd>Items pass through a cascade of filters, each more costly than the last and applied only to the items the previous stage keeps. First, code removes duplicates and applies fixed rules. A fast LLM then screens the remaining items. Next, machine-learning filters decide which of these need a full evaluation. Only those items go to a stronger LLM, which evaluates them against the criteria. The stronger LLM returns its assessment in a fixed structured format, which code checks before the result is accepted.</dd>
             
             <dt>Evidence</dt><dd>In a pilot on 691 postings, about two-thirds of strong-LLM calls were avoided with no high-value posting missed. The first filter on its own saved little; most of the gain came from the second.</dd>
           </dl>
