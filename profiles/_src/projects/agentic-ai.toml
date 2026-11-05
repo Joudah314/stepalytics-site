@@ -1,12 +1,10 @@
+
 slug = 'agentic-ai'
 person = 'ibrahim-joudah'
 updated = '2026-10-23'
 title = 'Agentic AI monitoring and decision-support platform: how it works'
 summary = 'An agentic AI platform that watches the Australian labour market around the clock: it detects new postings across thousands of organisations, filters and evaluates them with machine learning and LLMs, drafts grounded documents, and hands a short list to a person who decides.'
 description = 'How Ibrahim Joudah’s agentic AI monitoring and decision-support platform works, stage by stage: LLM screening and evaluation, machine-learning filters tested in shadow mode, checks against human judgement, grounded text generation and Bayesian timing.'
-underneath = ''
-next = []
-learned = []
 labels.glance = 'Core capabilities'
 labels.system = 'System architecture'
 labels.stages = 'How it was built, stage by stage'
@@ -15,7 +13,6 @@ labels.decision = 'Decision'
 labels.rejected = 'Rejected'
 labels.evidence = 'Evidence'
 labels.stage = 'Stage'
-labels.underneath = ''
 labels.next = 'Next'
 labels.learned = 'What I learned'
 glance = [
@@ -24,13 +21,13 @@ glance = [
 	{ value = 'Human oversight', text = 'The platform does the monitoring, filtering and drafting, so a person can focus on judgement: they review every shortlist and draft, make every decision, and their blind grades keep the AI’s ratings in check' },
 ]
 stages = [
-	{ title = 'Set the ground truth before generating text', problem = 'Text an LLM drafts about real people and organisations must never claim anything untrue.', decision = 'Before any code, a verified knowledge base of about 150 statements, each approved, and a list of claims never to make. Drafts are built only from the knowledge base, and the platform enforces both in code, not only in the prompt.', rejected = 'Letting an LLM write freely and checking afterwards.', evidence = '' },
-	{ title = 'Design first, then build', problem = 'A system with many parts can drift into inconsistency.', decision = 'A written design with fixed contracts between parts (one database, one message queue, each part with one owner), automated tests and secret scanning on every change, and review before shared code changes.', rejected = '', evidence = 'An independent review before launch found 2 blocking and 12 minor issues; all were fixed before going live.' },
-	{ title = 'Screen cheaply, evaluate carefully', problem = 'Most postings do not meet the criteria, and reading every one with a strong LLM is slow and costly.', decision = 'A cascade. Duplicates are removed and fixed rules applied in code, a fast LLM screens, and a stronger LLM evaluates the rest against the criteria, returning structured output that is validated in code.', rejected = 'One strong model on everything.', evidence = '' },
-	{ title = 'Go live with a person deciding', problem = 'Fully automated actions on real-world postings carry real risk.', decision = 'The platform recommends and drafts; a person reviews every draft and takes every action.', rejected = '', evidence = 'A review of the first 30 drafts found no claim outside the approved facts.' },
-	{ title = 'Check the AI against people', problem = 'An LLM’s ratings can’t be trusted just because they sound reasonable.', decision = 'I grade postings blind, and a weekly sample compares my grades with the AI’s. Any change to the evaluator restarts the comparison.', rejected = '', evidence = '' },
-	{ title = 'Cut paid calls without missing what matters', problem = 'The AI budget is fixed.', decision = 'Machine-learning filters (XGBoost, and a model built on the fast LLM’s probabilities) decide which postings need the strong LLM. They ran in shadow mode first and switch on only if pre-set limits on missed high-value postings hold.', rejected = '', evidence = 'In a pilot on 691 postings, about two-thirds of strong-LLM calls were avoided with no high-value posting missed. The first filter on its own saved little; most of the gain came from the second.' },
-	{ title = 'Check at the right time, at scale', problem = 'New postings appear at different times across thousands of organisations’ own sites, and checking everything constantly wastes load and budget.', decision = 'A Bayesian model of when each source posts decides when to check it, and coverage includes the sites of thousands of organisations, checked under a load limit. Data-quality checks catch bad data: decoy links on some sites, which produced thousands of false postings, were detected and excluded.', rejected = '', evidence = '' },
+	{ title = 'Set the ground truth before generating text', problem = 'Text an LLM drafts about real people and organisations must never claim anything untrue.', decision = 'Before any code, a verified knowledge base of about 150 statements, each approved, and a list of claims never to make. Drafts are built only from the knowledge base, and the platform enforces both in code, not only in the prompt.' },
+	{ title = 'Design first, then build', problem = 'A system with many parts can drift into inconsistency.', decision = 'The system follows a written design that fixes how its components interact. All components share one database and one message queue, and each component has a single owner. Every change is automatically tested. Any change to code that several components depend on is reviewed before it is accepted.' },
+	{ title = 'Screen cheaply, evaluate carefully', problem = 'Most postings do not meet the criteria, and reading every one with a strong LLM is slow and costly.', decision = 'Items pass through a cascade of filters, each more costly than the last and applied only to the items the previous stage keeps. First, code removes duplicates and applies fixed rules. Next, a machine-learning model filters out items that are unlikely to be relevant. A fast LLM then screens the remaining items, and a stronger LLM evaluates those that pass against the criteria. The stronger LLM returns its assessment in a fixed structured format, which code checks before the result is accepted.' },
+	{ title = 'Go live with a person deciding', problem = 'Fully automated actions on real-world postings carry real risk.', decision = 'The platform recommends and drafts; a person reviews every draft and takes every action.', evidence = 'A review of the first 30 drafts found no claim outside the approved facts.' },
+	{ title = 'Check the AI against people', problem = 'An LLM’s ratings can’t be trusted just because they sound reasonable.', decision = 'I grade postings blind, and a weekly sample compares my grades with the AI’s. Any change to the evaluator restarts the comparison.' },
+	{ title = 'Cut paid calls without missing what matters', problem = 'The AI budget is fixed.', decision = 'Machine-learning filters (XGBoost, and a model built on the fast LLM’s probabilities) decide which postings need the strong LLM. They ran in shadow mode first and switch on only if pre-set limits on missed high-value postings hold.', evidence = 'In a pilot on 691 postings, about two-thirds of strong-LLM calls were avoided with no high-value posting missed. The first filter on its own saved little; most of the gain came from the second.' },
+	{ title = 'Check at the right time, at scale', problem = 'New postings appear at different times across thousands of organisations’ own sites, and checking everything constantly wastes load and budget.', decision = 'A Bayesian model of when each source posts decides when to check it, and coverage includes the sites of thousands of organisations, checked under a load limit. Data-quality checks catch bad data: decoy links on some sites, which produced thousands of false postings, were detected and excluded.' },
 ]
 diagram.title = 'Diagram of the system today'
 diagram.description = 'Postings flow from left to right, from cheaper checks to costlier ones: data sources, then clean-up and rules in code, then a machine-learning filter, then a fast LLM screen, then a strong LLM evaluation, and finally a person, reviewing and deciding. Approved facts and never-claim rules feed the evaluation and the generated drafts. Two loops feed back: blind human grades go back to the strong LLM evaluation, and a Bayesian timing model decides when each source is checked. Monitoring, cost limits, backups and tests run underneath everything.'
