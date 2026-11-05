@@ -126,7 +126,7 @@
             <dt>Problem</dt><dd>Each call to a paid AI model costs money, and the budget is fixed. Sending every posting to the strongest model would exceed it.</dd>
             <dt>Decision</dt><dd>Items pass through a cascade of filters, each more costly than the last and applied only to the items the previous stage keeps. First, code removes duplicates and applies fixed rules. A fast LLM then screens the remaining items. Next, machine-learning filters decide which of these need a full evaluation. Only those items go to a stronger LLM, which evaluates them against the criteria. The stronger LLM returns its assessment in a fixed structured format, which code checks before the result is accepted.</dd>
             
-            <dt>Evidence</dt><dd>In a pilot on 691 postings, about two-thirds of strong-LLM calls were avoided with no high-value posting missed. The first filter on its own saved little; most of the gain came from the second.</dd>
+            
           </dl>
         </li>
         <li class="stage" id="stage-7">
