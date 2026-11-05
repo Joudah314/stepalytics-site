@@ -65,7 +65,7 @@
           <dl class="par">
             <dt>Problem</dt><dd>Text an LLM drafts about real people and organisations must never claim anything untrue.</dd>
             <dt>Decision</dt><dd>Before any code, a verified knowledge base of about 150 statements, each approved, and a list of claims never to make. Drafts are built only from the knowledge base, and the platform enforces both in code, not only in the prompt.</dd>
-            <dt>Rejected</dt><dd>Letting an LLM write freely and checking afterwards.</dd>
+            
             
           </dl>
         </li>
@@ -76,9 +76,9 @@
           </div>
           <dl class="par">
             <dt>Problem</dt><dd>A system with many parts can drift into inconsistency.</dd>
-            <dt>Decision</dt><dd>A written design with fixed contracts between parts (one database, one message queue, each part with one owner), automated tests and secret scanning on every change, and review before shared code changes.</dd>
+            <dt>Decision</dt><dd>The system follows a written design that fixes how its components interact. All components share one database and one message queue, and each component has a single owner. Every change is automatically tested. Any change to code that several components depend on is reviewed before it is accepted.</dd>
             
-            <dt>Evidence</dt><dd>An independent review before launch found 2 blocking and 12 minor issues; all were fixed before going live.</dd>
+            
           </dl>
         </li>
         <li class="stage" id="stage-3">
@@ -88,8 +88,8 @@
           </div>
           <dl class="par">
             <dt>Problem</dt><dd>Most postings do not meet the criteria, and reading every one with a strong LLM is slow and costly.</dd>
-            <dt>Decision</dt><dd>A cascade. Duplicates are removed and fixed rules applied in code, a fast LLM screens, and a stronger LLM evaluates the rest against the criteria, returning structured output that is validated in code.</dd>
-            <dt>Rejected</dt><dd>One strong model on everything.</dd>
+            <dt>Decision</dt><dd>Items pass through a cascade of filters, each more costly than the last and applied only to the items the previous stage keeps. First, code removes duplicates and applies fixed rules. Next, a machine-learning model filters out items that are unlikely to be relevant. A fast LLM then screens the remaining items, and a stronger LLM evaluates those that pass against the criteria. The stronger LLM returns its assessment in a fixed structured format, which code checks before the result is accepted.</dd>
+            
             
           </dl>
         </li>
