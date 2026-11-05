@@ -29,23 +29,21 @@
 <main id="main" class="project-page">
   <section class="shell pp-head" aria-labelledby="title">
     <h1 id="title">Agentic AI monitoring and decision-support platform: how it works</h1>
-    <p class="value">An agentic AI platform that watches the Australian labour market around the clock: it detects new postings across thousands of organisations, triages them with machine learning and LLMs, drafts grounded documents, and hands a short list to a person who decides.</p>
-    <p class="meta">Running since October 2026 · Last reviewed <time datetime="2026-10-23">23 October 2026</time></p>
-    <p class="private">Designed, built and run by me. The implementation is private; a walkthrough is available on request.</p>
+    <p class="value">An agentic AI platform that watches the Australian labour market around the clock: it detects new postings across thousands of organisations, filters and evaluates them with machine learning and LLMs, drafts grounded documents, and hands a short list to a person who decides.</p>
   </section>
 
   <section class="shell block" aria-labelledby="glance-h">
-    <h2 id="glance-h">At a glance</h2>
+    <h2 id="glance-h">Core capabilities</h2>
     <ul class="glance">
-      <li><span class="kpi">About two-thirds</span><span class="kpi-label">of strong-LLM calls avoided in a pilot on 691 postings, with no high-value posting missed compared with the full evaluation</span></li>
-      <li><span class="kpi">1,300+</span><span class="kpi-label">automated tests run on every change</span></li>
-      <li><span class="kpi">Every action</span><span class="kpi-label">is decided by a person; the platform recommends and drafts, and never acts on its own</span></li>
+      <li><span class="kpi">Real-time monitoring</span><span class="kpi-label">Watches thousands of organisations’ websites and data feeds around the clock and detects new postings within minutes; a Bayesian model decides when to check each source</span></li>
+      <li><span class="kpi">Cost-optimised filtering</span><span class="kpi-label">Each posting moves from the cheapest checks to the costliest: rules in code, a machine-learning filter, a fast LLM, then a strong LLM, so careful evaluation is spent only where it matters</span></li>
+      <li><span class="kpi">Human oversight</span><span class="kpi-label">The platform does the monitoring, filtering and drafting, so a person can focus on judgement: they review every shortlist and draft, make every decision, and their blind grades keep the AI’s ratings in check</span></li>
       
     </ul>
   </section>
 
   <section class="shell block" aria-labelledby="system-h">
-    <h2 id="system-h">The system today</h2>
+    <h2 id="system-h">System architecture</h2>
     <figure class="diagram">
       <svg class="dg dg-wide" viewBox="0 0 1104 356" role="img" aria-labelledby="dg-t-w dg-d-w"><title id="dg-t-w">Diagram of the system today</title><desc id="dg-d-w">Postings flow from left to right, from cheaper checks to costlier ones: data sources, then clean-up and rules in code, then a machine-learning filter, then a fast LLM screen, then a strong LLM evaluation, and finally a person, reviewing and deciding. Approved facts and never-claim rules feed the evaluation and the generated drafts. Two loops feed back: blind human grades go back to the strong LLM evaluation, and a Bayesian timing model decides when each source is checked. Monitoring, cost limits, backups and tests run underneath everything.</desc><defs><marker id="mw-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="dg-head"/></marker></defs><g class="dg-node"><rect class="dg-box" x="10" y="120" width="150" height="70" rx="6"/><text class="dg-text" x="85" y="155"><tspan x="85" dy="0.0em">Data sources</tspan></text></g><g class="dg-node"><rect class="dg-box" x="190" y="120" width="150" height="70" rx="6"/><text class="dg-text" x="265" y="155"><tspan x="265" dy="-0.6em">Clean-up and</tspan><tspan x="265" dy="1.2em">rules in code</tspan></text></g><g class="dg-node"><rect class="dg-box" x="370" y="120" width="150" height="70" rx="6"/><text class="dg-text" x="445" y="155"><tspan x="445" dy="-0.6em">Machine-learning</tspan><tspan x="445" dy="1.2em">filter</tspan></text></g><g class="dg-node"><rect class="dg-box" x="550" y="120" width="150" height="70" rx="6"/><text class="dg-text" x="625" y="155"><tspan x="625" dy="-0.6em">Fast LLM</tspan><tspan x="625" dy="1.2em">screen</tspan></text></g><g class="dg-node"><rect class="dg-box" x="730" y="120" width="150" height="70" rx="6"/><text class="dg-text" x="805" y="155"><tspan x="805" dy="-0.6em">Strong LLM</tspan><tspan x="805" dy="1.2em">evaluation</tspan></text></g><g class="dg-node"><rect class="dg-box dg-human" x="910" y="120" width="180" height="70" rx="6"/><text class="dg-text" x="1000" y="155"><tspan x="1000" dy="-0.6em">A person:</tspan><tspan x="1000" dy="1.2em">review and decide</tspan></text></g><path class="dg-arrow" d="M160,155 H186" marker-end="url(#mw-arrow)"/><path class="dg-arrow" d="M340,155 H366" marker-end="url(#mw-arrow)"/><path class="dg-arrow" d="M520,155 H546" marker-end="url(#mw-arrow)"/><path class="dg-arrow" d="M700,155 H726" marker-end="url(#mw-arrow)"/><path class="dg-arrow" d="M880,155 H906" marker-end="url(#mw-arrow)"/><path class="dg-axis" d="M10,96 H690" marker-end="url(#mw-arrow)"/><text class="dg-note" x="10" y="82">cheaper checks first, costlier last</text><path class="dg-arrow" d="M1000,120 V70 H805 V114" marker-end="url(#mw-arrow)"/><g class="dg-node"><text class="dg-text dg-loop" x="902" y="56">Blind human grades</text></g><g class="dg-node"><rect class="dg-box dg-side" x="10" y="232" width="150" height="72" rx="6"/><text class="dg-text" x="85" y="268"><tspan x="85" dy="-0.6em">Bayesian</tspan><tspan x="85" dy="1.2em">timing model</tspan></text></g><path class="dg-arrow" d="M85,232 V196" marker-end="url(#mw-arrow)"/><g class="dg-node"><rect class="dg-box dg-side" x="690" y="232" width="230" height="72" rx="6"/><text class="dg-text" x="805" y="268"><tspan x="805" dy="-1.2em">Approved facts</tspan><tspan x="805" dy="1.2em">and never-claim</tspan><tspan x="805" dy="1.2em">rules</tspan></text></g><path class="dg-arrow" d="M805,232 V196" marker-end="url(#mw-arrow)"/><g class="dg-node"><rect class="dg-band" x="10" y="318" width="1080" height="30" rx="6"/><text class="dg-text" x="550" y="333">Running underneath: monitoring · cost limits · backups · tests</text></g></svg>
 
@@ -157,7 +155,7 @@
 
 <footer class="site-footer">
   <div class="shell">
-    <p><a href="../../">Ibrahim Joudah</a> · Updated <time datetime="2026-10-23">23 October 2026</time> · <a href="../../../../">StepAlytics</a></p>
+    <p><a href="../../">Ibrahim Joudah</a> · <a href="../../../../">StepAlytics</a></p>
   </div>
 </footer>
 

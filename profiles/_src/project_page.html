@@ -30,8 +30,6 @@
   <section class="shell pp-head" aria-labelledby="title">
     <h1 id="title">{{title}}</h1>
     <p class="value">{{{summary_html}}}</p>
-    <p class="meta">{{labels.running_since}} {{since}} · {{labels.last_reviewed}} <time datetime="{{updated_iso}}">{{updated_human}}</time></p>
-    <p class="private">{{{private_line_html}}}</p>
   </section>
 
   <section class="shell block" aria-labelledby="glance-h">
@@ -93,7 +91,7 @@
 
 <footer class="site-footer">
   <div class="shell">
-    <p><a href="../../">{{person_name}}</a> · {{labels.updated}} <time datetime="{{updated_iso}}">{{updated_human}}</time> · <a href="../../../../">{{site.site_name}}</a></p>
+    <p><a href="../../">{{person_name}}</a> · <a href="../../../../">{{site.site_name}}</a></p>
   </div>
 </footer>
 {{#analytics}}<script data-goatcounter="https://{{goatcounter_code}}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>{{/analytics}}

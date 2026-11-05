@@ -3,7 +3,7 @@ person = 'ibrahim-joudah'
 updated = '2026-10-23'
 since = 'October 2026'
 title = 'Agentic AI monitoring and decision-support platform: how it works'
-summary = 'An agentic AI platform that watches the Australian labour market around the clock: it detects new postings across thousands of organisations, triages them with machine learning and LLMs, drafts grounded documents, and hands a short list to a person who decides.'
+summary = 'An agentic AI platform that watches the Australian labour market around the clock: it detects new postings across thousands of organisations, filters and evaluates them with machine learning and LLMs, drafts grounded documents, and hands a short list to a person who decides.'
 private_line = 'Designed, built and run by me. The implementation is private; a walkthrough is available on request.'
 description = 'How Ibrahim Joudah’s agentic AI monitoring and decision-support platform works, stage by stage: LLM screening and evaluation, machine-learning filters tested in shadow mode, checks against human judgement, grounded text generation and Bayesian timing.'
 underneath = ''
@@ -11,8 +11,8 @@ next = []
 learned = []
 labels.running_since = 'Running since'
 labels.last_reviewed = 'Last reviewed'
-labels.glance = 'At a glance'
-labels.system = 'The system today'
+labels.glance = 'Core capabilities'
+labels.system = 'System architecture'
 labels.stages = 'How it was built, stage by stage'
 labels.problem = 'Problem'
 labels.decision = 'Decision'
@@ -24,9 +24,9 @@ labels.next = 'Next'
 labels.learned = 'What I learned'
 labels.updated = 'Updated'
 glance = [
-	{ value = 'About two-thirds', text = 'of strong-LLM calls avoided in a pilot on 691 postings, with no high-value posting missed compared with the full evaluation' },
-	{ value = '1,300+', text = 'automated tests run on every change' },
-	{ value = 'Every action', text = 'is decided by a person; the platform recommends and drafts, and never acts on its own' },
+	{ value = 'Real-time monitoring', text = 'Watches thousands of organisations’ websites and data feeds around the clock and detects new postings within minutes; a Bayesian model decides when to check each source' },
+	{ value = 'Cost-optimised filtering', text = 'Each posting moves from the cheapest checks to the costliest: rules in code, a machine-learning filter, a fast LLM, then a strong LLM, so careful evaluation is spent only where it matters' },
+	{ value = 'Human oversight', text = 'The platform does the monitoring, filtering and drafting, so a person can focus on judgement: they review every shortlist and draft, make every decision, and their blind grades keep the AI’s ratings in check' },
 ]
 stages = [
 	{ title = 'Set the ground truth before generating text', problem = 'Text an LLM drafts about real people and organisations must never claim anything untrue.', decision = 'Before any code, a verified knowledge base of about 150 statements, each approved, and a list of claims never to make. Drafts are built only from the knowledge base, and the platform enforces both in code, not only in the prompt.', rejected = 'Letting an LLM write freely and checking afterwards.', evidence = '' },
