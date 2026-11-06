@@ -84,11 +84,11 @@
         <li class="stage" id="stage-3">
           <div class="stage-head">
             <span class="stage-no" aria-hidden="true">3</span>
-            <h3><span class="visually-hidden">Stage 3: </span>Screen cheaply, evaluate carefully</h3>
+            <h3><span class="visually-hidden">Stage 3: </span>Check each source at the right time</h3>
           </div>
           <dl class="par">
-            <dt>Problem</dt><dd>Most postings do not meet the criteria, and reading every one with a strong LLM is slow and costly.</dd>
-            <dt>Decision</dt><dd>Items pass through a cascade of filters, each more costly than the last and applied only to the items the previous stage keeps. First, code removes duplicates and applies fixed rules. Next, a machine-learning model filters out items that are unlikely to be relevant. A fast LLM then screens the remaining items, and a stronger LLM evaluates those that pass against the criteria. The stronger LLM returns its assessment in a fixed structured format, which code checks before the result is accepted.</dd>
+            <dt>Problem</dt><dd>Thousands of organisations post on their own websites, each on its own schedule. Checking every site constantly would overload those sites and waste the budget. Checking too rarely would miss new postings.</dd>
+            <dt>Decision</dt><dd>A Bayesian model estimates how often each organisation posts and checks busier sites more often, timing the checks to the hours when postings tend to appear, with a limit on how often any site is visited.</dd>
             
             
           </dl>
@@ -96,11 +96,11 @@
         <li class="stage" id="stage-4">
           <div class="stage-head">
             <span class="stage-no" aria-hidden="true">4</span>
-            <h3><span class="visually-hidden">Stage 4: </span>Keep a person in control of every action</h3>
+            <h3><span class="visually-hidden">Stage 4: </span>Screen cheaply, evaluate carefully</h3>
           </div>
           <dl class="par">
-            <dt>Problem</dt><dd>The platform deals with real postings. If it acted on its own, a single mistake, such as a false claim in a draft, would go out in a person’s name and could not be undone.</dd>
-            <dt>Decision</dt><dd>The platform only recommends postings and drafts applications. A person reads every draft, corrects it where needed, and decides whether to send it. The platform never submits anything itself.</dd>
+            <dt>Problem</dt><dd>Most postings do not meet the criteria, and reading every one with a strong LLM is slow and costly on a fixed budget.</dd>
+            <dt>Decision</dt><dd>Items pass through a cascade of filters, each more costly than the last and applied only to the items the previous stage keeps. First, code removes duplicates and applies fixed rules. Next, a machine-learning model filters out items that are unlikely to be relevant. A fast LLM then screens the remaining items, and a second machine-learning model, tested first in shadow mode, decides which of those can skip the strong LLM, within fixed limits on how many good postings it may miss. A stronger LLM evaluates the rest against the criteria. The stronger LLM returns its assessment in a fixed structured format, which code checks before the result is accepted.</dd>
             
             
           </dl>
@@ -108,35 +108,11 @@
         <li class="stage" id="stage-5">
           <div class="stage-head">
             <span class="stage-no" aria-hidden="true">5</span>
-            <h3><span class="visually-hidden">Stage 5: </span>Check the AI’s ratings against a person’s</h3>
+            <h3><span class="visually-hidden">Stage 5: </span>Keep a person in charge, and check the AI against them</h3>
           </div>
           <dl class="par">
-            <dt>Problem</dt><dd>The AI’s rating of a posting can sound convincing and still be wrong, so it has to be checked against an independent judgement.</dd>
-            <dt>Decision</dt><dd>I rate postings myself without seeing the AI’s rating first. Each week, a sample of postings rated by both of us is compared to measure how often we agree.</dd>
-            
-            
-          </dl>
-        </li>
-        <li class="stage" id="stage-6">
-          <div class="stage-head">
-            <span class="stage-no" aria-hidden="true">6</span>
-            <h3><span class="visually-hidden">Stage 6: </span>Reduce paid AI calls without missing good postings</h3>
-          </div>
-          <dl class="par">
-            <dt>Problem</dt><dd>Each call to a paid AI model costs money, and the budget is fixed. Sending every posting to the strongest model would exceed it.</dd>
-            <dt>Decision</dt><dd>A second machine-learning model, trained on the fast LLM’s scores, decides which postings can skip the strong LLM’s evaluation. It ran first in shadow mode, where its decisions were recorded but not acted on, and it works under fixed limits on how many good postings it may miss.</dd>
-            
-            
-          </dl>
-        </li>
-        <li class="stage" id="stage-7">
-          <div class="stage-head">
-            <span class="stage-no" aria-hidden="true">7</span>
-            <h3><span class="visually-hidden">Stage 7: </span>Check at the right time, at scale</h3>
-          </div>
-          <dl class="par">
-            <dt>Problem</dt><dd>Thousands of organisations post on their own websites, each on its own schedule. Checking every site constantly would overload those sites and waste the budget. Checking too rarely would miss new postings.</dd>
-            <dt>Decision</dt><dd>A Bayesian model estimates how often each organisation posts and checks busier sites more often, timing the checks to the hours when postings tend to appear, with a limit on how often any site is visited.</dd>
+            <dt>Problem</dt><dd>The platform deals with real postings in a person’s name. One unchecked mistake, such as a false claim in a draft, could not be undone, and an AI rating can sound convincing and still be wrong.</dd>
+            <dt>Decision</dt><dd>The platform only recommends postings and drafts applications. A person reads every draft, corrects it where needed and decides whether to send it; the platform never submits anything itself. The person also rates postings without seeing the AI’s rating first, and each week a sample rated by both is compared to measure how often they agree.</dd>
             
             
           </dl>
