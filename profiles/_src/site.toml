@@ -10,5 +10,6 @@ language = "en-AU"
 #   1. create a GoatCounter site (https://www.goatcounter.com/signup), e.g. code "stepalytics";
 #   2. put that code below and set enabled = true;
 #   3. run  python profiles/_src/build.py  and publish.
-enabled = false
-goatcounter_code = ""
+# Turned on 6 Nov 2026 (account "stepalytics"; dashboard https://stepalytics.goatcounter.com).
+enabled = true
+goatcounter_code = "stepalytics"
