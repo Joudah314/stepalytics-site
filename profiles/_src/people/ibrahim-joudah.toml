@@ -50,9 +50,9 @@ og_image.alt = 'Ibrahim Joudah – Data Scientist, Statistician & Applied AI Spe
 cv.file = 'Ibrahim-Joudah-CV.pdf'
 cv.pages = 3.0
 cv.date = 'November 2026'
-# TODO: replace VIDEO_ID with the real YouTube ID (this is the only place the link is set)
+# The CV video (unlisted, published 8 Nov 2026); this is the only place the link is set
 video_link.label = 'Video introduction (3 min)'
-video_link.url = 'https://youtu.be/VIDEO_ID'
+video_link.url = 'https://youtu.be/Mkys87RaiOs'
 structured_data.same_as = [
 	'https://www.linkedin.com/in/ibrahim-joudah/',
 	'https://github.com/Joudah314',
