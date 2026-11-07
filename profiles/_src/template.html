@@ -56,6 +56,7 @@
       <a class="button primary" href="mailto:{{contact.email}}">{{labels.email_me}}</a>
       <a class="button" href="{{contact.linkedin}}">LinkedIn</a>
       {{#cv}}<a class="button" href="{{file}}">CV (PDF)</a>{{/cv}}
+      {{#video_link}}<a class="button" href="{{url}}">{{label}}</a>{{/video_link}}
     </div>
   </section>
 
@@ -194,6 +195,7 @@
       <li><a href="{{contact.linkedin}}">LinkedIn</a></li>
       <li><a href="{{contact.github}}">GitHub</a></li>
       {{#cv}}<li><a href="{{file}}">CV (PDF)</a></li>{{/cv}}
+      {{#video_link}}<li><a href="{{url}}">{{label}}</a></li>{{/video_link}}
     </ul>
   </section>
 </main>
