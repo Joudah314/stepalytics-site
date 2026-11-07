@@ -5,6 +5,8 @@
 For every people/<slug>.toml it writes
     profiles/<slug>/index.html      the profile page (from template.html)
     <short_path>/index.html         a redirect to it, if the person has a short_path (from redirect.html)
+    <short_path>/video/index.html   a page that forwards to video_redirect.target, if set (from video_redirect.html;
+                                    the person's video is changed there and nowhere else)
 and for every projects/<slug>.toml (a project's page, owned by `person`)
     profiles/<person>/projects/<slug>/index.html   (from project_page.html, a running system told in stages, or
                                                     study_page.html when kind = "study": a finished study told
@@ -178,6 +180,20 @@ def file_size_label(path: Path) -> str:
     return f"{kb:,.0f} KB" if kb < 1024 else f"{kb / 1024:.1f} MB"
 
 
+def image_size(path: Path) -> tuple[int, int]:
+    """Width and height of a JPEG or PNG, read from its header (no Pillow needed)."""
+    data = path.read_bytes()
+    if data[:8] == b"\x89PNG\r\n\x1a\n":
+        return int.from_bytes(data[16:20], "big"), int.from_bytes(data[20:24], "big")
+    i = 2
+    while data[:2] == b"\xff\xd8" and i + 9 < len(data):
+        marker, length = data[i + 1], int.from_bytes(data[i + 2:i + 4], "big")
+        if 0xC0 <= marker <= 0xCF and marker not in (0xC4, 0xC8, 0xCC):   # a start-of-frame segment
+            return int.from_bytes(data[i + 7:i + 9], "big"), int.from_bytes(data[i + 5:i + 7], "big")
+        i += 2 + length
+    raise SystemExit(f"{path.name}: not a JPEG or PNG")
+
+
 def jsonld(site: dict, p: dict, page_url: str) -> str:
     person = {
         "@type": "Person",
@@ -253,7 +269,7 @@ def whole_numbers(value):
     return value
 
 
-def build_person(site: dict, path: Path, template: str, redirect_template: str) -> list[Path]:
+def build_person(site: dict, path: Path, template: str, redirect_template: str, video_template: str) -> list[Path]:
     raw = path.read_text(encoding="utf-8")
     p = whole_numbers(tomllib.loads(raw))
     slug = p["slug"]
@@ -320,6 +336,26 @@ def build_person(site: dict, path: Path, template: str, redirect_template: str) 
         data["target_relative"] = "../" * len(Path(short).parts) + f"profiles/{slug}/"
         out = short_dir / "index.html"
         out.write_text(render(redirect_template, data), encoding="utf-8", newline="\n")
+        written.append(out)
+
+    video = p.get("video_redirect")
+    if video:
+        # <short_path>/video/ forwards to the person's video; video_redirect.target is the only place it is set,
+        # and the meta refresh, the script, the fallback link and the canonical link all take it from there.
+        if not short:
+            raise SystemExit(f"{slug}: video_redirect needs short_path (its page is <short_path>/video/)")
+        target = video.get("target", "")
+        if not re.fullmatch(r"https://[^\s\"'<>\\]+", target):
+            raise SystemExit(f"{slug}: video_redirect.target must be a single https:// address")
+        video_dir = ROOT / short / "video"
+        thumb = video_dir / video["thumbnail"]
+        if not thumb.is_file():
+            raise SystemExit(f"{slug}: file missing: {short}/video/{video['thumbnail']}")
+        data["video_page_url"] = f"{site['base_url']}/{short}/video/"
+        data["video_target_js"] = json.dumps(target).replace("</", "<\\/")
+        data["video_thumb_width"], data["video_thumb_height"] = image_size(thumb)
+        out = video_dir / "index.html"
+        out.write_text(render(video_template, data), encoding="utf-8", newline="\n")
         written.append(out)
     return written
 
@@ -433,13 +469,14 @@ def main() -> int:
     site["base_url"] = site["base_url"].rstrip("/")
     template = (SRC / "template.html").read_text(encoding="utf-8")
     redirect_template = (SRC / "redirect.html").read_text(encoding="utf-8")
+    video_template = (SRC / "video_redirect.html").read_text(encoding="utf-8")
     project_template = (SRC / "project_page.html").read_text(encoding="utf-8")
     people = sorted((SRC / "people").glob("*.toml"))
     if not people:
         print("no content files in profiles/_src/people/")
         return 1
     for path in people:
-        for out in build_person(site, path, template, redirect_template):
+        for out in build_person(site, path, template, redirect_template, video_template):
             print("wrote", out.relative_to(ROOT).as_posix())
     for path in sorted((SRC / "projects").glob("*.toml")):
         print("wrote", build_project(site, path, project_template).relative_to(ROOT).as_posix())

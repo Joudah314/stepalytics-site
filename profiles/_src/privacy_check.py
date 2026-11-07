@@ -81,6 +81,7 @@ def check_all() -> list[str]:
         built = [ROOT / "profiles" / person["slug"] / "index.html"]
         if person.get("short_path"):
             built.append(ROOT / person["short_path"] / "index.html")
+            built.append(ROOT / person["short_path"] / "video" / "index.html")
         for page in built:
             if page.is_file():
                 problems += scan(page_text(page.read_text(encoding="utf-8")), allowed,

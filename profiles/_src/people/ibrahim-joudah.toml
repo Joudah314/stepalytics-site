@@ -44,15 +44,24 @@ labels.updated = 'Updated'
 labels.transcript = 'Read the transcript'
 photo.fallback = 'photo-480.jpg'
 photo.webp_srcset = 'photo-240.webp 240w, photo-480.webp 480w, photo-720.webp 720w'
-photo.alt = 'Ibrahim Joudah, smiling, in a white shirt'
+photo.alt = 'Ibrahim Joudah, smiling, in a navy suit jacket and white shirt'
 og_image.file = 'og-image.jpg'
 og_image.alt = 'Ibrahim Joudah – Data Scientist, Statistician & Applied AI Specialist'
 cv.file = 'Ibrahim-Joudah-CV.pdf'
 cv.pages = 3.0
 cv.date = 'November 2026'
-# The CV video (unlisted, published 8 Nov 2026); this is the only place the link is set
+# The profile's video button and Contact entry link to his own short address, which forwards to the video below
 video_link.label = 'Video introduction (3 min)'
-video_link.url = 'https://youtu.be/Mkys87RaiOs'
+video_link.url = 'https://stepalytics.com/ibrahim-joudah/video/'
+# HIS VIDEO: video_redirect.target is the ONE place to change it. build.py writes ibrahim-joudah/video/index.html
+# (https://stepalytics.com/ibrahim-joudah/video/), which forwards there at once. To switch videos, change the
+# target, rebuild and push. The preview picture is ibrahim-joudah/video/<thumbnail> (1280 x 720).
+video_redirect.target = 'https://youtu.be/ycIqCNWgw_k'
+video_redirect.title = 'Ibrahim Joudah: video introduction'
+video_redirect.description = 'A three-minute introduction from Ibrahim Joudah, data scientist and statistician in Sydney.'
+video_redirect.link_text = 'Watch Ibrahim Joudah’s video introduction'
+video_redirect.thumbnail = 'thumbnail.jpg'
+video_redirect.thumbnail_alt = 'Ibrahim Joudah, data science, AI and statistics: video introduction'
 structured_data.same_as = [
 	'https://www.linkedin.com/in/ibrahim-joudah/',
 	'https://github.com/Joudah314',

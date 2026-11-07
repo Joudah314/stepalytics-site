@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="{{site.language}}">
+<head>
+<meta charset="utf-8">
+<!-- Built by profiles/_src/build.py from video_redirect.target in profiles/_src/people/{{slug}}.toml: change the video there, then rebuild. -->
+<!-- (template: profiles/_src/video_redirect.html) -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{video_redirect.title}}</title>
+<link rel="canonical" href="{{video_redirect.target}}">
+<meta name="robots" content="noindex">
+<meta name="description" content="{{video_redirect.description}}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{site.site_name}}">
+<meta property="og:title" content="{{video_redirect.title}}">
+<meta property="og:description" content="{{video_redirect.description}}">
+<meta property="og:url" content="{{video_page_url}}">
+<meta property="og:image" content="{{video_page_url}}{{video_redirect.thumbnail}}">
+<meta property="og:image:width" content="{{video_thumb_width}}">
+<meta property="og:image:height" content="{{video_thumb_height}}">
+<meta property="og:image:alt" content="{{video_redirect.thumbnail_alt}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta http-equiv="refresh" content="0; url={{video_redirect.target}}">
+<script>location.replace({{{video_target_js}}});</script>
+<style>body{font:1rem/1.5 system-ui,sans-serif;margin:2rem auto;max-width:36rem;padding:0 1rem}</style>
+</head>
+<body>
+<p><a href="{{video_redirect.target}}">{{video_redirect.link_text}}</a></p>
+</body>
+</html>
