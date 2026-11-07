@@ -214,7 +214,7 @@
         <dl class="par">
           <dt>Problem</dt><dd>How many people will qualify for a new consumer survey, when the topic has no past data to learn from?</dd>
           <dt>What I did</dt><dd>Asked an LLM for a first estimate from the question wording and location alone, and treated it as data to correct rather than as truth. An R and Python pipeline then combined those estimates with text embeddings and machine learning (XGBoost).</dd>
-          <dt>Result</dt><dd>Prediction error (RMSE) 21% lower than the calibrated LLM estimate alone, in cross-validation on held-out categories. In business terms: how many people a survey needs to recruit to fill its quota, and a rule that flags qualifying questions few people are likely to pass.</dd>
+          <dt>Result</dt><dd>Prediction error (RMSE) 65% lower than predicting the average rate, in cross-validation on held-out categories. In business terms: how many people a survey needs to recruit to fill its quota, and a rule that flags qualifying questions few people are likely to pass.</dd>
         </dl>
         
         
