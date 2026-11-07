@@ -56,7 +56,7 @@
       <a class="button primary" href="mailto:{{contact.email}}">{{labels.email_me}}</a>
       <a class="button" href="{{contact.linkedin}}">LinkedIn</a>
       {{#cv}}<a class="button" href="{{file}}">CV (PDF)</a>{{/cv}}
-      {{#video_link}}<a class="button" href="{{url}}">{{label}}</a>{{/video_link}}
+      {{#video_link}}<a class="button video" href="{{url}}" aria-label="Watch my 3-minute video introduction"><span class="play" aria-hidden="true"><svg viewBox="0 0 12 12" focusable="false"><path d="M1 0.5v11l10-5.5z"/></svg></span>{{label}}</a>{{/video_link}}
     </div>
   </section>
 

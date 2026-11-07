@@ -398,3 +398,12 @@ details ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
 .bb-sw { width: 16px; height: 16px; border-radius: 3px; }
 .bb-num { font-weight: 700; text-align: right; min-width: 3.5rem; }
 .bb-cnt { color: var(--muted); font-size: 0.9375rem; text-align: right; min-width: 7.5rem; }
+/* Video introduction button (hero) */
+.button.video { display: inline-flex; align-items: center; gap: 0.55rem; background: #016F70; border-color: #016F70; color: #fff; border-radius: 999px; padding-left: 10px; transition: transform .15s ease, box-shadow .15s ease, background .15s ease; }
+.button.video:hover, .button.video:focus-visible { background: #015a5b; border-color: #015a5b; color: #fff; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(1, 111, 112, 0.35), 0 0 0 3px rgba(199, 146, 44, 0.35); }
+.button.video:focus-visible { outline: 3px solid var(--navy); outline-offset: 3px; }
+.button.video .play { position: relative; display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #fff; flex: none; }
+.button.video .play svg { width: 12px; height: 12px; margin-left: 2px; fill: #016F70; }
+.button.video .play::after { content: ""; position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 0 0 0 rgba(199, 146, 44, 0.75); animation: video-pulse 3.5s ease-out infinite; }
+@keyframes video-pulse { 0% { box-shadow: 0 0 0 0 rgba(199, 146, 44, 0.7); } 35%, 100% { box-shadow: 0 0 0 11px rgba(199, 146, 44, 0); } }
+@media (prefers-reduced-motion: reduce) { .button.video .play::after { animation: none; } .button.video { transition: none; } .button.video:hover, .button.video:focus-visible { transform: none; } }
