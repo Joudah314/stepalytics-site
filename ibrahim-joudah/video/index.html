@@ -19,8 +19,24 @@
 <meta property="og:image:height" content="720">
 <meta property="og:image:alt" content="Ibrahim Joudah, data science, AI and statistics: video introduction">
 <meta name="twitter:card" content="summary_large_image">
-<meta http-equiv="refresh" content="0; url=https://youtu.be/ycIqCNWgw_k">
-<script>location.replace("https://youtu.be/ycIqCNWgw_k");</script>
+<meta http-equiv="refresh" content="2; url=https://youtu.be/ycIqCNWgw_k">
+<!-- The visit is counted (GoatCounter's documented image pixel) before the page forwards: on the pixel's
+     answer, or after 0.8 s at most, so a slow or blocked counter never stops the video opening. -->
+<script>
+(function () {
+  var target = "https://youtu.be/ycIqCNWgw_k", gone = false;
+  function go() { if (!gone) { gone = true; location.replace(target); } }
+  try {
+    var img = new Image();
+    img.onload = img.onerror = go;
+    img.src = "https://stepalytics.goatcounter.com/count?p=" + encodeURIComponent(location.pathname) +
+      "&t=" + encodeURIComponent(document.title) + "&r=" + encodeURIComponent(document.referrer) +
+      "&s=" + encodeURIComponent(screen.width + "," + screen.height + "," + (window.devicePixelRatio || 1)) +
+      "&rnd=" + Math.random().toString(36).slice(2);
+    setTimeout(go, 800);
+  } catch (e) { go(); }
+})();
+</script>
 <style>body{font:1rem/1.5 system-ui,sans-serif;margin:2rem auto;max-width:36rem;padding:0 1rem}</style>
 </head>
 <body>
