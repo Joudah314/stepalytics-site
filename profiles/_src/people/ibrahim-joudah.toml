@@ -6,7 +6,7 @@ name = 'Ibrahim Joudah'
 headline = 'Data Scientist, Statistician & Applied AI Specialist'
 location = 'Sydney, Australia'
 description = 'Data scientist and statistician in Sydney: agentic AI and LLM systems, machine learning, statistical modelling, data pipelines and dashboards. Projects, publications and CV.'
-value = 'I build reliable data and AI tools end-to-end, from statistical models and machine learning to an agentic AI system that runs around the clock in the cloud.'
+value = 'I build reliable data and AI tools end-to-end, from statistical and machine learning models to agentic AI systems that run around the clock in the cloud.'
 summary = 'I’m a data scientist and statistician with a PhD in statistics. My work covers four areas: building **AI and LLM systems**, including agentic AI, and testing whether their outputs can be trusted; **machine learning and statistical modelling**, from choosing and validating models to explaining them; **data pipelines, analytics and dashboards** that turn raw data into dependable answers; and **communication, teaching and mentoring**, so that results are understood and acted on. I work in R, Python and SQL.'
 pubs_intro = 'Full list on [Google Scholar](https://scholar.google.com/citations?user=A4ikGPAAAAAJ) · ORCID [0000-0002-0397-6266](https://orcid.org/0000-0002-0397-6266)'
 pub_stats = [
@@ -50,12 +50,8 @@ og_image.alt = 'Ibrahim Joudah – Data Scientist, Statistician & Applied AI Spe
 cv.file = 'Ibrahim-Joudah-CV.pdf'
 cv.pages = 3.0
 cv.date = 'November 2026'
-# The profile's video button and Contact entry link to his own short address, which forwards to the video below
 video_link.label = 'Video introduction (3 min)'
 video_link.url = 'https://stepalytics.com/ibrahim-joudah/video/'
-# HIS VIDEO: video_redirect.target is the ONE place to change it. build.py writes ibrahim-joudah/video/index.html
-# (https://stepalytics.com/ibrahim-joudah/video/), which forwards there at once. To switch videos, change the
-# target, rebuild and push. The preview picture is ibrahim-joudah/video/<thumbnail> (1280 x 720).
 video_redirect.target = 'https://youtu.be/ycIqCNWgw_k'
 video_redirect.title = 'Ibrahim Joudah: video introduction'
 video_redirect.description = 'A three-minute introduction from Ibrahim Joudah, data scientist and statistician in Sydney.'
@@ -147,7 +143,7 @@ themes = [
 	], evidence = '“He just knows how to teach, and knows what to say and how to say it without making it too confusing.” (student evaluation, 2024)' },
 ]
 projects = [
-	{ order = 1.0, show = 'page', title = 'Agentic AI monitoring and decision-support platform', id = 'agentic-ai', url = './projects/agentic-ai/', when = '2026', kind = 'Independent project · designed, built and run by me', problem = 'New opportunities appear across thousands of sites and feeds, and the best ones go fast.', did_label = 'What I built', approach = 'An agentic AI platform that watches thousands of organisations and data feeds around the clock, uses LLMs to judge which new postings matter, drafts grounded documents and sends real-time alerts. A machine-learning filter (XGBoost) decides which items need the paid AI; it was tested in shadow mode before switching on.', result = 'New postings are found within minutes, and the AI’s judgement is measured against people’s. In a pilot on 691 postings, about two-thirds of strong-LLM calls were avoided with no high-value posting missed.', tools = 'Python · SQL · LLMs / GenAI · XGBoost · Bayesian modelling · cloud · CI/CD', links = [
+	{ order = 1.0, show = 'page', title = 'Agentic AI monitoring and decision-support platform', url = './projects/agentic-ai/', id = 'agentic-ai', when = '2026', kind = 'Independent project · designed, built and run by me', problem = 'New opportunities appear across thousands of sites and feeds, and the best ones go fast.', did_label = 'What I built', approach = 'An agentic AI platform that watches thousands of organisations and data feeds around the clock, uses LLMs to judge which new postings matter, drafts grounded documents and sends real-time alerts. A machine-learning filter (XGBoost) decides which items need the paid AI; it was tested in shadow mode before switching on.', result = 'New postings are found within minutes, and the AI’s judgement is measured against people’s. In a pilot on 691 postings, about two-thirds of strong-LLM calls were avoided with no high-value posting missed.', tools = 'Python · SQL · LLMs / GenAI · XGBoost · Bayesian modelling · cloud · CI/CD', links = [
 		{ label = 'How it works', url = './projects/agentic-ai/' },
 	] },
 	{ order = 2.0, show = 'page', title = 'Predicting survey qualification rates with LLMs', id = 'survey-llm', when = '2026', kind = 'Applied AI · predictive modelling', problem = 'How many people will qualify for a new consumer survey, when the topic has no past data to learn from?', approach = 'Asked an LLM for a first estimate from the question wording and location alone, and treated it as data to correct rather than as truth. An R and Python pipeline then combined those estimates with text embeddings and machine learning (XGBoost).', result = 'Prediction error (RMSE) 65% lower than predicting the average rate, in cross-validation on held-out categories. In business terms: how many people a survey needs to recruit to fill its quota, and a rule that flags qualifying questions few people are likely to pass.', tools = 'R · Python · LLMs · text embeddings · XGBoost · cross-validation' },
