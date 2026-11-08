@@ -97,7 +97,7 @@ structured_data.works_for = [
 structured_data.home_location = 'Sydney, Australia'
 proof = [
 	{ title = 'PhD in Statistics', line = 'Macquarie University', url = '#education' },
-	{ title = 'Agentic AI systems', line = 'e.g. [real-time monitoring platform](#agentic-ai)', url = './projects/agentic-ai/' },
+	{ title = 'Agentic AI systems', line = 'e.g. [market monitoring platform](#agentic-ai)', url = './projects/agentic-ai/' },
 	{ title = 'Live dashboards', line = 'e.g. [StepAlytics](https://stepalytics.com/activity-explorer/)', url = 'https://stepalytics.com/activity-explorer/' },
 	{ title = 'R packages', line = 'e.g. [AirScreen](https://CRAN.R-project.org/package=AirScreen)', url = 'https://CRAN.R-project.org/package=AirScreen' },
 ]
