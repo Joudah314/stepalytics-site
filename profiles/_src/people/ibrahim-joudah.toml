@@ -6,7 +6,7 @@ name = 'Ibrahim Joudah'
 headline = 'Data Scientist, Statistician & Applied AI Specialist'
 location = 'Sydney, Australia'
 description = 'Data scientist and statistician in Sydney: agentic AI and LLM systems, machine learning, statistical modelling, data pipelines and dashboards. Projects, publications and CV.'
-value = 'I build reliable data and AI tools end-to-end, from statistical and machine learning models to agentic AI systems that run around the clock in the cloud.'
+value = 'I build reliable data and AI tools end-to-end, from statistical & machine learning models to agentic AI systems that run around the clock in the cloud.'
 summary = 'I’m a data scientist and statistician with a PhD in statistics. My work covers four areas: building **AI and LLM systems**, including agentic AI, and testing whether their outputs can be trusted; **machine learning and statistical modelling**, from choosing and validating models to explaining them; **data pipelines, analytics and dashboards** that turn raw data into dependable answers; and **communication, teaching and mentoring**, so that results are understood and acted on. I work in R, Python and SQL.'
 pubs_intro = 'Full list on [Google Scholar](https://scholar.google.com/citations?user=A4ikGPAAAAAJ) · ORCID [0000-0002-0397-6266](https://orcid.org/0000-0002-0397-6266)'
 pub_stats = [
