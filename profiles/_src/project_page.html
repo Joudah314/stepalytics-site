@@ -35,7 +35,7 @@
   <section class="shell block" aria-labelledby="glance-h">
     <h2 id="glance-h">{{labels.glance}}</h2>
     <ul class="glance">
-      {{#glance}}<li><span class="kpi">{{value}}</span><span class="kpi-label">{{{text_html}}}</span></li>
+      {{#glance}}<li><span class="kpi">{{value}}</span>{{#stat}}<span class="kpi-stat"><strong>{{stat}}</strong> {{stat_text}}</span>{{/stat}}<span class="kpi-label">{{{text_html}}}</span></li>
       {{/glance}}
     </ul>
   </section>

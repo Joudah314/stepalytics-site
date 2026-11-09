@@ -1,7 +1,7 @@
 
 slug = 'agentic-ai'
 person = 'ibrahim-joudah'
-updated = '2026-10-23'
+updated = '2026-11-09'
 title = 'Agentic AI monitoring and decision-support platform: how it works'
 summary = 'An agentic AI platform that watches the Australian labour market around the clock: it detects new postings across thousands of organisations, filters and evaluates them with machine learning and LLMs, drafts grounded documents, and hands a short list to a person who decides.'
 description = 'How Ibrahim Joudah’s agentic AI monitoring and decision-support platform works, stage by stage: LLM screening and evaluation, machine-learning filters tested in shadow mode, checks against human judgement, grounded text generation and Bayesian timing.'
@@ -16,9 +16,9 @@ labels.stage = 'Stage'
 labels.next = 'Next'
 labels.learned = 'What I learned'
 glance = [
-	{ value = 'Real-time monitoring', text = 'Watches organisations’ websites and data feeds around the clock and detects new postings within minutes; a Bayesian model decides when to check each source' },
-	{ value = 'Cost-optimised filtering', text = 'Each posting moves from the cheapest checks to the costliest: rules in code, a machine-learning filter, a fast LLM, then a strong LLM, so careful evaluation is spent only where it matters' },
-	{ value = 'Human oversight', text = 'The platform does the monitoring, filtering and drafting, so a person can focus on judgement: they review every shortlist and draft, make every decision, and their blind grades keep the AI’s ratings in check' },
+	{ value = 'Real-time monitoring', stat = '4×', stat_text = 'the reach of LLM search alone', text = 'Watches organisations’ websites and data feeds around the clock and detects new postings within minutes; a Bayesian model decides when to check each source' },
+	{ value = 'Cost-optimised filtering', stat = '95%', stat_text = 'lower AI cost', text = 'Each posting moves from the cheapest checks to the costliest: rules in code, a machine-learning filter, a fast LLM, then a strong LLM, so fewer than 5% of postings ever reach a costly model' },
+	{ value = 'Human oversight', stat = '100%', stat_text = 'human-reviewed', text = 'The platform does the monitoring, filtering and drafting, so a person can focus on judgement: they review every shortlist and draft, make every decision, and their blind grades keep the AI’s ratings in check' },
 ]
 stages = [
 	{ title = 'Set the ground truth before generating text', problem = 'Text an LLM drafts about real people and organisations must never claim anything untrue.', decision = 'Before any code, a verified knowledge base of about 150 statements, each approved, and a list of claims never to make. Drafts are built only from the knowledge base, and the platform enforces both in code, not only in the prompt.' },

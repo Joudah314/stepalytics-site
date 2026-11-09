@@ -145,6 +145,9 @@ details ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
 .glance { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
 .glance li { background: var(--surface); border: 2px solid var(--border); padding: 0.6rem 0.8rem; line-height: 1.35; }
 .glance .kpi { font-size: 1.25rem; }
+/* each card's key number (9 Nov 2026): the site's dark teal, the number large, the words at body size */
+.kpi-stat { display: block; color: var(--link); font-weight: 600; font-size: 1rem; margin: 0.2rem 0 0.45rem; }
+.kpi-stat strong { font-size: 1.75rem; font-weight: 800; line-height: 1.1; margin-right: 0.15em; }
 @media (min-width: 760px) {
   .pp-head h1 { font-size: 2.125rem; }
   .pp-head { padding-top: 2.5rem; }
