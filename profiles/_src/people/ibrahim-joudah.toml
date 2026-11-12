@@ -58,6 +58,13 @@ video_redirect.description = 'A three-minute introduction from Ibrahim Joudah, d
 video_redirect.link_text = 'Watch Ibrahim Joudah’s video introduction'
 video_redirect.thumbnail = 'thumbnail.jpg'
 video_redirect.thumbnail_alt = 'Ibrahim Joudah, data science, AI and statistics: video introduction'
+# The data scientist CV's own video link (stepalytics.com/ibrahim-joudah/video-ds/), counted apart from /video/.
+video_pages.video-ds.target = 'https://youtu.be/0uYP9S0aJGM'
+video_pages.video-ds.title = 'Ibrahim Joudah: meet me in 2 minutes'
+video_pages.video-ds.description = 'A two-minute introduction from Ibrahim Joudah, data scientist, AI specialist and statistician in Sydney.'
+video_pages.video-ds.link_text = 'Watch Ibrahim Joudah’s video introduction'
+video_pages.video-ds.thumbnail = 'thumbnail.jpg'
+video_pages.video-ds.thumbnail_alt = 'Ibrahim Joudah, data scientist, AI specialist and statistician: video introduction'
 structured_data.same_as = [
 	'https://www.linkedin.com/in/ibrahim-joudah/',
 	'https://github.com/Joudah314',

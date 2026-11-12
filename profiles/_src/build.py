@@ -7,6 +7,7 @@ For every people/<slug>.toml it writes
     <short_path>/index.html         a redirect to it, if the person has a short_path (from redirect.html)
     <short_path>/video/index.html   a page that forwards to video_redirect.target, if set (from video_redirect.html;
                                     the person's video is changed there and nowhere else)
+    <short_path>/<name>/index.html  the same for each video_pages.<name> (one per CV, counted apart)
 and for every projects/<slug>.toml (a project's page, owned by `person`)
     profiles/<person>/projects/<slug>/index.html   (from project_page.html, a running system told in stages, or
                                                     study_page.html when kind = "study": a finished study told
@@ -356,6 +357,28 @@ def build_person(site: dict, path: Path, template: str, redirect_template: str, 
         data["video_thumb_width"], data["video_thumb_height"] = image_size(thumb)
         out = video_dir / "index.html"
         out.write_text(render(video_template, data), encoding="utf-8", newline="\n")
+        written.append(out)
+
+    # video_pages.<name>: further forwarding pages at <short_path>/<name>/, one per CV, so visits from each CV
+    # are counted apart from the general /video/ page. Each takes the same fields as video_redirect.
+    for name, extra in (p.get("video_pages") or {}).items():
+        if not short:
+            raise SystemExit(f"{slug}: video_pages needs short_path")
+        if not re.fullmatch(r"[a-z0-9-]+", name):
+            raise SystemExit(f"{slug}: video_pages.{name}: use lower-case letters, digits and hyphens")
+        target = extra.get("target", "")
+        if not re.fullmatch(r"https://[^\s\"'<>\\]+", target):
+            raise SystemExit(f"{slug}: video_pages.{name}.target must be a single https:// address")
+        page_dir = ROOT / short / name
+        thumb = page_dir / extra["thumbnail"]
+        if not thumb.is_file():
+            raise SystemExit(f"{slug}: file missing: {short}/{name}/{extra['thumbnail']}")
+        page = dict(data, video_redirect=extra)
+        page["video_page_url"] = f"{site['base_url']}/{short}/{name}/"
+        page["video_target_js"] = json.dumps(target).replace("</", "<\\/")
+        page["video_thumb_width"], page["video_thumb_height"] = image_size(thumb)
+        out = page_dir / "index.html"
+        out.write_text(render(video_template, page), encoding="utf-8", newline="\n")
         written.append(out)
     return written
 
