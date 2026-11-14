@@ -72,6 +72,53 @@ video_pages.video-da.description = 'A two-minute introduction from Ibrahim Jouda
 video_pages.video-da.link_text = 'Watch Ibrahim Joudah’s video introduction'
 video_pages.video-da.thumbnail = 'thumbnail.jpg'
 video_pages.video-da.thumbnail_alt = 'Ibrahim Joudah, data analyst, statistician and AI specialist: video introduction'
+# The video link used only in the academic CV (counted on its own; 14 Nov 2026).
+video_pages.video-academic.target = 'https://youtu.be/ycIqCNWgw_k'
+video_pages.video-academic.title = 'Ibrahim Joudah: video introduction'
+video_pages.video-academic.description = 'A three-minute introduction from Ibrahim Joudah, data scientist and statistician in Sydney.'
+video_pages.video-academic.link_text = 'Watch Ibrahim Joudah’s video introduction'
+video_pages.video-academic.thumbnail = 'thumbnail.jpg'
+video_pages.video-academic.thumbnail_alt = 'Ibrahim Joudah, data science, AI and statistics: video introduction'
+
+# The video link used only in the entry-level CV (counted on its own; 14 Nov 2026).
+video_pages.video-entry.target = 'https://youtu.be/ycIqCNWgw_k'
+video_pages.video-entry.title = 'Ibrahim Joudah: video introduction'
+video_pages.video-entry.description = 'A three-minute introduction from Ibrahim Joudah, data scientist and statistician in Sydney.'
+video_pages.video-entry.link_text = 'Watch Ibrahim Joudah’s video introduction'
+video_pages.video-entry.thumbnail = 'thumbnail.jpg'
+video_pages.video-entry.thumbnail_alt = 'Ibrahim Joudah, data science, AI and statistics: video introduction'
+
+# The video link used only in cover letters sent with the data scientist CV (counted on its own; 14 Nov 2026).
+video_pages.video-ds-letter.target = 'https://youtu.be/0uYP9S0aJGM'
+video_pages.video-ds-letter.title = 'Ibrahim Joudah: meet me in 2 minutes'
+video_pages.video-ds-letter.description = 'A two-minute introduction from Ibrahim Joudah, data scientist, AI specialist and statistician in Sydney.'
+video_pages.video-ds-letter.link_text = 'Watch Ibrahim Joudah’s video introduction'
+video_pages.video-ds-letter.thumbnail = 'thumbnail.jpg'
+video_pages.video-ds-letter.thumbnail_alt = 'Ibrahim Joudah, data scientist, AI specialist and statistician: video introduction'
+
+# The video link used only in cover letters sent with the data analyst CV (counted on its own; 14 Nov 2026).
+video_pages.video-da-letter.target = 'https://youtu.be/lNbtSk8o3II'
+video_pages.video-da-letter.title = 'Ibrahim Joudah: meet me in 2 minutes'
+video_pages.video-da-letter.description = 'A two-minute introduction from Ibrahim Joudah, data analyst, statistician and AI specialist in Sydney.'
+video_pages.video-da-letter.link_text = 'Watch Ibrahim Joudah’s video introduction'
+video_pages.video-da-letter.thumbnail = 'thumbnail.jpg'
+video_pages.video-da-letter.thumbnail_alt = 'Ibrahim Joudah, data analyst, statistician and AI specialist: video introduction'
+
+# The video link used only in cover letters sent with the academic CV (counted on its own; 14 Nov 2026).
+video_pages.video-academic-letter.target = 'https://youtu.be/ycIqCNWgw_k'
+video_pages.video-academic-letter.title = 'Ibrahim Joudah: video introduction'
+video_pages.video-academic-letter.description = 'A three-minute introduction from Ibrahim Joudah, data scientist and statistician in Sydney.'
+video_pages.video-academic-letter.link_text = 'Watch Ibrahim Joudah’s video introduction'
+video_pages.video-academic-letter.thumbnail = 'thumbnail.jpg'
+video_pages.video-academic-letter.thumbnail_alt = 'Ibrahim Joudah, data science, AI and statistics: video introduction'
+
+# The video link used only in cover letters sent with the entry-level CV (counted on its own; 14 Nov 2026).
+video_pages.video-entry-letter.target = 'https://youtu.be/ycIqCNWgw_k'
+video_pages.video-entry-letter.title = 'Ibrahim Joudah: video introduction'
+video_pages.video-entry-letter.description = 'A three-minute introduction from Ibrahim Joudah, data scientist and statistician in Sydney.'
+video_pages.video-entry-letter.link_text = 'Watch Ibrahim Joudah’s video introduction'
+video_pages.video-entry-letter.thumbnail = 'thumbnail.jpg'
+video_pages.video-entry-letter.thumbnail_alt = 'Ibrahim Joudah, data science, AI and statistics: video introduction'
 structured_data.same_as = [
 	'https://www.linkedin.com/in/ibrahim-joudah/',
 	'https://github.com/Joudah314',
